@@ -2,36 +2,37 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { HeaderContainer, FooterContainer, SEOContainer } from '~containers';
-import { ThemeProvider } from '~theme';
+import { ThemeContext, GlobalStyle } from '~theme';
+import { useTheme, getTheme } from '~hooks';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const RootContainer = ({ children, meta }) => (
-  <ThemeProvider>
-    <SEOContainer meta={meta} />
-    <div>
-      <HeaderContainer />
-      {children}
-      <FooterContainer />
-    </div>
-  </ThemeProvider>
-);
+export const ThemeProvider = ({ children }) => {
+  const [theme, toggleTheme] = useTheme();
+  const currentTheme = getTheme(theme);
 
-export default RootContainer;
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <StyledThemeProvider theme={currentTheme}>
+        <>
+          <GlobalStyle />
+          {children}
+        </>
+      </StyledThemeProvider>
+    </ThemeContext.Provider>
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-RootContainer.displayName = 'RootContainer';
-
-RootContainer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node]).isRequired,
-  meta: PropTypes.oneOfType([PropTypes.object]),
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
