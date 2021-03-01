@@ -3,8 +3,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import styled from 'styled-components';
-import { Link } from 'gatsby';
 import React from 'react';
+
+import { Link } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -15,7 +16,9 @@ const Nav = ({ links }) => (
     <ul>
       {links.map(({ text, url }) => (
         <li key={url}>
-          <Link to={url}>{text}</Link>
+          <Link to={url} look="primary">
+            {text}
+          </Link>
         </li>
       ))}
     </ul>

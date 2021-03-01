@@ -2,100 +2,98 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { graphql, useStaticQuery } from 'gatsby';
 import styled, { css } from 'styled-components';
+import { Link as GatsbyLink } from 'gatsby';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Nav, Link } from '~components';
+import { isExternalURL } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const HeaderContainer = (props) => {
-  const { top, bottom, site } = useStaticQuery(graphql`
-    {
-      site: site {
-        ...SITE_METADATA
-      }
+const Link = ({ href, to, children, ...rest }) => {
+  const link = href || to;
 
-      top: mdx(
-        fileAbsolutePath: { regex: "/markdown/navigations/" }
-        frontmatter: { title: { eq: "HeaderTop" } }
-      ) {
-        ...HEADER_NAV_FRAGMENT
-      }
+  const props = {
+    external: {
+      rel: 'noopener noreferrer',
+      target: '_blank',
+      ...rest,
+    },
+    internal: {
+      activeClassName: 'is-active',
+      ...rest,
+    },
+  };
 
-      bottom: mdx(
-        fileAbsolutePath: { regex: "/markdown/navigations/" }
-        frontmatter: { title: { eq: "HeaderBottom" } }
-      ) {
-        ...HEADER_NAV_FRAGMENT
-      }
-    }
-  `);
+  if (isExternalURL(link)) {
+    return (
+      <Anchor href={link} {...props.external}>
+        {children}
+      </Anchor>
+    );
+  }
 
   return (
-    <>
-      <Section isTop>
-        <Nav links={top.frontmatter.links} />
-      </Section>
-
-      <Section isBottom>
-        <h1>
-          <Link to="/" look="primary">
-            {site.siteMetadata.siteTitle}
-          </Link>
-        </h1>
-
-        <div>
-          <Nav links={bottom.frontmatter.links} />
-        </div>
-      </Section>
-    </>
+    <Anchor as={GatsbyLink} to={link} {...props.internal}>
+      {children}
+    </Anchor>
   );
 };
 
-export default HeaderContainer;
+export default Link;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Variants
 // ─────────────────────────────────────────────────────────────────────────────
 
-const sectionBottom = css`
-  height: 8rem;
+const AnchorPrimary = css`
+  font-weight: ${({ theme }) => theme.font.weight.normal};
+  font-size: ${({ theme }) => theme.font.size['2xl']};
+  text-decoration: none;
 
-  h1 {
-    a {
-      font-size: ${({ theme }) => theme.font.size['4xl']};
-    }
+  &:hover,
+  &:focus,
+  &:active,
+  &.is-active {
+    color: ${({ theme }) => theme.color.primary};
+    text-decoration: underline;
   }
 `;
 
-const sectionTop = css`
-  background-color: rgba(0, 0, 0, 0.04);
-  height: 4rem;
+const AnchorSecondary = css`
+  ${AnchorPrimary}// TODO:
+`;
 
-  a {
-    font-size: ${({ theme }) => theme.font.size.xl};
-  }
+const AnchorTertiary = css`
+  ${AnchorPrimary}// TODO:
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Section = styled.section`
-  ${({ isBottom }) => isBottom && sectionBottom}
-  ${({ isTop }) => isTop && sectionTop}
-
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
+export const Anchor = styled.a`
+  ${({ look }) => look === 'secondary' && AnchorSecondary};
+  ${({ look }) => look === 'tertiary' && AnchorTertiary};
+  ${({ look }) => look === 'primary' && AnchorPrimary};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-HeaderContainer.displayName = 'HeaderContainer';
+Link.displayName = 'Link';
+
+Link.propTypes = {
+  children: PropTypes.node.isRequired,
+  href: PropTypes.string,
+  to: PropTypes.string,
+};
+
+Link.defaultProps = {
+  href: null,
+  to: null,
+};
