@@ -1,0 +1,1 @@
+# aquatexbeskidy.pl
