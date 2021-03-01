@@ -1,0 +1,47 @@
+{
+  "name": "aquatexbeskidy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "aquatex beskidy",
+  "keywords": [
+    "aquatex",
+    "beskidy"
+  ],
+  "scripts": {
+    "build:clean": "gatsby clean && gatsby build --log-pages",
+    "start:verbose": "gatsby develop --verbose",
+    "start:clean": "gatsby clean && gatsby develop",
+    "bump": "yarn upgrade-interactive --latest",
+    "purge": "rm -rf node_modules && yarn",
+    "deploy:github": "gatsby build --prefix-paths && gh-pages -d public",
+    "start": "concurrently \"yarn start:clean\"",
+    "build": "concurrently \"yarn build:clean\""
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
+    "gatsby": "2.32.0",
+    "gatsby-image": "^2.11.0",
+    "gatsby-plugin-mdx": "^1.10.0",
+    "gatsby-plugin-react-helmet": "^3.10.0",
+    "gatsby-plugin-sharp": "^2.14.1",
+    "gatsby-plugin-styled-components": "^3.10.0",
+    "gatsby-remark-embedder": "^4.1.0",
+    "gatsby-remark-images": "^3.11.0",
+    "gatsby-remark-relative-images": "^2.0.2",
+    "gatsby-source-filesystem": "^2.11.0",
+    "gatsby-transformer-remark": "^2.16.0",
+    "gatsby-transformer-sharp": "^2.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
+    "styled-components": "^5.2.1",
+    "styled-normalize": "^8.0.7"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.12.0",
+    "concurrently": "^5.3.0",
+    "gh-pages": "^3.1.0"
+  }
+}
