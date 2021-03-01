@@ -2,35 +2,47 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
 import React from 'react';
-
-import { HeaderContainer, FooterContainer, SEOContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const RootContainer = ({ children, meta }) => (
-  <>
-    <SEOContainer meta={meta} />
-    <div>
-      <HeaderContainer />
-      {children}
-      <FooterContainer />
-    </div>
-  </>
+const Nav = ({ links }) => (
+  <NavStyled>
+    <ul>
+      {links.map(({ text, url }) => (
+        <li key={url}>
+          <Link to={url}>{text}</Link>
+        </li>
+      ))}
+    </ul>
+  </NavStyled>
 );
 
-export default RootContainer;
+export default Nav;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Extended Default Styles
+// ─────────────────────────────────────────────────────────────────────────────
+
+const NavStyled = styled.nav`
+  ul {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    list-style: none;
+
+    li:not(:last-child) {
+      padding-right: 1rem;
+    }
+  }
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-RootContainer.displayName = 'RootContainer';
-
-RootContainer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node]).isRequired,
-  meta: PropTypes.oneOfType([PropTypes.object]),
-};
+Nav.displayName = 'Nav';

@@ -2,35 +2,66 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { graphql, useStaticQuery } from 'gatsby';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import { HeaderContainer, FooterContainer, SEOContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const RootContainer = ({ children, meta }) => (
-  <>
-    <SEOContainer meta={meta} />
-    <div>
-      <HeaderContainer />
-      {children}
-      <FooterContainer />
-    </div>
-  </>
-);
+const SEOContainer = ({ meta }) => {
+  const query = useStaticQuery(graphql`
+    {
+      site {
+        siteMetadata {
+          siteTitle
+          siteUrl
+        }
+      }
+    }
+  `);
 
-export default RootContainer;
+  const { siteUrl, siteTitle } = query.site.siteMetadata;
+  const { title, description, permalink } = meta;
+
+  const hemletMetaData = [
+    { name: 'description', content: description },
+
+    { property: 'og:url', content: `${siteUrl}${permalink}` },
+    { property: 'og:title', content: `${title}` },
+    { property: 'og:type', content: 'website' },
+  ];
+
+  const hemletLinks = [
+    {
+      href: `${siteUrl}${permalink}`,
+      rel: 'canonical',
+    },
+  ];
+
+  return (
+    <Helmet
+      title={siteTitle}
+      titleTemplate={`%s | ${title}`}
+      meta={hemletMetaData}
+      link={hemletLinks}
+      htmlAttributes={{ lang: 'pl' }}
+    />
+  );
+};
+
+export default SEOContainer;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-RootContainer.displayName = 'RootContainer';
-
-RootContainer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node]).isRequired,
-  meta: PropTypes.oneOfType([PropTypes.object]),
+SEOContainer.propTypes = {
+  meta: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    permalink: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
 };
