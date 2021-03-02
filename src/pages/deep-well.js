@@ -11,7 +11,7 @@ import { RootContainer } from '~containers';
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const WaterWellsPage = ({
+const DeepWellPage = ({
   data: {
     page: {
       frontmatter: { meta },
@@ -23,7 +23,7 @@ const WaterWellsPage = ({
   </RootContainer>
 );
 
-export default WaterWellsPage;
+export default DeepWellPage;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
@@ -37,7 +37,7 @@ export const query = graphql`
   {
     page: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/waterwells/" } } }
+      frontmatter: { meta: { permalink: { eq: "/deep-well/" } } }
     ) {
       frontmatter {
         ...META_FRAGMENT

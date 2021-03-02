@@ -11,7 +11,7 @@ import { RootContainer } from '~containers';
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const DrillPage = ({
+const BoreholePage = ({
   data: {
     page: {
       frontmatter: { meta },
@@ -23,7 +23,7 @@ const DrillPage = ({
   </RootContainer>
 );
 
-export default DrillPage;
+export default BoreholePage;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
@@ -37,7 +37,7 @@ export const query = graphql`
   {
     page: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/drill/" } } }
+      frontmatter: { meta: { permalink: { eq: "/borehole/" } } }
     ) {
       frontmatter {
         ...META_FRAGMENT
