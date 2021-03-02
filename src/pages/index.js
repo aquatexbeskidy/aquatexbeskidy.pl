@@ -18,17 +18,19 @@ const HomePage = ({
       frontmatter: { meta },
     },
     photo1,
+    photo2,
+    photo3,
+    hero,
+    works,
   },
 }) => (
   <RootContainer meta={meta}>
     <div>{meta.title}</div>
 
     <Img fluid={hero.childImageSharp.fluid} alt={hero.name} />
-
     <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
     <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
     <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />
-
     <Img fluid={works.childImageSharp.fluid} alt={works.name} />
   </RootContainer>
 );
@@ -54,23 +56,23 @@ export const query = graphql`
       }
     }
 
-    hero: file(relativePath: { eq: "home-photo-1.jpg" }) {
+    hero: file(relativePath: { eq: "home/home-photo-1.jpg" }) {
       ...CHILD_FLUID
     }
 
-    works: file(relativePath: { eq: "home-photo-5.JPG" }) {
+    works: file(relativePath: { eq: "home/home-photo-5.JPG" }) {
       ...CHILD_FLUID
     }
 
-    photo1: file(relativePath: { eq: "home-photo-2.JPG" }) {
+    photo1: file(relativePath: { eq: "home/home-photo-2.JPG" }) {
       ...CHILD_FIXED_230_170
     }
 
-    photo2: file(relativePath: { eq: "home-photo-3.JPG" }) {
+    photo2: file(relativePath: { eq: "home/home-photo-3.JPG" }) {
       ...CHILD_FIXED_230_170
     }
 
-    photo3: file(relativePath: { eq: "home-photo-4.JPG" }) {
+    photo3: file(relativePath: { eq: "home/home-photo-4.JPG" }) {
       ...CHILD_FIXED_230_170
     }
   }
