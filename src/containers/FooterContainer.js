@@ -38,7 +38,6 @@ const FooterContainer = () => {
           </Section>
         );
       })}
-      footer
     </Footer>
   );
 };
