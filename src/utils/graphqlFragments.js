@@ -55,3 +55,55 @@ export const FOOTER_NAV_FRAGMENT = graphql`
     }
   }
 `;
+
+export const CHILD_FLUID = graphql`
+  fragment CHILD_FLUID on File {
+    childImageSharp {
+      fluid(maxWidth: 1024, maxHeight: 1024, quality: 75) {
+        ...GatsbyImageSharpFluid_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+export const CHILDREN_FIXED_230_170 = graphql`
+  fragment CHILDREN_FIXED_230_170 on File {
+    childrenImageSharp {
+      fixed(width: 230, height: 170, quality: 75) {
+        ...GatsbyImageSharpFixed_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+export const CHILD_FIXED_230_170 = graphql`
+  fragment CHILD_FIXED_230_170 on File {
+    childImageSharp {
+      fixed(width: 230, height: 170, quality: 75) {
+        ...GatsbyImageSharpFixed_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+export const CHILD_FIXED_150_150 = graphql`
+  fragment CHILD_FIXED_150_150 on File {
+    childImageSharp {
+      fixed(width: 150, height: 150, quality: 75) {
+        ...GatsbyImageSharpFixed_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;

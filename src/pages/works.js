@@ -6,6 +6,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import { RootContainer } from '~containers';
+import { GalleryOffer } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -16,10 +17,15 @@ const WorksPage = ({
     page: {
       frontmatter: { meta },
     },
+    images: { nodes },
   },
 }) => (
   <RootContainer meta={meta}>
     <div>{meta.title}</div>
+
+    {nodes.map(({ id, name, childrenImageSharp }) => (
+      <Img fixed={childrenImageSharp[0].fixed} title={name} alt={name} key={id} />
+    ))}
   </RootContainer>
 );
 
@@ -41,6 +47,17 @@ export const query = graphql`
     ) {
       frontmatter {
         ...META_FRAGMENT
+      }
+    }
+
+    images: allFile(
+      filter: { absolutePath: { regex: "/works/" }, extension: { regex: "/(jpg)|(jpeg)|(png)/" } }
+    ) {
+      nodes {
+        ...CHILDREN_FIXED_230_170
+        publicURL
+        name
+        id
       }
     }
   }

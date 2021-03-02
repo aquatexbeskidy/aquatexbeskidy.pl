@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import React from 'react';
 
 import { RootContainer } from '~containers';
@@ -16,10 +17,19 @@ const HomePage = ({
     page: {
       frontmatter: { meta },
     },
+    photo1,
   },
 }) => (
   <RootContainer meta={meta}>
     <div>{meta.title}</div>
+
+    <Img fluid={hero.childImageSharp.fluid} alt={hero.name} />
+
+    <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
+    <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
+    <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />
+
+    <Img fluid={works.childImageSharp.fluid} alt={works.name} />
   </RootContainer>
 );
 
@@ -42,6 +52,26 @@ export const query = graphql`
       frontmatter {
         ...META_FRAGMENT
       }
+    }
+
+    hero: file(relativePath: { eq: "home-photo-1.jpg" }) {
+      ...CHILD_FLUID
+    }
+
+    works: file(relativePath: { eq: "home-photo-5.JPG" }) {
+      ...CHILD_FLUID
+    }
+
+    photo1: file(relativePath: { eq: "home-photo-2.JPG" }) {
+      ...CHILD_FIXED_230_170
+    }
+
+    photo2: file(relativePath: { eq: "home-photo-3.JPG" }) {
+      ...CHILD_FIXED_230_170
+    }
+
+    photo3: file(relativePath: { eq: "home-photo-4.JPG" }) {
+      ...CHILD_FIXED_230_170
     }
   }
 `;
