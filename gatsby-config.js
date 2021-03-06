@@ -19,7 +19,7 @@ module.exports = {
   siteMetadata: {
     siteGithub: `https://github.com/nomads-codes/aquatexbeskidy.pl`,
     siteUrl: `https://aquatexbeskidy.pl`,
-    siteTitle: `Aquatex Beskidy`,
+    siteTitle: `AQUA-TEX Beskidy`,
   },
   flags: {
     // EXPERIMENTAL
@@ -80,6 +80,13 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: gatsbyRemarkPlugins,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`montserrat`],
+        display: 'swap',
       },
     },
     `gatsby-plugin-sharp`,

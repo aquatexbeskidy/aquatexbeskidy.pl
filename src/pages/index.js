@@ -27,7 +27,19 @@ const HomePage = ({
   <RootContainer meta={meta}>
     <div>{meta.title}</div>
 
-    <Img fluid={hero.childImageSharp.fluid} alt={hero.name} />
+    <div
+      style={{
+        maxHeight: `750px`,
+        overflow: `hidden`,
+      }}
+    >
+      <Img
+        style={{ height: '100%' }}
+        imgStyle={{ objectFit: 'contain' }}
+        fluid={hero.childImageSharp.fluid}
+        alt={hero.name}
+      />
+    </div>
     <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
     <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
     <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />

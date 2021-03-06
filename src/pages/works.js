@@ -6,6 +6,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import React from 'react';
 
+import { Video } from '~components';
 import { RootContainer } from '~containers';
 import { GalleryOffer } from '~components';
 
@@ -18,14 +19,19 @@ const WorksPage = ({
     page: {
       frontmatter: { meta },
     },
+    videos: {
+      frontmatter: { videos },
+    },
     images: { nodes },
   },
 }) => (
   <RootContainer meta={meta}>
     <div>{meta.title}</div>
-
     {nodes.map(({ id, name, childrenImageSharp }) => (
       <Img fixed={childrenImageSharp[0].fixed} title={name} alt={name} key={id} />
+    ))}
+    {videos.map(({ videoSrcURL, videoTitle }) => (
+      <Video videoSrcURL={videoSrcURL} videoTitle={videoTitle} key={videoTitle} />
     ))}
   </RootContainer>
 );
@@ -60,6 +66,13 @@ export const query = graphql`
         name
         id
       }
+    }
+
+    videos: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { title: { eq: "Realizacje" } }
+    ) {
+      ...META_VIDEO_FRAGMENT
     }
   }
 `;

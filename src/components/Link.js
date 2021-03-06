@@ -51,7 +51,7 @@ export default Link;
 
 const AnchorPrimary = css`
   font-weight: ${({ theme }) => theme.font.weight.normal};
-  font-size: ${({ theme }) => theme.font.size['2xl']};
+  font-size: ${({ theme }) => theme.font.size.base};
   text-decoration: none;
 
   &:hover,
@@ -59,7 +59,7 @@ const AnchorPrimary = css`
   &:active,
   &.is-active {
     color: ${({ theme }) => theme.color.primary};
-    text-decoration: underline;
+    text-decoration: none;
   }
 `;
 

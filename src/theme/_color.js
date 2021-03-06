@@ -1,6 +1,6 @@
 export const light = {
   background: `#ffffff`,
-  text: `#1f262e`,
+  text: `#474747`,
   white: `#1f262e`,
   black: `#ffffff`,
 };
@@ -13,6 +13,6 @@ export const dark = {
 };
 
 export const color = {
-  primary: `#ffcd02`,
+  primary: `#176ED3`,
   danger: `#F82611`,
 };
