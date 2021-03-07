@@ -9,10 +9,10 @@ import React from 'react';
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Video = ({ videoSrcURL, videoTitle, width, height }) => (
+const Video = ({ videoId, videoTitle, width, height }) => (
   <div>
     <IFrameStyled
-      src={videoSrcURL}
+      src={`https://www.youtube.com/embed/${videoId}`}
       title={videoTitle}
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       frameBorder="0"

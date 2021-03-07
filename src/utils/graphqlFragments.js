@@ -62,7 +62,7 @@ export const META_VIDEO_FRAGMENT = graphql`
       videos {
         title
         date
-        videoSrcURL
+        videoId
         videoTitle
       }
     }
