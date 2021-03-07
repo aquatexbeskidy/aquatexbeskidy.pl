@@ -30,8 +30,8 @@ const Video = ({ videoId, videoTitle, width, height }) => (
 // ─────────────────────────────────────────────────────────────────────────────
 
 const IFrameStyled = styled.iframe`
-  width: ${(props) => (props.width ? props.width : '230px')};
-  height: ${(props) => (props.height ? props.height : '170px')};
+  width: ${({ width }) => (width ? width : '230px')};
+  height: ${({ height }) => (height ? height : '170px')};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
