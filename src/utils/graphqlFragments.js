@@ -56,10 +56,23 @@ export const FOOTER_NAV_FRAGMENT = graphql`
   }
 `;
 
+export const META_VIDEO_FRAGMENT = graphql`
+  fragment META_VIDEO_FRAGMENT on Mdx {
+    frontmatter {
+      videos {
+        title
+        date
+        videoId
+        videoTitle
+      }
+    }
+  }
+`;
+
 export const CHILD_FLUID = graphql`
   fragment CHILD_FLUID on File {
     childImageSharp {
-      fluid(maxWidth: 1024, maxHeight: 1024, quality: 75) {
+      fluid(maxWidth: 1024, maxHeight: 1024, quality: 90) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }

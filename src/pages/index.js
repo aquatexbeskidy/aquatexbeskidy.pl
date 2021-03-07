@@ -27,7 +27,19 @@ const HomePage = ({
   <RootContainer meta={meta}>
     <div>{meta.title}</div>
 
-    <Img fluid={hero.childImageSharp.fluid} alt={hero.name} />
+    <div
+      style={{
+        maxHeight: `750px`,
+        overflow: `hidden`,
+      }}
+    >
+      <Img
+        style={{ height: '100%' }}
+        imgStyle={{ objectFit: 'contain' }}
+        fluid={hero.childImageSharp.fluid}
+        alt={hero.name}
+      />
+    </div>
     <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
     <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
     <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />
@@ -60,19 +72,19 @@ export const query = graphql`
       ...CHILD_FLUID
     }
 
-    works: file(relativePath: { eq: "home/home-photo-5.JPG" }) {
+    works: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
       ...CHILD_FLUID
     }
 
-    photo1: file(relativePath: { eq: "home/home-photo-2.JPG" }) {
+    photo1: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
       ...CHILD_FIXED_230_170
     }
 
-    photo2: file(relativePath: { eq: "home/home-photo-3.JPG" }) {
+    photo2: file(relativePath: { eq: "home/home-photo-3.jpg" }) {
       ...CHILD_FIXED_230_170
     }
 
-    photo3: file(relativePath: { eq: "home/home-photo-4.JPG" }) {
+    photo3: file(relativePath: { eq: "home/home-photo-4.jpg" }) {
       ...CHILD_FIXED_230_170
     }
   }

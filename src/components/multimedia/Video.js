@@ -2,98 +2,49 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled, { css } from 'styled-components';
-import { Link as GatsbyLink } from 'gatsby';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { isExternalURL } from '~utils';
-
 // ─────────────────────────────────────────────────────────────────────────────
-// Component
+//  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Link = ({ href, to, children, ...rest }) => {
-  const link = href || to;
-
-  const props = {
-    external: {
-      rel: 'noopener noreferrer',
-      target: '_blank',
-      ...rest,
-    },
-    internal: {
-      activeClassName: 'is-active',
-      ...rest,
-    },
-  };
-
-  if (isExternalURL(link)) {
-    return (
-      <Anchor href={link} {...props.external}>
-        {children}
-      </Anchor>
-    );
-  }
-
-  return (
-    <Anchor as={GatsbyLink} to={link} {...props.internal}>
-      {children}
-    </Anchor>
-  );
-};
-
-export default Link;
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Variants
-// ─────────────────────────────────────────────────────────────────────────────
-
-const AnchorPrimary = css`
-  font-weight: ${({ theme }) => theme.font.weight.normal};
-  font-size: ${({ theme }) => theme.font.size.base};
-  text-decoration: none;
-
-  &:hover,
-  &:focus,
-  &:active,
-  &.is-active {
-    color: ${({ theme }) => theme.color.primary};
-    text-decoration: none;
-  }
-`;
-
-const AnchorSecondary = css`
-  ${AnchorPrimary}// TODO:
-`;
-
-const AnchorTertiary = css`
-  ${AnchorPrimary}// TODO:
-`;
+const Video = ({ videoId, videoTitle, width, height }) => (
+  <div>
+    <IFrameStyled
+      src={`https://www.youtube.com/embed/${videoId}`}
+      title={videoTitle}
+      loading="lazy"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      frameBorder="0"
+      webkitallowfullscreen="true"
+      mozallowfullscreen="true"
+      allowFullScreen
+      width={width}
+      height={height}
+    />
+  </div>
+);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Anchor = styled.a`
-  ${({ look }) => look === 'secondary' && AnchorSecondary};
-  ${({ look }) => look === 'tertiary' && AnchorTertiary};
-  ${({ look }) => look === 'primary' && AnchorPrimary};
+const IFrameStyled = styled.iframe`
+  width: ${({ width }) => (width ? width : '230px')};
+  height: ${({ height }) => (height ? height : '170px')};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-Link.displayName = 'Link';
-
-Link.propTypes = {
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string,
-  to: PropTypes.string,
+Video.propTypes = {
+  videoId: PropTypes.string.isRequired,
+  videoTitle: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
 };
 
-Link.defaultProps = {
-  href: null,
-  to: null,
-};
+export default Video;

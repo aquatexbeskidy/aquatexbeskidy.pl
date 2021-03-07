@@ -56,16 +56,19 @@ export const Section = styled.section`
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: calc(100% / 4);
+  width: calc(100% / 3);
   display: flex;
 
   ul {
     align-items: flex-start;
     flex-direction: column;
-
+    padding: 0;
     li {
       margin-top: 1rem;
       padding: 0;
+      a.is-active {
+        color: initial;
+      }
     }
   }
 `;

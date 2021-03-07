@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
     box-sizing: border-box;
-    font-size: 10px;
+    font-size: 16px;
   }
 
   body {
@@ -33,10 +33,10 @@ export const GlobalStyle = createGlobalStyle`
 
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/clamp() */
     /* font-size: clamp(var(--xs), var(--lg), var(--xl)); */
-    font-size: ${({ theme }) => theme.font.size['2xl']};
+    font-size: ${({ theme }) => theme.font.size.base};
 
 
-    font-family: ${({ theme }) => theme.font.family.sans};
+    font-family: ${({ theme }) => theme.font.family.montserrat};
     background-color: ${({ theme }) => theme.color.background};
     color: ${({ theme }) => theme.color.text};
 

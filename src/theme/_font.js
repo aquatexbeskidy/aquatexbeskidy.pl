@@ -36,7 +36,7 @@ const size = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const family = {
-  sans: 'Open Sans, sans-serif',
+  montserrat: 'Montserrat, sans-serif',
 };
 
 export const font = {

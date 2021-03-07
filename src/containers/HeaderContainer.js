@@ -67,7 +67,7 @@ const sectionBottom = css`
 
   h1 {
     a {
-      font-size: ${({ theme }) => theme.font.size['4xl']};
+      font-size: ${({ theme }) => theme.font.size['2xl']};
     }
   }
 `;
@@ -77,7 +77,7 @@ const sectionTop = css`
   height: 4rem;
 
   a {
-    font-size: ${({ theme }) => theme.font.size.xl};
+    font-size: ${({ theme }) => theme.font.size.base};
   }
 `;
 
