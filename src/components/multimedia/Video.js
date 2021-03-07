@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -14,6 +15,7 @@ const Video = ({ videoId, videoTitle, width, height }) => (
     <IFrameStyled
       src={`https://www.youtube.com/embed/${videoId}`}
       title={videoTitle}
+      loading="lazy"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       frameBorder="0"
       webkitallowfullscreen="true"
@@ -37,5 +39,12 @@ const IFrameStyled = styled.iframe`
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
+
+Video.propTypes = {
+  videoId: PropTypes.string.isRequired,
+  videoTitle: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
+};
 
 export default Video;

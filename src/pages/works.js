@@ -8,7 +8,6 @@ import React from 'react';
 
 import { Video } from '~components';
 import { RootContainer } from '~containers';
-import { GalleryOffer } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
