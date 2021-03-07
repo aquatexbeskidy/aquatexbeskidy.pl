@@ -70,7 +70,7 @@ export const query = graphql`
 
     videos: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { title: { eq: "Realizacje" } }
+      frontmatter: { meta: { permalink: { eq: "/works/" } } }
     ) {
       ...META_VIDEO_FRAGMENT
     }
