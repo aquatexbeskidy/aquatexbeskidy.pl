@@ -9,7 +9,7 @@ import React from 'react';
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Video = ({ videoSrcURL, videoTitle, width, height, ...props }) => (
+const Video = ({ videoSrcURL, videoTitle, width, height }) => (
   <div>
     <IFrameStyled
       src={videoSrcURL}
@@ -24,7 +24,6 @@ const Video = ({ videoSrcURL, videoTitle, width, height, ...props }) => (
     />
   </div>
 );
-export default Video;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
@@ -34,3 +33,9 @@ const IFrameStyled = styled.iframe`
   width: ${(props) => (props.width ? props.width : '230px')};
   height: ${(props) => (props.height ? props.height : '170px')};
 `;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Others
+// ─────────────────────────────────────────────────────────────────────────────
+
+export default Video;
