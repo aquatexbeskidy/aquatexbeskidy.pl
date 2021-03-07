@@ -31,7 +31,7 @@ const WorksPage = ({
       <Img fixed={childrenImageSharp[0].fixed} title={name} alt={name} key={id} />
     ))}
     {videos.map(({ videoId, videoTitle }) => (
-      <Video videoId={videoId} videoTitle={videoTitle} key={videoTitle} />
+      <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
     ))}
   </RootContainer>
 );
