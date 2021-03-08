@@ -8,7 +8,22 @@ const path = require('path');
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-module.exports = ({ plugins, actions }) => {
+module.exports = ({ stage, loaders, actions }) => {
+  if (stage === 'build-html' || stage === 'develop-html') {
+    const regex = [/node_modules\/leaflet/, /node_modules\\leaflet/];
+
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: regex,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+
   actions.setWebpackConfig({
     resolve: {
       alias: {

@@ -6,6 +6,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import { RootContainer } from '~containers';
+import { MapLeaflet } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -20,6 +21,7 @@ const ContactPage = ({
 }) => (
   <RootContainer meta={meta}>
     <div>{meta.title}</div>
+    {typeof window !== 'undefined' && <MapLeaflet height="400px" width="100%" />}
   </RootContainer>
 );
 
