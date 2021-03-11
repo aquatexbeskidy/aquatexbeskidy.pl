@@ -77,15 +77,15 @@ export const query = graphql`
     }
 
     photo1: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
-      ...CHILD_FIXED_230_170
+      ...CHILD_FIXED_400_225
     }
 
     photo2: file(relativePath: { eq: "home/home-photo-3.jpg" }) {
-      ...CHILD_FIXED_230_170
+      ...CHILD_FIXED_400_225
     }
 
     photo3: file(relativePath: { eq: "home/home-photo-4.jpg" }) {
-      ...CHILD_FIXED_230_170
+      ...CHILD_FIXED_400_225
     }
   }
 `;

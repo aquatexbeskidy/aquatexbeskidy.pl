@@ -1,5 +1,4 @@
 import { light as lightColors, dark as darkColors, color as commonColors } from './_color';
-import { breakpoint } from './_breakpoint';
 import { font } from './_font';
 
 export const THEME_LABEL_LIGHT = 'light';
@@ -14,7 +13,6 @@ const createTheme = (theme) => {
   };
 
   return {
-    breakpoint,
     color,
     font,
   };

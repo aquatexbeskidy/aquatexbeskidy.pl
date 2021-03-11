@@ -69,10 +69,18 @@ export const META_VIDEO_FRAGMENT = graphql`
   }
 `;
 
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILD_FLUID = graphql`
   fragment CHILD_FLUID on File {
     childImageSharp {
-      fluid(maxWidth: 1024, maxHeight: 1024, quality: 90) {
+      fluid(
+        srcSetBreakpoints: [320, 768, 1024, 1200]
+        cropFocus: CENTER
+        maxHeight: 1024
+        maxWidth: 1024
+        quality: 90
+      ) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }
@@ -82,10 +90,53 @@ export const CHILD_FLUID = graphql`
   }
 `;
 
-export const CHILDREN_FIXED_230_170 = graphql`
-  fragment CHILDREN_FIXED_230_170 on File {
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
+export const CHILDREN_FLUID = graphql`
+  fragment CHILDREN_FLUID on File {
     childrenImageSharp {
-      fixed(width: 230, height: 170, quality: 75) {
+      fluid(
+        srcSetBreakpoints: [320, 768, 1024, 1200]
+        cropFocus: CENTER
+        maxWidth: 540
+        quality: 95
+      ) {
+        ...GatsbyImageSharpFluid_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
+export const CHILDREN_FLUID_860_480 = graphql`
+  fragment CHILDREN_FLUID_860_480 on File {
+    childrenImageSharp {
+      fluid(
+        srcSetBreakpoints: [320, 768]
+        cropFocus: CENTER
+        maxHeight: 480
+        maxWidth: 840
+        quality: 95
+      ) {
+        ...GatsbyImageSharpFluid_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
+export const CHILDREN_FIXED_400_225 = graphql`
+  fragment CHILDREN_FIXED_400_225 on File {
+    childrenImageSharp {
+      fixed(width: 400, height: 225, quality: 75, cropFocus: CENTER) {
         ...GatsbyImageSharpFixed_noBase64
       }
     }
@@ -95,10 +146,42 @@ export const CHILDREN_FIXED_230_170 = graphql`
   }
 `;
 
-export const CHILD_FIXED_230_170 = graphql`
-  fragment CHILD_FIXED_230_170 on File {
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
+export const CHILDREN_FIXED_150_150 = graphql`
+  fragment CHILDREN_FIXED_150_150 on File {
+    childrenImageSharp {
+      fixed(width: 150, height: 150, quality: 75, cropFocus: CENTER) {
+        ...GatsbyImageSharpFixed_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
+export const CHILDREN_FIXED_75_75 = graphql`
+  fragment CHILDREN_FIXED_75_75 on File {
+    childrenImageSharp {
+      fixed(width: 75, height: 75, quality: 75, cropFocus: CENTER) {
+        ...GatsbyImageSharpFixed_noBase64
+      }
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
+export const CHILD_FIXED_400_225 = graphql`
+  fragment CHILD_FIXED_400_225 on File {
     childImageSharp {
-      fixed(width: 230, height: 170, quality: 75) {
+      fixed(width: 400, height: 225, quality: 75, cropFocus: CENTER) {
         ...GatsbyImageSharpFixed_noBase64
       }
     }
@@ -108,10 +191,12 @@ export const CHILD_FIXED_230_170 = graphql`
   }
 `;
 
+// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
+// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILD_FIXED_150_150 = graphql`
   fragment CHILD_FIXED_150_150 on File {
     childImageSharp {
-      fixed(width: 150, height: 150, quality: 75) {
+      fixed(width: 150, height: 150, quality: 75, cropFocus: CENTER) {
         ...GatsbyImageSharpFixed_noBase64
       }
     }
