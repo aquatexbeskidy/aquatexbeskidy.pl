@@ -10,7 +10,7 @@
   "scripts": {
     "build:clean": "gatsby clean && gatsby build --log-pages",
     "start:verbose": "gatsby develop --verbose",
-    "start:clean": "gatsby clean && gatsby develop",
+    "start:clean": "gatsby clean && gatsby develop -H 0.0.0.0",
     "bump": "yarn upgrade-interactive --latest",
     "purge": "rm -rf node_modules && yarn",
     "deploy:github": "gatsby build --prefix-paths && gh-pages -d public",
