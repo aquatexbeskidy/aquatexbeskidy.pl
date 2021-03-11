@@ -85,7 +85,7 @@ export const query = graphql`
     }
 
     photoFixed: file(relativePath: { eq: "home/home-photo-2.JPG" }) {
-      ...CHILD_FIXED_230_170
+      ...CHILD_FIXED_400_225
     }
   }
 `;
