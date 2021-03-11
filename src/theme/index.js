@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
 export { LightTheme, DarkTheme, THEME_LABEL_LIGHT, THEME_LABEL_DARK } from './create';
+export { animationKeyframes } from './animations';
 export { default as mq } from './_breakpoints';
 export { ThemeProvider } from './provider';
 export { ThemeContext } from './context';
@@ -49,6 +50,23 @@ export const GlobalStyle = createGlobalStyle`
 
     &:hover {
       color: ${({ theme }) => theme.color.primary};
+    }
+  }
+
+  [data-scroll-lock="true"] {
+    overflow: hidden;
+  }
+
+  .gatsby-image-wrapper {
+    overflow: hidden;
+
+    img {
+      transition: all 450ms ease-in-out !important;
+      will-change: scale;
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
   }
 `;
