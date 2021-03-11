@@ -1,5 +1,6 @@
 export { default as ImagePlaceholder } from './multimedia/ImagePlaceholder';
 export { default as ImageBackground } from './multimedia/ImageBackground';
+export { default as ImageLightbox } from './multimedia/ImageLightbox';
 export { default as Image } from './multimedia/Image';
 
 export { default as Link } from './Link';
