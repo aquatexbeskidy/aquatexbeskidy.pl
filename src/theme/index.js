@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
 export { LightTheme, DarkTheme, THEME_LABEL_LIGHT, THEME_LABEL_DARK } from './create';
+export { default as mq } from './_breakpoints';
 export { ThemeProvider } from './provider';
 export { ThemeContext } from './context';
 
