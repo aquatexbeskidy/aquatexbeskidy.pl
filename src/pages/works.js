@@ -2,11 +2,12 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import React from 'react';
 
-import { Video } from '~components';
+import { Video, ImageLightbox } from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,25 +22,64 @@ const WorksPage = ({
     videos: {
       frontmatter: { videos },
     },
-    images: { nodes },
+    images_860_480,
+    images_400_225,
+    images_75_75,
   },
-}) => (
-  <RootContainer meta={meta}>
-    <div>{meta.title}</div>
-    {nodes.map(({ id, name, childrenImageSharp }) => (
-      <Img fixed={childrenImageSharp[0].fixed} title={name} alt={name} key={id} />
-    ))}
-    {videos.map(({ videoId, videoTitle }) => (
-      <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
-    ))}
-  </RootContainer>
-);
+}) => {
+  const [currentImageId, setCurrentImageId] = useState(0);
+  const [isLightbox, setIsLightbox] = useState(false);
 
-export default WorksPage;
+  const handleLightbox = () => setIsLightbox((prev) => !prev);
+
+  const onChangeHandler = (index) => {
+    console.log('onChangeHandler', index);
+    setCurrentImageId(index);
+    handleLightbox();
+  };
+
+  return (
+    <RootContainer meta={meta}>
+      <div>{meta.title}</div>
+
+      <Wrapper>
+        {images_400_225.nodes.map(({ id, name, childrenImageSharp }, index) => (
+          <Thumbnail onClick={() => onChangeHandler(index)} key={id}>
+            <Img fixed={childrenImageSharp[0].fixed} title={name} alt={name} />
+          </Thumbnail>
+        ))}
+      </Wrapper>
+
+      <Wrapper>
+        {videos.map(({ videoId, videoTitle }) => (
+          <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
+        ))}
+      </Wrapper>
+
+      <ImageLightbox
+        currentImageId={currentImageId}
+        thumbnails={images_75_75.nodes}
+        images={images_860_480.nodes}
+        onClose={handleLightbox}
+        isOpen={isLightbox}
+      />
+    </RootContainer>
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
+
+const Thumbnail = styled.div`
+  display: inline-flex;
+  cursor: pointer;
+`;
+
+const Wrapper = styled.div`
+  flex-wrap: wrap;
+  display: flex;
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Graphql Query
@@ -56,11 +96,44 @@ export const query = graphql`
       }
     }
 
-    images: allFile(
+    images_400_225: allFile(
       filter: { absolutePath: { regex: "/works/" }, extension: { regex: "/(jpg)|(jpeg)|(png)/" } }
     ) {
       nodes {
-        ...CHILDREN_FIXED_230_170
+        ...CHILDREN_FIXED_400_225
+        publicURL
+        name
+        id
+      }
+    }
+
+    images_860_480: allFile(
+      filter: { absolutePath: { regex: "/works/" }, extension: { regex: "/(jpg)|(jpeg)|(png)/" } }
+    ) {
+      nodes {
+        ...CHILDREN_FLUID_860_480
+        publicURL
+        name
+        id
+      }
+    }
+
+    images_fluid: allFile(
+      filter: { absolutePath: { regex: "/works/" }, extension: { regex: "/(jpg)|(jpeg)|(png)/" } }
+    ) {
+      nodes {
+        ...CHILDREN_FLUID
+        publicURL
+        name
+        id
+      }
+    }
+
+    images_75_75: allFile(
+      filter: { absolutePath: { regex: "/works/" }, extension: { regex: "/(jpg)|(jpeg)|(png)/" } }
+    ) {
+      nodes {
+        ...CHILDREN_FIXED_75_75
         publicURL
         name
         id
@@ -79,3 +152,5 @@ export const query = graphql`
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
+
+export default WorksPage;
