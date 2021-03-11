@@ -249,23 +249,18 @@ const Header = styled.header`
 `;
 
 const FooterInner = styled.div`
-  ${mq.max.desktop_small} {
-    white-space: nowrap;
-    overflow-x: scroll;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  &::-webkit-scrollbar {
+    display: none;
   }
 
-  ${mq.min.desktop_small} {
+  white-space: nowrap;
+  overflow-x: scroll;
+
+  /* ${mq.min.desktop_small} {
     justify-content: flex-start;
     flex-wrap: wrap;
     display: flex;
-
-    overflow-y: scroll;
-    max-height: 84px;
-  }
+  } */
 `;
 
 const Footer = styled.footer`
