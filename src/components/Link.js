@@ -49,11 +49,14 @@ export default Link;
 // Variants
 // ─────────────────────────────────────────────────────────────────────────────
 
-const AnchorPrimary = css`
+const DefaultStyles = css`
   font-weight: ${({ theme }) => theme.font.weight.normal};
   font-size: ${({ theme }) => theme.font.size.base};
   text-decoration: none;
+`;
 
+const DefaultAnchorCss = css`
+  ${DefaultStyles}
   &:hover,
   &:focus,
   &:active,
@@ -63,12 +66,77 @@ const AnchorPrimary = css`
   }
 `;
 
+const DefaultButtonCss = css`
+  ${DefaultStyles}
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: ${({ theme }) => theme.font.weight.medium};
+  ${({ look }) => {
+    if (look === 'buttonPrimary') {
+      return css`
+        color: ${({ theme }) => theme.color.black};
+        background: ${({ theme }) => theme.color.white};
+        border: 2px solid ${({ theme }) => theme.color.white};
+        &:hover,
+        &:focus,
+        &:active,
+        &.is-active {
+          color: ${({ theme }) => theme.color.black};
+          text-decoration: none;
+        }
+      `;
+    } else if (look === 'buttonSecondary') {
+      return css`
+        color: ${({ theme }) => theme.color.white};
+        background: ${({ theme }) => theme.color.transparent};
+        border: 2px solid ${({ theme }) => theme.color.white};
+        &:hover,
+        &:focus,
+        &:active,
+        &.is-active {
+          color: ${({ theme }) => theme.color.white};
+          text-decoration: none;
+        }
+      `;
+    } else {
+      return css`
+        color: ${({ theme }) => theme.color.white};
+        background: ${({ theme }) => theme.color.primary};
+        border: 2px solid ${({ theme }) => theme.color.primary};
+        &:hover,
+        &:focus,
+        &:active,
+        &.is-active {
+          color: ${({ theme }) => theme.color.white};
+          text-decoration: none;
+        }
+      `;
+    }
+  }}
+`;
+
+const AnchorPrimary = css`
+  ${DefaultAnchorCss}
+`;
+
 const AnchorSecondary = css`
-  ${AnchorPrimary}// TODO:
+  ${DefaultAnchorCss}
 `;
 
 const AnchorTertiary = css`
-  ${AnchorPrimary}// TODO:
+  ${DefaultAnchorCss}
+`;
+
+const ButtonPrimary = css`
+  ${DefaultButtonCss}
+`;
+
+const ButtonSecondary = css`
+  ${DefaultButtonCss}
+`;
+
+const ButtonTertiary = css`
+  ${DefaultButtonCss}
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -79,6 +147,9 @@ export const Anchor = styled.a`
   ${({ look }) => look === 'secondary' && AnchorSecondary};
   ${({ look }) => look === 'tertiary' && AnchorTertiary};
   ${({ look }) => look === 'primary' && AnchorPrimary};
+  ${({ look }) => look === 'buttonPrimary' && ButtonPrimary};
+  ${({ look }) => look === 'buttonSecondary' && ButtonSecondary};
+  ${({ look }) => look === 'buttonTertiary' && ButtonTertiary};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────

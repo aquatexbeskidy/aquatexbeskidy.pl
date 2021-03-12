@@ -7,7 +7,7 @@ import Img from 'gatsby-image';
 import React from 'react';
 
 import { RootContainer } from '~containers';
-import { Hero } from '~components';
+import { HeroSection } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -27,9 +27,7 @@ const HomePage = ({
 }) => {
   return (
     <RootContainer meta={meta}>
-      <div>{meta.title}</div>
-
-      <Hero {...hero} {...(hero.image && { fluid: heroImage.childImageSharp.fluid })} />
+      <HeroSection {...hero} {...(hero.image && { fluid: heroImage.childImageSharp.fluid })} />
 
       <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
       <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
@@ -64,27 +62,23 @@ export const query = graphql`
           buttons {
             title
             link
+            type
           }
         }
       }
     }
-
     heroImage: file(relativePath: { eq: "home/home-photo-1.jpg" }) {
       ...CHILD_FLUID
     }
-
     works: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
       ...CHILD_FLUID
     }
-
     photo1: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
       ...CHILD_FIXED_400_225
     }
-
     photo2: file(relativePath: { eq: "home/home-photo-3.jpg" }) {
       ...CHILD_FIXED_400_225
     }
-
     photo3: file(relativePath: { eq: "home/home-photo-4.jpg" }) {
       ...CHILD_FIXED_400_225
     }

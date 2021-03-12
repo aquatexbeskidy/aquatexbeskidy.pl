@@ -3,6 +3,7 @@ export const light = {
   text: `#474747`,
   white: `#ffffff`,
   black: `#1f262e`,
+  transparent: 'transparent',
 };
 
 export const dark = {};

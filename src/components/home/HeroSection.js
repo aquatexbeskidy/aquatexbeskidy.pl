@@ -14,7 +14,7 @@ import { Link } from '~components';
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Hero = ({ title, subtitle, buttons, image, fluid }) => {
+const HeroSection = ({ title, subtitle, buttons, image, fluid }) => {
   const headingChildren = stringIncludesHTML(title)
     ? { dangerouslySetInnerHTML: { __html: title } }
     : { children: title };
@@ -26,19 +26,19 @@ const Hero = ({ title, subtitle, buttons, image, fluid }) => {
   const Wrapper = image ? HeroBackground : HeroWithoutBackground;
 
   return (
-    <Wrapper {...(image && { fluid: fluid, Tag: 'section' })}>
+    <BackgroundImage fluid={fluid}>
       <Inner>
         {title && <Heading {...headingChildren} />}
         {subtitle && <SubHeading {...subHeadingChildren} />}
 
         {buttons &&
-          buttons.map(({ title, link }, index) => (
-            <Button to={link} look="primary" key={index}>
+          buttons.map(({ title, link, type }, index) => (
+            <Link to={link} look={type} key={index}>
               {title}
-            </Button>
+            </Link>
           ))}
       </Inner>
-    </Wrapper>
+    </BackgroundImage>
   );
 };
 
@@ -46,7 +46,7 @@ const Hero = ({ title, subtitle, buttons, image, fluid }) => {
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const [, height] = SIZE_HERO.split('x');
+const [width, height] = SIZE_HERO.split('x');
 
 const common = css`
   justify-content: flex-start;
@@ -56,6 +56,10 @@ const common = css`
 
 const HeroBackground = styled(BackgroundImage)`
   ${common}
+  background-position: bottom center;
+  background-repeat: repeat-y;
+  background-size: cover;
+  width: 100%;
 `;
 const HeroWithoutBackground = styled.div`
   ${common}
@@ -63,50 +67,59 @@ const HeroWithoutBackground = styled.div`
 
 const Inner = styled.div`
   min-height: ${height}px;
-  max-width: 50vw;
-  padding: 6vw;
+  max-width: 100%;
+  padding: 4vw;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #176ed370;
+    z-index: -1;
+  }
+  a {
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
 `;
 
 const SubHeading = styled.p`
   color: ${({ theme }) => theme.color.white};
   line-height: 30px;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 22px;
+  margin: 30px 0 50px;
 `;
 
 const Heading = styled.h2`
   color: ${({ theme }) => theme.color.white};
-  line-height: 46px;
-  font-weight: 500;
+  line-height: 60px;
+  font-weight: 600;
   font-size: 36px;
-`;
-
-const Button = styled(Link)`
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  display: flex;
-  border: 0;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-Hero.displayName = 'Hero';
+HeroSection.displayName = 'Hero';
 
-Hero.propTypes = {
+HeroSection.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   buttons: PropTypes.arrayOf(PropTypes.object),
   image: PropTypes.bool,
 };
 
-Hero.defaultProps = {
+HeroSection.defaultProps = {
   title: '',
   subtitle: '',
   buttons: [],
   image: true,
 };
 
-export default Hero;
+export default HeroSection;
