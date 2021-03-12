@@ -26,7 +26,7 @@ const HeroSection = ({ title, subtitle, buttons, image, fluid }) => {
   const Wrapper = image ? HeroBackground : HeroWithoutBackground;
 
   return (
-    <BackgroundImage fluid={fluid}>
+    <Wrapper {...(image && { fluid: fluid, Tag: 'section' })}>
       <Inner>
         {title && <Heading {...headingChildren} />}
         {subtitle && <SubHeading {...subHeadingChildren} />}
@@ -38,7 +38,7 @@ const HeroSection = ({ title, subtitle, buttons, image, fluid }) => {
             </Link>
           ))}
       </Inner>
-    </BackgroundImage>
+    </Wrapper>
   );
 };
 
