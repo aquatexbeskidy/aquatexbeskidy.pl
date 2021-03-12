@@ -1,16 +1,11 @@
 export const light = {
   background: `#ffffff`,
   text: `#474747`,
-  white: `#1f262e`,
-  black: `#ffffff`,
+  white: `#ffffff`,
+  black: `#1f262e`,
 };
 
-export const dark = {
-  background: `#1f262e`,
-  text: `#ffffff`,
-  white: `#ffffff`,
-  black: '#1f262e',
-};
+export const dark = {};
 
 export const color = {
   primary: `#176ED3`,
