@@ -7,6 +7,7 @@ import Img from 'gatsby-image';
 import React from 'react';
 
 import { RootContainer } from '~containers';
+import { Hero } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -15,37 +16,28 @@ import { RootContainer } from '~containers';
 const HomePage = ({
   data: {
     page: {
-      frontmatter: { meta },
+      frontmatter: { meta, hero },
     },
     photo1,
     photo2,
     photo3,
-    hero,
+    heroImage,
     works,
   },
-}) => (
-  <RootContainer meta={meta}>
-    <div>{meta.title}</div>
+}) => {
+  return (
+    <RootContainer meta={meta}>
+      <div>{meta.title}</div>
 
-    <div
-      style={{
-        maxHeight: `750px`,
-        overflow: `hidden`,
-      }}
-    >
-      <Img
-        style={{ height: '100%' }}
-        imgStyle={{ objectFit: 'contain' }}
-        fluid={hero.childImageSharp.fluid}
-        alt={hero.name}
-      />
-    </div>
-    <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
-    <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
-    <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />
-    <Img fluid={works.childImageSharp.fluid} alt={works.name} />
-  </RootContainer>
-);
+      <Hero {...hero} {...(hero.image && { fluid: heroImage.childImageSharp.fluid })} />
+
+      <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
+      <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
+      <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />
+      <Img fluid={works.childImageSharp.fluid} alt={works.name} />
+    </RootContainer>
+  );
+};
 
 export default HomePage;
 
@@ -65,10 +57,19 @@ export const query = graphql`
     ) {
       frontmatter {
         ...META_FRAGMENT
+        hero {
+          title
+          subtitle
+          image
+          buttons {
+            title
+            link
+          }
+        }
       }
     }
 
-    hero: file(relativePath: { eq: "home/home-photo-1.jpg" }) {
+    heroImage: file(relativePath: { eq: "home/home-photo-1.jpg" }) {
       ...CHILD_FLUID
     }
 
