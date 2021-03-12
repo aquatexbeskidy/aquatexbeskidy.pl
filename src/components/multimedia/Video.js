@@ -6,13 +6,13 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { SIZE_230_170 } from '~utils';
+import { SIZE_400_225 } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const [fwidth, fheight] = SIZE_230_170.split('x');
+const [fwidth, fheight] = SIZE_400_225.split('x');
 
 const Video = ({ videoId, videoTitle, width, height }) => {
   const srcDocStyles = css`

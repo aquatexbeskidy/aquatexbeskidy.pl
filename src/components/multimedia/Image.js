@@ -16,30 +16,30 @@ import { ImagePlaceholder } from '~components';
 //    How to use:
 //
 //    A) fixed:
-//    <Image name="home-photo-1.jpg" type="fixed" format={SIZE_230_170} />
+//    <Image name="home-photo-1.jpg" type="fixed" format={SIZE_400_225} />
 //
 //    B) fluid:
 //    <Image name="home-photo-1.jpg" type="fluid" />
 //
 // ─────────────────────────────────────────────────────────────────────────────
 
-const [SIZE_230_170, SIZE_150_150] = imageAcceptableFormats;
+const [SIZE_400_225, SIZE_75_75] = imageAcceptableFormats;
 
 const Image = ({ name, type, format }) => {
   const formats = useStaticQuery(graphql`
     query {
-      format_230_170: allImageSharp {
+      format_400_225: allImageSharp {
         nodes {
-          fixed(width: 230, height: 170, quality: 75) {
+          fixed(width: 400, height: 225, quality: 95, cropFocus: CENTER) {
             ...GatsbyImageSharpFixed_withWebp_noBase64
             originalName
           }
           id
         }
       }
-      format_150_150: allImageSharp {
+      format_75_75: allImageSharp {
         nodes {
-          fixed(width: 150, height: 150, quality: 75) {
+          fixed(width: 75, height: 75, quality: 95, cropFocus: CENTER) {
             ...GatsbyImageSharpFixed_withWebp_noBase64
             originalName
           }
@@ -48,7 +48,13 @@ const Image = ({ name, type, format }) => {
       }
       format_FLUID: allImageSharp {
         nodes {
-          fluid(maxWidth: 1024, quality: 75) {
+          fluid(
+            srcSetBreakpoints: [320, 768, 1024, 1200]
+            cropFocus: CENTER
+            maxHeight: 480
+            maxWidth: 840
+            quality: 95
+          ) {
             ...GatsbyImageSharpFluid_withWebp_noBase64
             originalName
           }
@@ -59,24 +65,24 @@ const Image = ({ name, type, format }) => {
   `);
 
   if (!name) {
-    return <ImagePlaceholder format={format || SIZE_230_170} />;
+    return <ImagePlaceholder format={format || SIZE_400_225} />;
   }
 
   const find = (nodes) => nodes.find(({ [type]: { originalName } }) => originalName === name);
 
   const getImageProps = () => {
-    const { format_230_170, format_150_150, format_FLUID } = formats;
+    const { format_400_225, format_75_75, format_FLUID } = formats;
 
     if (type === 'fixed') {
       switch (format) {
-        case SIZE_230_170:
+        case SIZE_400_225:
           return {
-            [type]: find(format_230_170.nodes)[type],
+            [type]: find(format_400_225.nodes)[type],
           };
           break;
-        case SIZE_150_150:
+        case SIZE_75_75:
           return {
-            [type]: find(format_150_150.nodes)[type],
+            [type]: find(format_75_75.nodes)[type],
           };
           break;
       }
@@ -111,7 +117,7 @@ Image.propTypes = {
 };
 
 Image.defaultProps = {
-  format: SIZE_230_170,
+  format: SIZE_400_225,
   type: 'fixed',
   name: false,
 };
