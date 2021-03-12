@@ -46,97 +46,105 @@ const Link = ({ href, to, children, ...rest }) => {
 export default Link;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Variants
+// Commons
 // ─────────────────────────────────────────────────────────────────────────────
 
 const DefaultStyles = css`
   font-weight: ${({ theme }) => theme.font.weight.normal};
   font-size: ${({ theme }) => theme.font.size.base};
   text-decoration: none;
-`;
 
-const DefaultAnchorCss = css`
-  ${DefaultStyles}
   &:hover,
   &:focus,
   &:active,
   &.is-active {
-    color: ${({ theme }) => theme.color.primary};
     text-decoration: none;
   }
 `;
 
-const DefaultButtonCss = css`
-  ${DefaultStyles}
-  padding: 12px 30px;
-  border-radius: 30px;
-  font-weight: ${({ theme }) => theme.font.weight.medium};
-  ${({ look }) => {
-    if (look === 'buttonPrimary') {
-      return css`
-        color: ${({ theme }) => theme.color.black};
-        background: ${({ theme }) => theme.color.white};
-        border: 2px solid ${({ theme }) => theme.color.white};
-        &:hover,
-        &:focus,
-        &:active,
-        &.is-active {
-          color: ${({ theme }) => theme.color.black};
-          text-decoration: none;
-        }
-      `;
-    } else if (look === 'buttonSecondary') {
-      return css`
-        color: ${({ theme }) => theme.color.white};
-        background: ${({ theme }) => theme.color.transparent};
-        border: 2px solid ${({ theme }) => theme.color.white};
-        &:hover,
-        &:focus,
-        &:active,
-        &.is-active {
-          color: ${({ theme }) => theme.color.white};
-          text-decoration: none;
-        }
-      `;
-    } else {
-      return css`
-        color: ${({ theme }) => theme.color.white};
-        background: ${({ theme }) => theme.color.primary};
-        border: 2px solid ${({ theme }) => theme.color.primary};
-        &:hover,
-        &:focus,
-        &:active,
-        &.is-active {
-          color: ${({ theme }) => theme.color.white};
-          text-decoration: none;
-        }
-      `;
-    }
-  }}
-`;
+// ─────────────────────────────────────────────────────────────────────────────
+// Anchors Variants
+// ─────────────────────────────────────────────────────────────────────────────
 
 const AnchorPrimary = css`
-  ${DefaultAnchorCss}
+  ${DefaultStyles};
+
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const AnchorSecondary = css`
-  ${DefaultAnchorCss}
+  ${DefaultStyles};
+
+  color: ${({ theme }) => theme.color.primary};
 `;
 
-const AnchorTertiary = css`
-  ${DefaultAnchorCss}
-`;
+// ─────────────────────────────────────────────────────────────────────────────
+// Buttons Variants
+// ─────────────────────────────────────────────────────────────────────────────
 
-const ButtonPrimary = css`
-  ${DefaultButtonCss}
+const DefaultButtonCss = css`
+  ${DefaultStyles};
+
+  font-weight: ${({ theme }) => theme.font.weight.medium};
+  border-radius: 30px;
+  padding: 12px 30px;
 `;
 
 const ButtonSecondary = css`
-  ${DefaultButtonCss}
+  --button-secondary-background: ${({ theme }) => theme.color.transparent};
+  --button-secondary-border: ${({ theme }) => theme.color.white};
+  --button-secondary-color: ${({ theme }) => theme.color.white};
+
+  ${DefaultButtonCss};
+
+  border: 2px solid var(--button-secondary-border);
+  background: var(--button-secondary-background);
+  color: var(--button-secondary-color);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.is-active {
+    color: var(--button-secondary-color);
+  }
 `;
 
 const ButtonTertiary = css`
+  --button-tertiary-background: ${({ theme }) => theme.color.primary};
+  --button-tertiary-border: ${({ theme }) => theme.color.primary};
+  --button-tertiary-color: ${({ theme }) => theme.color.white};
+
   ${DefaultButtonCss}
+
+  border: 2px solid var(--button-tertiary-border);
+  background: var(--button-tertiary-background);
+  color: var(--button-tertiary-color);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.is-active {
+    color: var(--button-tertiary-color);
+  }
+`;
+
+const ButtonPrimary = css`
+  --button-primary-background: ${({ theme }) => theme.color.white};
+  --button-primary-border: ${({ theme }) => theme.color.white};
+  --button-primary-color: ${({ theme }) => theme.color.black};
+
+  ${DefaultButtonCss};
+
+  border: 2px solid var(--button-primary-border);
+  background: var(--button-primary-background);
+  color: var(--button-primary-color);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.is-active {
+    color: var(--button-primary-color);
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -145,11 +153,11 @@ const ButtonTertiary = css`
 
 export const Anchor = styled.a`
   ${({ look }) => look === 'secondary' && AnchorSecondary};
-  ${({ look }) => look === 'tertiary' && AnchorTertiary};
   ${({ look }) => look === 'primary' && AnchorPrimary};
-  ${({ look }) => look === 'buttonPrimary' && ButtonPrimary};
+
   ${({ look }) => look === 'buttonSecondary' && ButtonSecondary};
   ${({ look }) => look === 'buttonTertiary' && ButtonTertiary};
+  ${({ look }) => look === 'buttonPrimary' && ButtonPrimary};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
