@@ -6,7 +6,10 @@ import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import React from 'react';
 
-import { Nav } from '~components';
+import { Nav, Link } from '~components';
+import ATBLogo from '../assets/icons/atb_logo.svg';
+import NCLogo from '../assets/icons/nc_sygnet_mono.svg';
+import PhoneIcon from '../assets/icons/phone.svg';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -29,16 +32,41 @@ const FooterContainer = () => {
   `);
 
   return (
-    <Footer>
-      {footer.frontmatter.links.map(({ title, links, type }) => {
-        return (
-          <Section key={title}>
-            <h3>{title}</h3>
-            {type === 'nested' && <Nav links={links} />}
-          </Section>
-        );
-      })}
-    </Footer>
+    <>
+      <QuickContact>
+        <div>
+          <p>Zainteresowany?</p>
+          <p>Skontaktuj się z nami! Dostosujemy pod Ciebie najlepsze rozwiązanie.</p>
+        </div>
+        <div>
+          <Link to="/dd" look="buttonSecondary">
+            601 282 929
+          </Link>
+        </div>
+      </QuickContact>
+      <Footer>
+        {footer.frontmatter.links.map(({ title, links, type }) => {
+          return (
+            <Section key={title}>
+              <h3>{title}</h3>
+              {type === 'nested' && <Nav links={links} />}
+            </Section>
+          );
+        })}
+        <Section>
+          <div>
+            <img src={ATBLogo} />
+            <p>Copyright © 2021 Wszystkie prawa zastrzeżone</p>
+          </div>
+          <div>
+            <p>Made by</p>
+            <a href="http://nomads.codes">
+              <img src={NCLogo} />
+            </a>
+          </div>
+        </Section>
+      </Footer>
+    </>
   );
 };
 
@@ -48,16 +76,86 @@ export default FooterContainer;
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
+const QuickContact = styled.section`
+  display: flex;
+  background: ${({ theme }) => theme.color.primary};
+  justify-content: space-between;
+  align-items: center;
+  div {
+    &:first-child {
+      color: ${({ theme }) => theme.color.white};
+      p {
+        &:first-child {
+          font-weight: ${({ theme }) => theme.font.weight.semibold};
+          font-size: ${({ theme }) => theme.font.size.xl};
+          margin-bottom: 0;
+        }
+        &:last-child {
+          margin: 5px 0 20px;
+          font-weight: ${({ theme }) => theme.font.weight.normal};
+          font-size: ${({ theme }) => theme.font.size.sm};
+        }
+      }
+    }
+    &:last-child {
+      a {
+        padding-left: 50px;
+        position: relative;
+        &::before {
+          display: block;
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 25px;
+          transform: translateY(-50%);
+          width: 20px;
+          height: 20px;
+          background-image: url(${PhoneIcon});
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+        }
+      }
+    }
+  }
+`;
+
 const Footer = styled.footer`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const Section = styled.section`
+  background: rgba(0, 0, 0, 0.01);
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
   width: calc(100% / 3);
   display: flex;
+  padding: 40px 0;
+  &:last-child {
+    background: transparent;
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0;
+    div {
+      &:first-child {
+        p {
+          margin-top: 0;
+        }
+      }
+      &:last-child {
+        display: flex;
+        align-items: center;
+        img {
+          width: 70px;
+        }
+      }
+    }
+  }
 
   ul {
     align-items: flex-start;

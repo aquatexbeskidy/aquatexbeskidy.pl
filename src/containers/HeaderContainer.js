@@ -69,7 +69,8 @@ export default HeaderContainer;
 // ─────────────────────────────────────────────────────────────────────────────
 
 const sectionBottom = css`
-  height: 8rem;
+  height: 5rem;
+  justify-content: space-between;
 
   h1 {
     a {
@@ -79,11 +80,14 @@ const sectionBottom = css`
 `;
 
 const sectionTop = css`
-  background-color: rgba(0, 0, 0, 0.04);
-  height: 4rem;
+  background-color: rgba(0, 0, 0, 0.01);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  height: 3rem;
+  justify-content: flex-end;
 
   a {
-    font-size: ${({ theme }) => theme.font.size.base};
+    font-size: ${({ theme }) => theme.font.size.xs};
+    font-weight: ${({ theme }) => theme.font.weight.light};
   }
 `;
 
@@ -95,7 +99,6 @@ const Section = styled.section`
   ${({ isBottom }) => isBottom && sectionBottom}
   ${({ isTop }) => isTop && sectionTop}
 
-  justify-content: space-between;
   align-items: center;
   display: flex;
 `;
