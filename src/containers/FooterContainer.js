@@ -66,8 +66,14 @@ export const Section = styled.section`
     li {
       margin-top: 1rem;
       padding: 0;
-      a.is-active {
-        color: initial;
+      a {
+        &:hover,
+        &:focus,
+        &:active,
+        &.is-active {
+          color: ${({ theme }) => theme.color.text};
+          text-decoration: none;
+        }
       }
     }
   }

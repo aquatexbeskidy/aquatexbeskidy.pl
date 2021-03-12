@@ -56,8 +56,8 @@ const common = css`
 
 const HeroBackground = styled(BackgroundImage)`
   ${common}
-  background-position: bottom center;
-  background-repeat: repeat-y;
+  background-position: left;
+  background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
 `;

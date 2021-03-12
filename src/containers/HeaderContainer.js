@@ -101,7 +101,7 @@ const Section = styled.section`
 `;
 
 const Logo = styled.img`
-  width: 95px;
+  max-width: 100%;
   height: auto;
 `;
 
