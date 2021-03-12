@@ -116,7 +116,7 @@ export const CHILDREN_FLUID_860_480 = graphql`
   fragment CHILDREN_FLUID_860_480 on File {
     childrenImageSharp {
       fluid(
-        srcSetBreakpoints: [320, 768]
+        srcSetBreakpoints: [320, 768, 1024, 1200]
         cropFocus: CENTER
         maxHeight: 480
         maxWidth: 840

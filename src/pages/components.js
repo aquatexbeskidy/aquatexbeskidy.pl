@@ -80,11 +80,11 @@ export const query = graphql`
       }
     }
 
-    photoFluid: file(relativePath: { eq: "home/home-photo-5.JPG" }) {
+    photoFluid: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
       ...CHILD_FLUID
     }
 
-    photoFixed: file(relativePath: { eq: "home/home-photo-2.JPG" }) {
+    photoFixed: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
       ...CHILD_FIXED_400_225
     }
   }
