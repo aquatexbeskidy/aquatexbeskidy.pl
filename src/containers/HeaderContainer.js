@@ -6,8 +6,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 import styled, { css } from 'styled-components';
 import React from 'react';
 
+import { ReactComponent as BrandLogo } from '../assets/icons/atb_logo.svg';
 import { Nav, Link } from '~components';
-import ATBLogo from '../assets/icons/atb_logo.svg';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -46,11 +46,7 @@ const HeaderContainer = (props) => {
         <StyledH1>
           {site.siteMetadata.siteTitle}
           <Link to="/">
-            <Logo
-              src={ATBLogo}
-              alt={site.siteMetadata.siteTitle}
-              title={site.siteMetadata.siteTitle}
-            />
+            <BrandLogo title={site.siteMetadata.siteTitle} />
           </Link>
         </StyledH1>
 

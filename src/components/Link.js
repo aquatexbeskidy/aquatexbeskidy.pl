@@ -167,7 +167,7 @@ export const Anchor = styled.a`
 Link.displayName = 'Link';
 
 Link.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   href: PropTypes.string,
   to: PropTypes.string,
 };
