@@ -115,8 +115,8 @@ export const DEEPWELL_FRAGMENT = graphql`
         }
         waterSearchTitle
         waterSearchDesc
-        WaterConnectTitle
-        WaterConnectDesc
+        waterConnectTitle
+        waterConnectDesc
       }
     }
   }
