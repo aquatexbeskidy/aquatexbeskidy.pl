@@ -89,6 +89,17 @@ module.exports = {
         display: 'swap',
       },
     },
+    {
+      resolve: 'gatsby-plugin-svgr',
+      options: {
+        // include: `${__dirname}/src/assets/icons`,
+        prettier: true,
+        svgo: true,
+        svgoConfig: {
+          plugins: [{ removeViewBox: true }, { cleanupIDs: true }],
+        },
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
