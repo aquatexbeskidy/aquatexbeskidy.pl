@@ -56,6 +56,24 @@ export const FOOTER_NAV_FRAGMENT = graphql`
   }
 `;
 
+export const CONTACT_FRAGMENT = graphql`
+  fragment CONTACT_FRAGMENT on Mdx {
+    frontmatter {
+      contact {
+        title
+        subTitle
+        pinTitle
+        pinDesc
+        buttons {
+          text
+          url
+          type
+        }
+      }
+    }
+  }
+`;
+
 export const META_VIDEO_FRAGMENT = graphql`
   fragment META_VIDEO_FRAGMENT on Mdx {
     frontmatter {
