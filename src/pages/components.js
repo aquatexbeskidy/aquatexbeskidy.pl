@@ -6,7 +6,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import React from 'react';
 
-import { Image, ImageBackground } from '~components';
+// import { Image, ImageBackground } from '~components';
 import { RootContainer } from '~containers';
 
 import { imageAcceptableFormats } from '~utils';
@@ -36,16 +36,16 @@ const ComponentsPage = ({
       <p>Image Background</p>
       <br />
       <br />
-      <ImageBackground name="home-photo-1.jpg">
+      {/* <ImageBackground name="home-photo-1.jpg">
         <p>Tytuł strona główna dla hero</p>
-      </ImageBackground>
+      </ImageBackground> */}
       <br />
       <br />
       <p>Image with format and types: [fluid, fixed]</p>
       <br />
       <br />
-      <Image name="home-photo-1.jpg" type="fixed" format={SIZE_230_170} />
-      <Image name="home-photo-1.jpg" type="fluid" />
+      {/* <Image name="home-photo-1.jpg" type="fixed" format={SIZE_230_170} />
+      <Image name="home-photo-1.jpg" type="fluid" /> */}
       <br />
       <br />
       <p>Gatsby image fluid and fixed</p>
