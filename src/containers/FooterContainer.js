@@ -158,8 +158,12 @@ export const Section = styled.section`
       &:last-child {
         display: flex;
         align-items: center;
+        p {
+          margin-right: 10px;
+        }
         img {
-          width: 70px;
+          width: 20px;
+          height: auto;
         }
       }
     }
