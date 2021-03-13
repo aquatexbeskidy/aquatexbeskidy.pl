@@ -45,7 +45,7 @@ const HeaderContainer = (props) => {
       <Section isBottom>
         <StyledH1>
           {site.siteMetadata.siteTitle}
-          <Link to="/" look="primary">
+          <Link to="/">
             <Logo
               src={ATBLogo}
               alt={site.siteMetadata.siteTitle}

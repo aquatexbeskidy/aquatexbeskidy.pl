@@ -30,18 +30,21 @@ const FooterContainer = () => {
       }
     }
   `);
-
   return (
     <>
       <QuickContact>
         <div>
-          <p>Zainteresowany?</p>
-          <p>Skontaktuj się z nami! Dostosujemy pod Ciebie najlepsze rozwiązanie.</p>
+          <p>{footer.frontmatter.quickContact.title}</p>
+          <p>{footer.frontmatter.quickContact.desc}</p>
         </div>
         <div>
-          <Link to="/dd" look="buttonSecondary">
-            601 282 929
-          </Link>
+          {footer.frontmatter.quickContact.link.map(({ text, url, type }) => {
+            return (
+              <Link to={url} look={type} key={text}>
+                {text}
+              </Link>
+            );
+          })}
         </div>
       </QuickContact>
       <Footer>
@@ -56,14 +59,18 @@ const FooterContainer = () => {
         <Section>
           <div>
             <img src={ATBLogo} />
-            <p>Copyright © 2021 Wszystkie prawa zastrzeżone</p>
+            <p>{footer.frontmatter.copyright}</p>
           </div>
-          <div>
-            <p>Made by</p>
-            <a href="http://nomads.codes">
-              <img src={NCLogo} />
-            </a>
-          </div>
+          {footer.frontmatter.nomadsCodes.map(({ madeBy, name, url }) => {
+            return (
+              <div key={name}>
+                <p>{madeBy}</p>
+                <a href={url} target="_blank">
+                  <img src={NCLogo} alt={name} title={name} />
+                </a>
+              </div>
+            );
+          })}
         </Section>
       </Footer>
     </>
@@ -101,6 +108,7 @@ const QuickContact = styled.section`
       a {
         padding-left: 50px;
         position: relative;
+        font-weight: ${({ theme }) => theme.font.weight.semibold};
         &::before {
           display: block;
           content: '';
@@ -169,7 +177,7 @@ export const Section = styled.section`
         &:focus,
         &:active,
         &.is-active {
-          color: ${({ theme }) => theme.color.text};
+          color: ${({ theme }) => theme.color.black};
           text-decoration: none;
         }
       }

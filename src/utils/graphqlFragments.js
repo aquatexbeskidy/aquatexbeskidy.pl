@@ -41,6 +41,21 @@ export const FOOTER_NAV_FRAGMENT = graphql`
   fragment FOOTER_NAV_FRAGMENT on Mdx {
     frontmatter {
       title
+      copyright
+      nomadsCodes {
+        madeBy
+        name
+        url
+      }
+      quickContact {
+        title
+        desc
+        link {
+          text
+          url
+          type
+        }
+      }
       links {
         url
         type
