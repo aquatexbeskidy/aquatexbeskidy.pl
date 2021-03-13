@@ -25,8 +25,8 @@ const DeepWellPage = ({
           additionList,
           waterSearchTitle,
           waterSearchDesc,
-          WaterConnectTitle,
-          WaterConnectDesc,
+          waterConnectTitle,
+          waterConnectDesc,
         },
       },
     },
@@ -40,9 +40,9 @@ const DeepWellPage = ({
     ? { dangerouslySetInnerHTML: { __html: waterSearchDesc } }
     : { children: waterSearchDesc };
 
-  const waterConnectDescChildren = stringIncludesHTML(WaterConnectDesc)
-    ? { dangerouslySetInnerHTML: { __html: WaterConnectDesc } }
-    : { children: WaterConnectDesc };
+  const waterConnectDescChildren = stringIncludesHTML(waterConnectDesc)
+    ? { dangerouslySetInnerHTML: { __html: waterConnectDesc } }
+    : { children: waterConnectDesc };
 
   return (
     <RootContainer meta={meta}>
@@ -51,7 +51,7 @@ const DeepWellPage = ({
         <p {...mainContentChildren} />
         <h3>{waterSearchTitle}</h3>
         <p {...waterSearchDescChildren} />
-        <h3>{WaterConnectTitle}</h3>
+        <h3>{waterConnectTitle}</h3>
         <p {...waterConnectDescChildren} />
       </div>
     </RootContainer>
