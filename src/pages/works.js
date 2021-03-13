@@ -22,6 +22,9 @@ const WorksPage = ({
     videos: {
       frontmatter: { videos },
     },
+    content: {
+      frontmatter: { photosTitle, videosTitle },
+    },
     images_860_480,
     images_400_225,
     images_75_75,
@@ -40,8 +43,7 @@ const WorksPage = ({
 
   return (
     <RootContainer meta={meta}>
-      <div>{meta.title}</div>
-
+      <h2>{photosTitle}</h2>
       <Wrapper>
         {images_400_225.nodes.map(({ id, name, childrenImageSharp }, index) => (
           <Thumbnail onClick={() => onChangeHandler(index)} key={id}>
@@ -50,6 +52,7 @@ const WorksPage = ({
         ))}
       </Wrapper>
 
+      <h2>{videosTitle}</h2>
       <Wrapper>
         {videos.map(({ videoId, videoTitle }) => (
           <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
@@ -94,6 +97,13 @@ export const query = graphql`
       frontmatter {
         ...META_FRAGMENT
       }
+    }
+
+    content: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/works/" } } }
+    ) {
+      ...WORKS_FRAGMENT
     }
 
     images_400_225: allFile(

@@ -83,7 +83,7 @@ export default FooterContainer;
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const QuickContact = styled.section`
+export const QuickContact = styled.section`
   display: flex;
   background: ${({ theme }) => theme.color.primary};
   justify-content: space-between;

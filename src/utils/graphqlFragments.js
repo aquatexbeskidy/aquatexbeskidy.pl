@@ -71,6 +71,72 @@ export const FOOTER_NAV_FRAGMENT = graphql`
   }
 `;
 
+export const WORKS_FRAGMENT = graphql`
+  fragment WORKS_FRAGMENT on Mdx {
+    frontmatter {
+      photosTitle
+      videosTitle
+    }
+  }
+`;
+
+export const OFFER_FRAGMENT = graphql`
+  fragment OFFER_FRAGMENT on Mdx {
+    frontmatter {
+      offer {
+        mainTitle
+        mainContent
+        subContent
+        subTitle
+        offerList {
+          title
+          price
+        }
+        reviewImgList {
+          photo
+        }
+      }
+    }
+  }
+`;
+
+export const DEEPWELL_FRAGMENT = graphql`
+  fragment DEEPWELL_FRAGMENT on Mdx {
+    frontmatter {
+      deepWell {
+        mainTitle
+        mainContent
+        additionList {
+          title
+          contentList {
+            desc
+          }
+          photo
+        }
+        waterSearchTitle
+        waterSearchDesc
+        WaterConnectTitle
+        WaterConnectDesc
+      }
+    }
+  }
+`;
+
+export const BOREHOLE_FRAGMENT = graphql`
+  fragment BOREHOLE_FRAGMENT on Mdx {
+    frontmatter {
+      borehole {
+        mainTitle
+        mainContent
+        equipmentImgList {
+          photo
+        }
+        subContent
+      }
+    }
+  }
+`;
+
 export const CONTACT_FRAGMENT = graphql`
   fragment CONTACT_FRAGMENT on Mdx {
     frontmatter {

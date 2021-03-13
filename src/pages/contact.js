@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 import React from 'react';
 
 import { RootContainer } from '~containers';
+import { QuickContact } from '~containers/FooterContainer';
 import { MapLeaflet, Link } from '~components';
 import PinIcon from '../assets/icons/pin.svg';
 import PhoneIcon from '../assets/icons/phone.svg';
@@ -69,6 +70,10 @@ const commonIconCss = css`
 `;
 
 const ContactWrapper = styled.div`
+  margin-bottom: 50px;
+  & + ${QuickContact} {
+    display: none;
+  }
   .leaflet-popup-content {
     p {
       margin: 10px 0 0;
