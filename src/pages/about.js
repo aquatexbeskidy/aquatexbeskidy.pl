@@ -30,11 +30,16 @@ const AboutPage = ({
       <section>
         {contentBlocks.map(({ title, contentList }) => (
           <div key={title}>
-            {contentList.map(({ desc }, index) => (
-              <div key={index}>
-                <p dangerouslySetInnerHTML={{ __html: desc }} />
-              </div>
-            ))}
+            {contentList.map(({ desc }, index) => {
+              const descChildren = stringIncludesHTML(desc)
+                ? { dangerouslySetInnerHTML: { __html: desc } }
+                : { children: desc };
+              return (
+                <div key={index}>
+                  <p {...descChildren} />
+                </div>
+              );
+            })}
           </div>
         ))}
       </section>
