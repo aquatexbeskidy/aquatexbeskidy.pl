@@ -36,10 +36,12 @@ const Toggler = ({ toggleItems }) => {
 
 const ToggleContainer = styled.div`
   width: 100%;
+  margin: 40px 0;
 `;
 
 const ToggleItem = styled.div`
   width: 100%;
+  padding: 20px 0;
 `;
 
 const CheckBox = styled.input`
@@ -48,9 +50,12 @@ const CheckBox = styled.input`
 
 const ToggleIcon = styled.img`
   width: 20px;
-`
+`;
 
 const Title = styled.label`
+  cursor: pointer;
+  font-weight: ${({ theme }) => theme.font.weight.semibold};
+  font-size: ${({ theme }) => theme.font.size.base};
   user-select: none;
   width: 100%;
   display: flex;
@@ -69,7 +74,13 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Content = styled.p``;
+const Content = styled.p`
+  margin: 15px 0 0;
+  max-width: 90%;
+  font-weight: ${({ theme }) => theme.font.weight.normal};
+  font-size: ${({ theme }) => theme.font.size.sm};
+  line-height: 25px;
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
