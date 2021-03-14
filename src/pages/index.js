@@ -6,8 +6,8 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { graphql } from 'gatsby';
 import React from 'react';
 
+import { HeroSection, Features } from '~components';
 import { RootContainer } from '~containers';
-import { HeroSection } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -16,7 +16,7 @@ import { HeroSection } from '~components';
 const HomePage = ({
   data: {
     page: {
-      frontmatter: { meta, hero },
+      frontmatter: { meta, hero, features },
     },
     photo1,
     photo2,
@@ -28,6 +28,7 @@ const HomePage = ({
   return (
     <RootContainer meta={meta}>
       <HeroSection {...(hero.image && { imageData: heroImage })} {...hero} />
+      <Features features={features} />
 
       <GatsbyImage image={getImage(photo1)} alt="" style={{ display: 'inline-block' }} />
       <GatsbyImage image={getImage(photo2)} alt="" style={{ display: 'inline-block' }} />
@@ -61,8 +62,16 @@ export const query = graphql`
           image
           buttons {
             title
-            link
             type
+            link
+          }
+        }
+        features {
+          title
+          icon
+          link {
+            title
+            url
           }
         }
       }
