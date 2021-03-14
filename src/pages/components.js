@@ -3,15 +3,14 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import React from 'react';
 
-// import { Image, ImageBackground } from '~components';
 import { RootContainer } from '~containers';
 
-import { imageAcceptableFormats } from '~utils';
-
-const [SIZE_230_170] = imageAcceptableFormats;
+// import { Image, ImageBackground } from '~components';
+// import { GatsbyImage } from 'gatsby-plugin-image';
+// import { imageAcceptableFormats } from '~utils';
+// const [SIZE_230_170] = imageAcceptableFormats;
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -51,8 +50,8 @@ const ComponentsPage = ({
       <p>Gatsby image fluid and fixed</p>
       <br />
       <br />
-      <Img fluid={photoFluid.childImageSharp.fluid} alt={photoFluid.name} />
-      <Img fixed={photoFixed.childImageSharp.fixed} alt={photoFixed.name} />
+      {/* <GatsbyImage image={photoFluid.childImageSharp.gatsbyImageData} alt={photoFluid.name} />
+      <GatsbyImage image={photoFixed.childImageSharp.gatsbyImageData} alt={photoFixed.name} /> */}
       <br />
       <br />
     </div>
@@ -80,13 +79,13 @@ export const query = graphql`
       }
     }
 
-    photoFluid: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
-      ...CHILD_FLUID
-    }
+    # photoFluid: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
+    #   ...CHILD_FLUID
+    # }
 
-    photoFixed: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
-      ...CHILD_FIXED_400_225
-    }
+    # photoFixed: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
+    #   ...CHILD_FIXED_400_225
+    # }
   }
 `;
 

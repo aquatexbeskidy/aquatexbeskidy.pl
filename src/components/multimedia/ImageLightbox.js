@@ -2,12 +2,12 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import React, { useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import FocusLock from 'react-focus-lock';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import Img from 'gatsby-image';
 
 import { useEventListener, useScrollLock } from '~hooks';
 import { animationKeyframes, mq } from '~theme';
@@ -109,7 +109,11 @@ const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpe
           </Navigation>
         </Header>
         <Body>
-          <Img {...images[currentIdx].childrenImageSharp[0]} />
+          <GatsbyImage
+            image={getImage(images[currentIdx].childrenImageSharp[0])}
+            title={name}
+            alt={name}
+          />
 
           <Navigation>
             <Button onClick={handlePrevious}>
@@ -133,7 +137,7 @@ const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpe
             <FooterInner style={{ width: `${100 * imagesLength}%` }}>
               {thumbnails.map(({ id, childrenImageSharp }, index) => (
                 <Button onClick={() => setCurrentIdx(index)} key={id}>
-                  <Img {...childrenImageSharp[0]} />
+                  <GatsbyImage image={getImage(childrenImageSharp[0])} title={name} alt={name} />
                 </Button>
               ))}
             </FooterInner>

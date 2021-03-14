@@ -4,7 +4,7 @@
 
 import { graphql, useStaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 import React from 'react';
 
 import { imageAcceptableFormats } from '~utils';
@@ -97,7 +97,7 @@ const Image = ({ name, type, format }) => {
 
   const imageProps = getImageProps();
 
-  return <Img {...imageProps} />;
+  return <GatsbyImage {...imageProps} />;
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

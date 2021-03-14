@@ -2,8 +2,8 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import React from 'react';
 
 import { RootContainer } from '~containers';
@@ -27,12 +27,12 @@ const HomePage = ({
 }) => {
   return (
     <RootContainer meta={meta}>
-      <HeroSection {...hero} {...(hero.image && { fluid: heroImage.childImageSharp.fluid })} />
+      <HeroSection {...(hero.image && { imageData: heroImage })} {...hero} />
 
-      <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
-      <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
-      <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />
-      <Img fluid={works.childImageSharp.fluid} alt={works.name} />
+      <GatsbyImage image={getImage(photo1)} alt="" style={{ display: 'inline-block' }} />
+      <GatsbyImage image={getImage(photo2)} alt="" style={{ display: 'inline-block' }} />
+      <GatsbyImage image={getImage(photo3)} alt="" style={{ display: 'inline-block' }} />
+      <GatsbyImage image={getImage(works)} alt="" style={{ display: 'inline-block' }} />
     </RootContainer>
   );
 };
@@ -68,10 +68,10 @@ export const query = graphql`
       }
     }
     heroImage: file(relativePath: { eq: "home/home-photo-1.jpg" }) {
-      ...CHILD_FLUID
+      ...DUOTONE_176ED3_40_FLUID
     }
     works: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
-      ...CHILD_FLUID
+      ...DUOTONE_176ED3_90_FLUID
     }
     photo1: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
       ...CHILD_FIXED_400_225
