@@ -81,6 +81,7 @@ export const CONTACT_FRAGMENT = graphql`
         pinDesc
         buttons {
           text
+          icon
           url
           type
         }
