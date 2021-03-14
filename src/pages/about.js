@@ -23,41 +23,35 @@ const AboutPage = ({
       },
     },
   },
-}) => {
-  // const contentListChildren = stringIncludesHTML(desc)
-  //   ? { dangerouslySetInnerHTML: { __html: desc } }
-  //   : { children: desc };
-
-  return (
-    <RootContainer meta={meta}>
-      <div>
-        <h2>{mainTitle}</h2>
-        <section>
-          {contentBlocks.map(({ title, contentList }) => (
-            <div key={title}>
-              {contentList.map(({ desc }, index) => (
-                <div key={index}>
-                  <p dangerouslySetInnerHTML={{ __html: desc }} />
-                </div>
-              ))}
-            </div>
-          ))}
-        </section>
-        <section>
-          <h3>{subTitle}</h3>
-          <ul>
-            {whyUsList.map(({ title, desc }) => (
-              <li key={title}>
-                <h4>{title}</h4>
-                <p>{desc}</p>
-              </li>
+}) => (
+  <RootContainer meta={meta}>
+    <div>
+      <h2>{mainTitle}</h2>
+      <section>
+        {contentBlocks.map(({ title, contentList }) => (
+          <div key={title}>
+            {contentList.map(({ desc }, index) => (
+              <div key={index}>
+                <p dangerouslySetInnerHTML={{ __html: desc }} />
+              </div>
             ))}
-          </ul>
-        </section>
-      </div>
-    </RootContainer>
-  );
-};
+          </div>
+        ))}
+      </section>
+      <section>
+        <h3>{subTitle}</h3>
+        <ul>
+          {whyUsList.map(({ title, desc }) => (
+            <li key={title}>
+              <h4>{title}</h4>
+              <p>{desc}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </RootContainer>
+);
 
 export default AboutPage;
 
