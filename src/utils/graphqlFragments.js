@@ -80,6 +80,30 @@ export const WORKS_FRAGMENT = graphql`
   }
 `;
 
+export const ABOUT_FRAGMENT = graphql`
+  fragment ABOUT_FRAGMENT on Mdx {
+    frontmatter {
+      about {
+        mainTitle
+        contentBlocks {
+          title
+          contentList {
+            desc
+          }
+        }
+        viewOfWorkImgList {
+          photo
+        }
+        subTitle
+        whyUsList {
+          title
+          desc
+        }
+      }
+    }
+  }
+`;
+
 export const OFFER_FRAGMENT = graphql`
   fragment OFFER_FRAGMENT on Mdx {
     frontmatter {
