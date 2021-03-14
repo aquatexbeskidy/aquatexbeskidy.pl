@@ -6,29 +6,27 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { ReactComponent as ArrowRight } from '../assets/icons/arrow_right.svg';
-import { Link } from '~components';
-
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Features = ({ features }) => {
+const Toggler = ({ toggleItems }) => {
   return (
-    <Wrapper>
-      {features &&
-        features.map(({ title, icon, link, desc }, index) => (
-          <Inner key={index}>
-            {icon && icon.includes('/icons/') && <Image src={require(`../${icon}`)} />}
-            <Title>{title}</Title>
-            {link && <Link to={link.url} look="primary">
-              <span>{link.title}</span>
-              <ArrowRight />
-            </Link>}
-            {desc && <Description>{desc}</Description>}
-          </Inner>
+    <ToggleContainer>
+      {toggleItems &&
+        toggleItems.map(({ title, content, icon }, index) => (
+          <ToggleItem key={index}>
+            <CheckBox type="checkbox" id={index} />
+            <Title htmlFor={index}>
+              {title}
+              <ToggleIcon src={require(`../${icon}`)} />
+            </Title>
+            <ContentWrapper>
+              <Content>{content}</Content>
+            </ContentWrapper>
+          </ToggleItem>
         ))}
-    </Wrapper>
+    </ToggleContainer>
   );
 };
 
@@ -36,41 +34,59 @@ const Features = ({ features }) => {
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Wrapper = styled.div``;
-
-const Inner = styled.div``;
-
-const Title = styled.div`
-  font-weight: ${({ theme }) => theme.font.weight.normal};
-  font-size: ${({ theme }) => theme.font.size.base};
-  color: ${({ theme }) => theme.color.black};
+const ToggleContainer = styled.div`
+  width: 100%;
 `;
 
-const Image = styled.img`
-  height: 35px;
-  width: 35px;
+const ToggleItem = styled.div`
+  width: 100%;
 `;
 
-const Description = styled.p``;
+const CheckBox = styled.input`
+  display: none;
+`;
+
+const ToggleIcon = styled.img`
+  width: 20px;
+`
+
+const Title = styled.label`
+  user-select: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  ${CheckBox}:checked ~ & {
+    ${ToggleIcon} {
+      transform: rotate(180deg);
+    }
+  }
+`;
+
+const ContentWrapper = styled.div`
+  ${CheckBox}:not(:checked) ~ & {
+    display: none;
+  }
+`;
+
+const Content = styled.p``;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-Features.displayName = 'Features';
+Toggler.displayName = 'Toggler';
 
-Features.propTypes = {
+Toggler.propTypes = {
   title: PropTypes.string,
-  iconName: PropTypes.string,
-  link: PropTypes.string,
-  desc: PropTypes.string,
+  contet: PropTypes.string,
+  icon: PropTypes.string,
 };
 
-Features.defaultProps = {
+Toggler.defaultProps = {
   title: '',
-  iconName: '',
-  link: '',
-  desc: '',
+  content: '',
+  icon: '',
 };
 
-export default Features;
+export default Toggler;
