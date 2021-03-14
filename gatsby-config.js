@@ -3,7 +3,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const gatsbyRemarkPlugins = [
-  `gatsby-remark-embedder`, // gatsby-remark-embedder must go before gatsby-remark-[ images, iframe ]
   `gatsby-remark-relative-images`, // gatsby-remark-relative-images must go before gatsby-remark-images
   `gatsby-remark-images`,
   {
@@ -100,6 +99,7 @@ module.exports = {
         },
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,

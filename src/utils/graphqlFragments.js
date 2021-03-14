@@ -197,20 +197,16 @@ export const META_VIDEO_FRAGMENT = graphql`
   }
 `;
 
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILD_FLUID = graphql`
   fragment CHILD_FLUID on File {
     childImageSharp {
-      fluid(
-        srcSetBreakpoints: [320, 768, 1024, 1200]
-        cropFocus: CENTER
-        maxHeight: 1024
-        maxWidth: 1024
-        quality: 90
-      ) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
+      gatsbyImageData(
+        transformOptions: { cropFocus: CENTER }
+        breakpoints: [320, 768, 1024]
+        layout: FULL_WIDTH
+        placeholder: NONE
+        quality: 75
+      )
     }
     publicURL
     name
@@ -218,19 +214,17 @@ export const CHILD_FLUID = graphql`
   }
 `;
 
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILDREN_FLUID = graphql`
   fragment CHILDREN_FLUID on File {
     childrenImageSharp {
-      fluid(
-        srcSetBreakpoints: [320, 768, 1024, 1200]
-        cropFocus: CENTER
-        maxWidth: 540
-        quality: 95
-      ) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
+      gatsbyImageData(
+        transformOptions: { cropFocus: CENTER }
+        breakpoints: [320, 768, 1024]
+        layout: FULL_WIDTH
+        placeholder: NONE
+        width: 540
+        quality: 75
+      )
     }
     publicURL
     name
@@ -238,20 +232,18 @@ export const CHILDREN_FLUID = graphql`
   }
 `;
 
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILDREN_FLUID_860_480 = graphql`
   fragment CHILDREN_FLUID_860_480 on File {
     childrenImageSharp {
-      fluid(
-        srcSetBreakpoints: [320, 768, 1024, 1200]
-        cropFocus: CENTER
-        maxHeight: 480
-        maxWidth: 840
-        quality: 95
-      ) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
+      gatsbyImageData(
+        transformOptions: { cropFocus: CENTER }
+        breakpoints: [320, 768, 1024]
+        layout: FULL_WIDTH
+        placeholder: NONE
+        height: 480
+        width: 840
+        quality: 75
+      )
     }
     publicURL
     name
@@ -259,14 +251,17 @@ export const CHILDREN_FLUID_860_480 = graphql`
   }
 `;
 
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILDREN_FIXED_400_225 = graphql`
   fragment CHILDREN_FIXED_400_225 on File {
     childrenImageSharp {
-      fixed(width: 400, height: 225, quality: 75, cropFocus: CENTER) {
-        ...GatsbyImageSharpFixed_noBase64
-      }
+      gatsbyImageData(
+        transformOptions: { cropFocus: CENTER }
+        breakpoints: [320, 768, 1024]
+        placeholder: NONE
+        height: 225
+        width: 400
+        quality: 75
+      )
     }
     publicURL
     name
@@ -274,29 +269,17 @@ export const CHILDREN_FIXED_400_225 = graphql`
   }
 `;
 
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
-export const CHILDREN_FIXED_150_150 = graphql`
-  fragment CHILDREN_FIXED_150_150 on File {
-    childrenImageSharp {
-      fixed(width: 150, height: 150, quality: 75, cropFocus: CENTER) {
-        ...GatsbyImageSharpFixed_noBase64
-      }
-    }
-    publicURL
-    name
-    id
-  }
-`;
-
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILDREN_FIXED_75_75 = graphql`
   fragment CHILDREN_FIXED_75_75 on File {
     childrenImageSharp {
-      fixed(width: 75, height: 75, quality: 75, cropFocus: CENTER) {
-        ...GatsbyImageSharpFixed_noBase64
-      }
+      gatsbyImageData(
+        transformOptions: { cropFocus: CENTER }
+        breakpoints: [320, 768, 1024]
+        placeholder: NONE
+        height: 75
+        width: 75
+        quality: 75
+      )
     }
     publicURL
     name
@@ -304,14 +287,17 @@ export const CHILDREN_FIXED_75_75 = graphql`
   }
 `;
 
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILD_FIXED_400_225 = graphql`
   fragment CHILD_FIXED_400_225 on File {
     childImageSharp {
-      fixed(width: 400, height: 225, quality: 75, cropFocus: CENTER) {
-        ...GatsbyImageSharpFixed_noBase64
-      }
+      gatsbyImageData(
+        transformOptions: { cropFocus: CENTER }
+        placeholder: NONE
+        layout: FIXED
+        height: 225
+        width: 400
+        quality: 75
+      )
     }
     publicURL
     name
@@ -319,14 +305,43 @@ export const CHILD_FIXED_400_225 = graphql`
   }
 `;
 
-// fit: [INSIDE, OUTSIDE, FILL, CONTAIN, COVER]
-// cropFocus: [CENTER, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, ENTROPY, ATTENTION]
 export const CHILD_FIXED_150_150 = graphql`
   fragment CHILD_FIXED_150_150 on File {
     childImageSharp {
-      fixed(width: 150, height: 150, quality: 75, cropFocus: CENTER) {
-        ...GatsbyImageSharpFixed_noBase64
-      }
+      gatsbyImageData(
+        transformOptions: { cropFocus: CENTER }
+        placeholder: BLURRED
+        layout: FIXED
+        height: 150
+        width: 150
+        quality: 75
+      )
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+export const DUOTONE_176ED3_40_FLUID = graphql`
+  fragment DUOTONE_176ED3_40_FLUID on File {
+    childImageSharp {
+      gatsbyImageData(
+        transformOptions: { duotone: { highlight: "#176ED3", shadow: "#176ED3", opacity: 40 } }
+      )
+    }
+    publicURL
+    name
+    id
+  }
+`;
+
+export const DUOTONE_176ED3_90_FLUID = graphql`
+  fragment DUOTONE_176ED3_90_FLUID on File {
+    childImageSharp {
+      gatsbyImageData(
+        transformOptions: { duotone: { highlight: "#176ED3", shadow: "#176ED3", opacity: 76 } }
+      )
     }
     publicURL
     name

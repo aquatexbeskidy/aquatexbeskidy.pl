@@ -2,8 +2,8 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import BackgroundImage from 'gatsby-background-image';
 import styled, { css } from 'styled-components';
+import { getSrc } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -14,7 +14,7 @@ import { Link } from '~components';
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const HeroSection = ({ title, subtitle, buttons, image, fluid }) => {
+const HeroSection = ({ title, subtitle, buttons, imageData }) => {
   const headingChildren = stringIncludesHTML(title)
     ? { dangerouslySetInnerHTML: { __html: title } }
     : { children: title };
@@ -23,10 +23,10 @@ const HeroSection = ({ title, subtitle, buttons, image, fluid }) => {
     ? { dangerouslySetInnerHTML: { __html: subtitle } }
     : { children: subtitle };
 
-  const Wrapper = image ? HeroBackground : HeroWithoutBackground;
+  const image = getSrc(imageData);
 
   return (
-    <Wrapper {...(image && { fluid: fluid, Tag: 'section' })}>
+    <Wrapper style={{ backgroundImage: `url(${image})` }}>
       <Inner>
         {title && <Heading {...headingChildren} />}
         {subtitle && <SubHeading {...subHeadingChildren} />}
@@ -46,40 +46,24 @@ const HeroSection = ({ title, subtitle, buttons, image, fluid }) => {
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const [width, height] = SIZE_HERO.split('x');
+const [, height] = SIZE_HERO.split('x');
 
-const common = css`
+const Wrapper = styled.div`
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
-`;
 
-const HeroBackground = styled(BackgroundImage)`
-  ${common}
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 100%;
-`;
-const HeroWithoutBackground = styled.div`
-  ${common}
 `;
 
 const Inner = styled.div`
   min-height: ${height}px;
   max-width: 100%;
   padding: 4vw;
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: #176ed370;
-    z-index: -1;
-  }
   a {
     &:not(:last-child) {
       margin-right: 15px;
