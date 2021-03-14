@@ -29,6 +29,7 @@ export const META_FRAGMENT = graphql`
 export const HEADER_NAV_FRAGMENT = graphql`
   fragment HEADER_NAV_FRAGMENT on Mdx {
     frontmatter {
+      icon
       links {
         text
         url
@@ -42,10 +43,12 @@ export const FOOTER_NAV_FRAGMENT = graphql`
     frontmatter {
       title
       copyright
+      atbLogo
       nomadsCodes {
         madeBy
         name
         url
+        icon
       }
       quickContact {
         title
@@ -54,6 +57,7 @@ export const FOOTER_NAV_FRAGMENT = graphql`
           text
           url
           type
+          icon
         }
       }
       links {
