@@ -2,8 +2,8 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect } from 'react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
