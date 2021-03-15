@@ -2,8 +2,8 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled, { css } from 'styled-components';
-import { getSrc } from 'gatsby-plugin-image';
+import { getSrcSet } from 'gatsby-plugin-image';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -14,7 +14,10 @@ import { Link } from '~components';
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const HeroSection = ({ title, subtitle, buttons, imageData }) => {
+const Hero = ({ hero }) => {
+  const { title, subtitle, image, buttons } = hero;
+  const { childImageSharp } = image;
+
   const headingChildren = stringIncludesHTML(title)
     ? { dangerouslySetInnerHTML: { __html: title } }
     : { children: title };
@@ -23,10 +26,10 @@ const HeroSection = ({ title, subtitle, buttons, imageData }) => {
     ? { dangerouslySetInnerHTML: { __html: subtitle } }
     : { children: subtitle };
 
-  const image = getSrc(imageData);
+  const background = getSrcSet(childImageSharp).split(',')[2].split(' ')[0];
 
   return (
-    <Wrapper style={{ backgroundImage: `url(${image})` }}>
+    <Wrapper style={{ backgroundImage: `url(${background})` }}>
       <Inner>
         {title && <Heading {...headingChildren} />}
         {subtitle && <SubHeading {...subHeadingChildren} />}
@@ -90,20 +93,20 @@ const Heading = styled.h2`
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-HeroSection.displayName = 'Hero';
+Hero.displayName = 'Hero';
 
-HeroSection.propTypes = {
+Hero.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   buttons: PropTypes.arrayOf(PropTypes.object),
   image: PropTypes.bool,
 };
 
-HeroSection.defaultProps = {
+Hero.defaultProps = {
   title: '',
   subtitle: '',
   buttons: [],
   image: true,
 };
 
-export default HeroSection;
+export default Hero;
