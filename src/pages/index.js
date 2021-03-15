@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import { HeroSection, Features } from '~components';
+import { HeroSection, Features, Toggler } from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -16,7 +16,7 @@ import { RootContainer } from '~containers';
 const HomePage = ({
   data: {
     page: {
-      frontmatter: { meta, hero, features },
+      frontmatter: { meta, hero, features, advantages, howWorks, frequentlyAskedQuestions },
     },
     photo1,
     photo2,
@@ -29,11 +29,13 @@ const HomePage = ({
     <RootContainer meta={meta}>
       <HeroSection {...(hero.image && { imageData: heroImage })} {...hero} />
       <Features features={features} />
-
+      <Features features={advantages.advList} />
+        
       <GatsbyImage image={getImage(photo1)} alt="" style={{ display: 'inline-block' }} />
       <GatsbyImage image={getImage(photo2)} alt="" style={{ display: 'inline-block' }} />
       <GatsbyImage image={getImage(photo3)} alt="" style={{ display: 'inline-block' }} />
       <GatsbyImage image={getImage(works)} alt="" style={{ display: 'inline-block' }} />
+      <Toggler toggleItems={frequentlyAskedQuestions.toggleList}/>
     </RootContainer>
   );
 };
@@ -72,6 +74,29 @@ export const query = graphql`
           link {
             title
             url
+          }
+        }
+        quickReviews {
+          desc
+          photo
+        }
+        advantages {
+          advList {
+            title
+            icon
+            desc
+          }
+        }
+        howWorks {
+          title
+          link
+        }
+        frequentlyAskedQuestions {
+          title
+          toggleList {
+            title
+            content
+            icon
           }
         }
       }

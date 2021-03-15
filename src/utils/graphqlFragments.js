@@ -29,6 +29,7 @@ export const META_FRAGMENT = graphql`
 export const HEADER_NAV_FRAGMENT = graphql`
   fragment HEADER_NAV_FRAGMENT on Mdx {
     frontmatter {
+      icon
       links {
         text
         url
@@ -42,10 +43,12 @@ export const FOOTER_NAV_FRAGMENT = graphql`
     frontmatter {
       title
       copyright
+      atbLogo
       nomadsCodes {
         madeBy
         name
         url
+        icon
       }
       quickContact {
         title
@@ -54,6 +57,7 @@ export const FOOTER_NAV_FRAGMENT = graphql`
           text
           url
           type
+          icon
         }
       }
       links {
@@ -66,6 +70,96 @@ export const FOOTER_NAV_FRAGMENT = graphql`
           text
           url
         }
+      }
+    }
+  }
+`;
+
+export const WORKS_FRAGMENT = graphql`
+  fragment WORKS_FRAGMENT on Mdx {
+    frontmatter {
+      photosTitle
+      videosTitle
+    }
+  }
+`;
+
+export const ABOUT_FRAGMENT = graphql`
+  fragment ABOUT_FRAGMENT on Mdx {
+    frontmatter {
+      about {
+        mainTitle
+        contentBlocks {
+          title
+          contentList {
+            desc
+          }
+        }
+        viewOfWorkImgList {
+          photo
+        }
+        subTitle
+        whyUsList {
+          title
+          desc
+        }
+      }
+    }
+  }
+`;
+
+export const OFFER_FRAGMENT = graphql`
+  fragment OFFER_FRAGMENT on Mdx {
+    frontmatter {
+      offer {
+        mainTitle
+        mainContent
+        subContent
+        subTitle
+        offerList {
+          title
+          price
+        }
+        reviewImgList {
+          photo
+        }
+      }
+    }
+  }
+`;
+
+export const DEEPWELL_FRAGMENT = graphql`
+  fragment DEEPWELL_FRAGMENT on Mdx {
+    frontmatter {
+      deepWell {
+        mainTitle
+        mainContent
+        additionList {
+          title
+          contentList {
+            desc
+          }
+          photo
+        }
+        waterSearchTitle
+        waterSearchDesc
+        waterConnectTitle
+        waterConnectDesc
+      }
+    }
+  }
+`;
+
+export const BOREHOLE_FRAGMENT = graphql`
+  fragment BOREHOLE_FRAGMENT on Mdx {
+    frontmatter {
+      borehole {
+        mainTitle
+        mainContent
+        equipmentImgList {
+          photo
+        }
+        subContent
       }
     }
   }

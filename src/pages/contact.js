@@ -6,8 +6,9 @@ import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import { MapLeaflet, Link } from '~components';
 import { RootContainer } from '~containers';
+import { QuickContact } from '~containers/FooterContainer';
+import { MapLeaflet, Link } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -24,7 +25,7 @@ const ContactPage = ({
   },
 }) => (
   <RootContainer meta={meta}>
-    <Wrapper>
+    <ContactWrapper>
       <Details>
         <Headline>{contact.title}</Headline>
         <Description>{contact.subTitle}</Description>
@@ -49,7 +50,7 @@ const ContactPage = ({
           width="100%"
         />
       )}
-    </Wrapper>
+    </ContactWrapper>
   </RootContainer>
 );
 
@@ -59,7 +60,11 @@ export default ContactPage;
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Wrapper = styled.div`
+const ContactWrapper = styled.div`
+  margin-bottom: 50px;
+  & + ${QuickContact} {
+    display: none;
+  }
   .leaflet-popup-content {
     p {
       margin: 10px 0 0;
@@ -98,8 +103,24 @@ const Buttons = styled.div`
     font-weight: ${({ theme }) => theme.font.weight.semibold};
 
     &:first-child {
+      padding-left: 0;
+      justify-content: flex-start;
+      text-align: left;
       color: ${({ theme }) => theme.color.primary};
       pointer-events: none;
+      img {
+        max-height: 35px;
+        width: 35px;
+      }
+    }
+    &:not(:first-child) {
+      max-width: 190px;
+      padding-left: 15px;
+      padding-right: 20px;
+      img {
+        max-height: 18px;
+        width: 18px;
+      }
     }
   }
 `;
@@ -107,7 +128,7 @@ const Buttons = styled.div`
 const Image = styled.img`
   display: inline-block;
   max-height: 16px;
-  margin: 0 6px;
+  margin-right: 6px;
   width: 16px;
 `;
 

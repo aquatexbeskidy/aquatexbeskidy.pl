@@ -7,16 +7,13 @@ import styled from 'styled-components';
 import React from 'react';
 
 import { Nav, Link } from '~components';
-import ATBLogo from '../assets/icons/atb_logo.svg';
-import NCLogo from '../assets/icons/nc_sygnet_mono.svg';
-import PhoneIcon from '../assets/icons/phone.svg';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
 const FooterContainer = () => {
-  const { footer } = useStaticQuery(graphql`
+  const { footer, site } = useStaticQuery(graphql`
     {
       site: site {
         ...SITE_METADATA
@@ -38,9 +35,10 @@ const FooterContainer = () => {
           <p>{footer.frontmatter.quickContact.desc}</p>
         </div>
         <div>
-          {footer.frontmatter.quickContact.link.map(({ text, url, type }) => {
+          {footer.frontmatter.quickContact.link.map(({ text, url, type, icon }) => {
             return (
               <Link to={url} look={type} key={text}>
+                <PhoneIcon src={require(`../${icon}`)} />
                 {text}
               </Link>
             );
@@ -58,15 +56,19 @@ const FooterContainer = () => {
         })}
         <Section>
           <div>
-            <img src={ATBLogo} />
+            <ATBLogo
+              src={require(`../${footer.frontmatter.atbLogo}`)}
+              alt={site.siteMetadata.siteTitle}
+              title={site.siteMetadata.siteTitle}
+            />
             <p>{footer.frontmatter.copyright}</p>
           </div>
-          {footer.frontmatter.nomadsCodes.map(({ madeBy, name, url }) => {
+          {footer.frontmatter.nomadsCodes.map(({ madeBy, name, url, icon }) => {
             return (
               <div key={name}>
                 <p>{madeBy}</p>
                 <a href={url} target="_blank">
-                  <img src={NCLogo} alt={name} title={name} />
+                  <NCLogo src={require(`../${icon}`)} alt={name} title={name} />
                 </a>
               </div>
             );
@@ -83,7 +85,7 @@ export default FooterContainer;
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const QuickContact = styled.section`
+export const QuickContact = styled.section`
   display: flex;
   background: ${({ theme }) => theme.color.primary};
   justify-content: space-between;
@@ -106,26 +108,25 @@ const QuickContact = styled.section`
     }
     &:last-child {
       a {
-        padding-left: 50px;
-        position: relative;
         font-weight: ${({ theme }) => theme.font.weight.semibold};
-        &::before {
-          display: block;
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 25px;
-          transform: translateY(-50%);
-          width: 20px;
-          height: 20px;
-          background-image: url(${PhoneIcon});
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: contain;
-        }
+        display: flex;
+        align-items: center;
       }
     }
   }
+`;
+
+const PhoneIcon = styled.img`
+  display: inline-block;
+  max-height: 20px;
+  margin-right: 8px;
+  width: 20px;
+`;
+
+const ATBLogo = styled.img``;
+
+const NCLogo = styled.img`
+  width: 20px;
 `;
 
 const Footer = styled.footer`
@@ -160,10 +161,6 @@ export const Section = styled.section`
         align-items: center;
         p {
           margin-right: 10px;
-        }
-        img {
-          width: 20px;
-          height: auto;
         }
       }
     }

@@ -17,14 +17,15 @@ const Features = ({ features }) => {
   return (
     <Wrapper>
       {features &&
-        features.map(({ title, icon, link }, index) => (
+        features.map(({ title, icon, link, desc }, index) => (
           <Inner key={index}>
             {icon && icon.includes('/icons/') && <Image src={require(`../${icon}`)} />}
             <Title>{title}</Title>
-            <Link to={link.url} look="primary">
+            {link && <Link to={link.url} look="primary">
               <span>{link.title}</span>
               <ArrowRight />
-            </Link>
+            </Link>}
+            {desc && <Description>{desc}</Description>}
           </Inner>
         ))}
     </Wrapper>
@@ -46,9 +47,11 @@ const Title = styled.div`
 `;
 
 const Image = styled.img`
-  height: 25px;
-  width: 25px;
+  height: 35px;
+  width: 35px;
 `;
+
+const Description = styled.p``;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
@@ -60,12 +63,14 @@ Features.propTypes = {
   title: PropTypes.string,
   iconName: PropTypes.string,
   link: PropTypes.string,
+  desc: PropTypes.string,
 };
 
 Features.defaultProps = {
   title: '',
   iconName: '',
   link: '',
+  desc: '',
 };
 
 export default Features;

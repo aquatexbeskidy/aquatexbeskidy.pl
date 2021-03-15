@@ -2,75 +2,106 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { graphql } from 'gatsby';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import React from 'react';
-
-import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const OfferPage = ({
-  data: {
-    page: {
-      frontmatter: { meta },
-    },
-    content: {
-      frontmatter: {
-        offer: { mainTitle, mainContent, subContent, subTitle, offerList, reviewImgList },
-      },
-    },
-  },
-}) => (
-  <RootContainer meta={meta}>
-    <div>
-      <h2>{mainTitle}</h2>
-      <p>{mainContent}</p>
-      <p>{subContent}</p>
-      <h3>{subTitle}</h3>
-      <ul>
-        {offerList.map(({ title, price }, index) => (
-          <li key={index}>
-            <p>{title}</p>
-            <span>{price}</span>
-          </li>
+const Toggler = ({ toggleItems }) => {
+  return (
+    <ToggleContainer>
+      {toggleItems &&
+        toggleItems.map(({ title, content, icon }, index) => (
+          <ToggleItem key={index}>
+            <CheckBox type="checkbox" id={index} />
+            <Title htmlFor={index}>
+              {title}
+              <ToggleIcon src={require(`../${icon}`)} />
+            </Title>
+            <ContentWrapper>
+              <Content>{content}</Content>
+            </ContentWrapper>
+          </ToggleItem>
         ))}
-      </ul>
-    </div>
-  </RootContainer>
-);
-
-export default OfferPage;
+    </ToggleContainer>
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Graphql Query
-// ─────────────────────────────────────────────────────────────────────────────
+const ToggleContainer = styled.div`
+  width: 100%;
+  margin: 40px 0;
+`;
 
-export const query = graphql`
-  {
-    page: mdx(
-      fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/offer/" } } }
-    ) {
-      frontmatter {
-        ...META_FRAGMENT
-      }
-    }
+const ToggleItem = styled.div`
+  width: 100%;
+  padding: 10px 0;
+`;
 
-    content: mdx(
-      fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/offer/" } } }
-    ) {
-      ...OFFER_FRAGMENT
+const CheckBox = styled.input`
+  display: none;
+`;
+
+const ToggleIcon = styled.img`
+  width: 20px;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+`;
+
+const Title = styled.label`
+  cursor: pointer;
+  font-weight: ${({ theme }) => theme.font.weight.semibold};
+  font-size: ${({ theme }) => theme.font.size.base};
+  line-height: 25px;
+  padding: 10px 0;
+  user-select: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  ${CheckBox}:checked ~ & {
+    ${ToggleIcon} {
+      transform: rotate(180deg);
     }
   }
+`;
+
+const ContentWrapper = styled.div`
+  ${CheckBox}:not(:checked) ~ & {
+    display: none;
+  }
+`;
+
+const Content = styled.p`
+  margin: 5px 0 0;
+  max-width: 90%;
+  font-weight: ${({ theme }) => theme.font.weight.normal};
+  font-size: ${({ theme }) => theme.font.size.sm};
+  line-height: 25px;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
+
+Toggler.displayName = 'Toggler';
+
+Toggler.propTypes = {
+  title: PropTypes.string,
+  contet: PropTypes.string,
+  icon: PropTypes.string,
+};
+
+Toggler.defaultProps = {
+  title: '',
+  content: '',
+  icon: '',
+};
+
+export default Toggler;
