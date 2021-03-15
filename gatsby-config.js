@@ -12,6 +12,12 @@ const gatsbyRemarkPlugins = [
       linkImagesToOriginal: false,
     },
   },
+  {
+    resolve: 'gatsby-remark-normalize-paths',
+    options: {
+      pathFields: ['image'],
+    },
+  },
 ];
 
 module.exports = {
@@ -54,7 +60,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
         name: `images`,
       },
-      __key: `images`,
     },
     {
       resolve: `gatsby-source-filesystem`,
