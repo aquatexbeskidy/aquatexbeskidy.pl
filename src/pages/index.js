@@ -2,40 +2,25 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import { HeroSection, Features, Toggler } from '~components';
+import { Hero2, Hero, Features, Reviews, Toggler } from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const HomePage = ({
-  data: {
-    page: {
-      frontmatter: { meta, hero, features, advantages, howWorks, frequentlyAskedQuestions },
-    },
-    photo1,
-    photo2,
-    photo3,
-    heroImage,
-    works,
-  },
-}) => {
+const HomePage = ({ data: { advantages, howWorks, features, reviews, hero, meta, faq } }) => {
   return (
-    <RootContainer meta={meta}>
-      <HeroSection {...(hero.image && { imageData: heroImage })} {...hero} />
-      <Features features={features} />
-      <Features features={advantages.advList} />
-        
-      <GatsbyImage image={getImage(photo1)} alt="" style={{ display: 'inline-block' }} />
-      <GatsbyImage image={getImage(photo2)} alt="" style={{ display: 'inline-block' }} />
-      <GatsbyImage image={getImage(photo3)} alt="" style={{ display: 'inline-block' }} />
-      <GatsbyImage image={getImage(works)} alt="" style={{ display: 'inline-block' }} />
-      <Toggler toggleItems={frequentlyAskedQuestions.toggleList}/>
+    <RootContainer meta={meta.frontmatter.meta}>
+      <Hero hero={hero.frontmatter.hero} />
+      <Features features={features.frontmatter.features} />
+      <Features features={advantages.frontmatter.advantages.advList} />
+      <Reviews reviews={reviews.frontmatter.reviews} />
+      <Toggler faq={faq.frontmatter.faq} />
+      <Hero2 hero2={howWorks.frontmatter.howWorks} />
     </RootContainer>
   );
 };
@@ -52,22 +37,80 @@ export default HomePage;
 
 export const query = graphql`
   {
-    page: mdx(
+    meta: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
       frontmatter: { meta: { permalink: { eq: "/" } } }
     ) {
       frontmatter {
         ...META_FRAGMENT
-        hero {
-          title
-          subtitle
-          image
+      }
+    }
+
+    faq: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        faq {
+          headline
+          list {
+            title
+            content
+            icon
+          }
+        }
+      }
+    }
+
+    howWorks: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        howWorks {
+          heading
+          image {
+            childImageSharp {
+              gatsbyImageData(
+                transformOptions: {
+                  duotone: { highlight: "#176ED3", shadow: "#176ED3", opacity: 90 }
+                }
+                breakpoints: [320, 768, 1024, 1200]
+              )
+            }
+            publicURL
+            name
+            id
+          }
           buttons {
             title
             type
             link
           }
         }
+      }
+    }
+
+    advantages: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        advantages {
+          advList {
+            title
+            icon
+            desc
+          }
+        }
+      }
+    }
+
+    features: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
         features {
           title
           icon
@@ -76,45 +119,63 @@ export const query = graphql`
             url
           }
         }
-        quickReviews {
-          desc
-          photo
-        }
-        advantages {
-          advList {
-            title
-            icon
-            desc
+      }
+    }
+
+    hero: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        hero {
+          title
+          subtitle
+          image {
+            childImageSharp {
+              gatsbyImageData(
+                transformOptions: {
+                  duotone: { highlight: "#176ED3", shadow: "#176ED3", opacity: 40 }
+                }
+                breakpoints: [320, 768, 1024, 1200]
+              )
+            }
+            publicURL
+            name
+            id
           }
-        }
-        howWorks {
-          title
-          link
-        }
-        frequentlyAskedQuestions {
-          title
-          toggleList {
+          buttons {
             title
-            content
-            icon
+            type
+            link
           }
         }
       }
     }
-    heroImage: file(relativePath: { eq: "home/home-photo-1.jpg" }) {
-      ...DUOTONE_176ED3_40_FLUID
-    }
-    works: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
-      ...DUOTONE_176ED3_90_FLUID
-    }
-    photo1: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
-      ...CHILD_FIXED_400_225
-    }
-    photo2: file(relativePath: { eq: "home/home-photo-3.jpg" }) {
-      ...CHILD_FIXED_400_225
-    }
-    photo3: file(relativePath: { eq: "home/home-photo-4.jpg" }) {
-      ...CHILD_FIXED_400_225
+
+    reviews: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        reviews {
+          description
+          image {
+            childrenImageSharp {
+              gatsbyImageData(
+                transformOptions: { cropFocus: CENTER }
+                breakpoints: [320, 768, 1024]
+                placeholder: NONE
+                height: 225
+                width: 400
+                quality: 75
+              )
+            }
+            publicURL
+            name
+            id
+          }
+        }
+      }
     }
   }
 `;
