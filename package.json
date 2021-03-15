@@ -12,7 +12,7 @@
     "start:verbose": "gatsby develop --verbose",
     "start:clean": "gatsby clean && gatsby develop -H 0.0.0.0",
     "bump": "yarn upgrade-interactive --latest",
-    "purge": "rm -rf node_modules && yarn",
+    "purge": "rm -rf node_modules && rm -rf .cache && yarn",
     "deploy:github": "gatsby build --prefix-paths && gh-pages -d public",
     "start": "concurrently \"yarn start:clean\"",
     "build": "concurrently \"yarn build:clean\""
