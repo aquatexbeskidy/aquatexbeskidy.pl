@@ -5,6 +5,7 @@ export { default as Video } from './multimedia/Video';
 export { default as MapLeaflet } from './MapLeaflet';
 export { default as Features } from './Features';
 export { default as Toggler } from './Toggler';
+export { default as Reviews } from './Reviews';
 export { default as Hero } from './Hero';
 export { default as Link } from './Link';
 export { default as Nav } from './Nav';
