@@ -10,23 +10,26 @@ import React from 'react';
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Toggler = ({ toggleItems }) => {
+const Toggler = ({ faq: { headline, list } }) => {
+  console.log(headline, list);
   return (
-    <ToggleContainer>
-      {toggleItems &&
-        toggleItems.map(({ title, content, icon }, index) => (
-          <ToggleItem key={index}>
+    <Wrapper>
+      {headline && <Headline>{headline}</Headline>}
+
+      {list &&
+        list.map(({ title, content, icon }, index) => (
+          <Item key={index}>
             <CheckBox type="checkbox" id={index} />
+
             <Title htmlFor={index}>
               {title}
-              <ToggleIcon src={require(`../${icon}`)} />
+              <Icon src={require(`../${icon}`)} />
             </Title>
-            <ContentWrapper>
-              <Content>{content}</Content>
-            </ContentWrapper>
-          </ToggleItem>
+
+            <ContentWrapper children={<Content>{content}</Content>} />
+          </Item>
         ))}
-    </ToggleContainer>
+    </Wrapper>
   );
 };
 
@@ -34,12 +37,12 @@ const Toggler = ({ toggleItems }) => {
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const ToggleContainer = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   margin: 40px 0;
 `;
 
-const ToggleItem = styled.div`
+const Item = styled.div`
   width: 100%;
   padding: 10px 0;
 `;
@@ -48,11 +51,13 @@ const CheckBox = styled.input`
   display: none;
 `;
 
-const ToggleIcon = styled.img`
+const Icon = styled.img`
   width: 20px;
   margin-left: 10px;
   transition: all 0.2s ease;
 `;
+
+const Headline = styled.h2``;
 
 const Title = styled.label`
   cursor: pointer;
@@ -66,7 +71,7 @@ const Title = styled.label`
   justify-content: space-between;
   align-items: center;
   ${CheckBox}:checked ~ & {
-    ${ToggleIcon} {
+    ${Icon} {
       transform: rotate(180deg);
     }
   }
