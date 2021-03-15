@@ -292,8 +292,8 @@ export const CHILD_FIXED_400_225 = graphql`
     childImageSharp {
       gatsbyImageData(
         transformOptions: { cropFocus: CENTER }
-        placeholder: NONE
-        layout: FIXED
+        breakpoints: [320, 768, 1024, 1200]
+        placeholder: BLURRED
         height: 225
         width: 400
         quality: 75
