@@ -10,28 +10,24 @@ import React from 'react';
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Toggler = ({ faq: { headline, list } }) => {
-  console.log(headline, list);
-  return (
-    <Wrapper>
-      {headline && <Headline>{headline}</Headline>}
+const Toggler = ({ faq: { headline, list } }) => (
+  <Wrapper>
+    {headline && <Headline>{headline}</Headline>}
+    {list &&
+      list.map(({ title, content, icon }, index) => (
+        <Item key={index}>
+          <CheckBox type="checkbox" id={index} />
 
-      {list &&
-        list.map(({ title, content, icon }, index) => (
-          <Item key={index}>
-            <CheckBox type="checkbox" id={index} />
+          <Title htmlFor={index}>
+            {title}
+            <Icon src={require(`../${icon}`)} />
+          </Title>
 
-            <Title htmlFor={index}>
-              {title}
-              <Icon src={require(`../${icon}`)} />
-            </Title>
-
-            <ContentWrapper children={<Content>{content}</Content>} />
-          </Item>
-        ))}
-    </Wrapper>
-  );
-};
+          <ContentWrapper children={<Content>{content}</Content>} />
+        </Item>
+      ))}
+  </Wrapper>
+);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
