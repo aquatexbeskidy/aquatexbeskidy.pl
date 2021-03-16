@@ -16,11 +16,11 @@ const HomePage = ({ data: { advantages, howWorks, features, reviews, hero, meta,
   return (
     <RootContainer meta={meta.frontmatter.meta}>
       <Hero hero={hero.frontmatter.hero} />
-      {/* <Features features={features.frontmatter.features} /> */}
-      {/* <Features features={advantages.frontmatter.advantages.advList} /> */}
-      {/* <Reviews reviews={reviews.frontmatter.reviews} /> */}
-      {/* <Toggler faq={faq.frontmatter.faq} /> */}
-      {/* <Hero2 hero2={howWorks.frontmatter.howWorks} /> */}
+      <Features features={features.frontmatter.features} />
+      <Features features={advantages.frontmatter.advantages.advList} />
+      <Reviews reviews={reviews.frontmatter.reviews} />
+      <Toggler faq={faq.frontmatter.faq} />
+      <Hero2 hero2={howWorks.frontmatter.howWorks} />
     </RootContainer>
   );
 };
