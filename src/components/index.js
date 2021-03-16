@@ -3,6 +3,7 @@ export { default as ImageLightbox } from './multimedia/ImageLightbox';
 export { default as Video } from './multimedia/Video';
 
 export { default as MapLeaflet } from './MapLeaflet';
+export { default as Hamburger } from './Hamburger';
 export { default as Features } from './Features';
 export { default as Toggler } from './Toggler';
 export { default as Reviews } from './Reviews';
