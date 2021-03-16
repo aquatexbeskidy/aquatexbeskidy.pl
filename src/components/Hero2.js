@@ -56,11 +56,33 @@ const Wrapper = styled.div`
   display: flex;
 
   width: 100%;
+  margin-bottom: 80px;
 `;
 
-const Inner = styled.div``;
+const Inner = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0 70px;
+  a {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+`;
 
-const Heading = styled.h2``;
+const Heading = styled.h2`
+  width: 100%;
+  max-width: 580px;
+  margin: 40px auto 30px;
+  padding: 0 20px;
+  text-align: center;
+  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.font.size.lg};
+  font-weight: ${({ theme }) => theme.font.weight.medium};
+  line-height: 35px;
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others

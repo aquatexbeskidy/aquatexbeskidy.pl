@@ -38,24 +38,25 @@ const HeaderContainer = (props) => {
   return (
     <>
       <Section isTop>
-        <Nav links={top.frontmatter.links} />
+        <Wrapper>
+          <Nav links={top.frontmatter.links} />
+        </Wrapper>
       </Section>
 
       <Section isBottom>
-        <StyledH1>
-          {site.siteMetadata.siteTitle}
-          <Link to="/">
-            <ATBLogo
-              src={require(`../${bottom.frontmatter.icon}`)}
-              title={site.siteMetadata.siteTitle}
-              alt={site.siteMetadata.siteTitle}
-            />
-          </Link>
-        </StyledH1>
-
-        <div>
+        <Wrapper>
+          <StyledH1>
+            {site.siteMetadata.siteTitle}
+            <Link to="/">
+              <ATBLogo
+                src={require(`../${bottom.frontmatter.icon}`)}
+                title={site.siteMetadata.siteTitle}
+                alt={site.siteMetadata.siteTitle}
+              />
+            </Link>
+          </StyledH1>
           <Nav links={bottom.frontmatter.links} />
-        </div>
+        </Wrapper>
       </Section>
     </>
   );
@@ -94,12 +95,20 @@ const sectionTop = css`
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
 const Section = styled.section`
-  ${({ isBottom }) => isBottom && sectionBottom}
-  ${({ isTop }) => isTop && sectionTop}
+  ${Wrapper} {
+    ${({ isBottom }) => isBottom && sectionBottom}
+    ${({ isTop }) => isTop && sectionTop}
 
   align-items: center;
-  display: flex;
+    display: flex;
+  }
 `;
 
 const ATBLogo = styled.img`
