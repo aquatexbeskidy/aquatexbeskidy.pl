@@ -30,47 +30,51 @@ const FooterContainer = () => {
   return (
     <>
       <QuickContact>
-        <div>
-          <p>{footer.frontmatter.quickContact.title}</p>
-          <p>{footer.frontmatter.quickContact.desc}</p>
-        </div>
-        <div>
-          {footer.frontmatter.quickContact.link.map(({ text, url, type, icon }) => {
-            return (
-              <Link to={url} look={type} key={text}>
-                <PhoneIcon src={require(`../${icon}`)} />
-                {text}
-              </Link>
-            );
-          })}
-        </div>
+        <Wrapper>
+          <Content>
+            <Text>{footer.frontmatter.quickContact.title}</Text>
+            <Text>{footer.frontmatter.quickContact.desc}</Text>
+          </Content>
+          <LinkWrapper>
+            {footer.frontmatter.quickContact.link.map(({ text, url, type, icon }) => {
+              return (
+                <Link to={url} look={type} key={text}>
+                  <PhoneIcon src={require(`../${icon}`)} />
+                  {text}
+                </Link>
+              );
+            })}
+          </LinkWrapper>
+        </Wrapper>
       </QuickContact>
       <Footer>
-        {footer.frontmatter.links.map(({ title, links, type }) => {
-          return (
-            <Section key={title}>
-              <h3>{title}</h3>
-              {type === 'nested' && <Nav links={links} />}
-            </Section>
-          );
-        })}
+        <Wrapper>
+          {footer.frontmatter.links.map(({ title, links, type }) => {
+            return (
+              <Section key={title}>
+                <NavHeading>{title}</NavHeading>
+                {type === 'nested' && <Nav links={links} />}
+              </Section>
+            );
+          })}
+        </Wrapper>
         <Section>
-          <div>
+          <CopyrightWrapper>
             <ATBLogo
               src={require(`../${footer.frontmatter.atbLogo}`)}
               alt={site.siteMetadata.siteTitle}
               title={site.siteMetadata.siteTitle}
             />
-            <p>{footer.frontmatter.copyright}</p>
-          </div>
+            <Copyright>{footer.frontmatter.copyright}</Copyright>
+          </CopyrightWrapper>
           {footer.frontmatter.nomadsCodes.map(({ madeBy, name, url, icon }) => {
             return (
-              <div key={name}>
-                <p>{madeBy}</p>
-                <a href={url} target="_blank">
+              <NCWrapper key={name}>
+                <NCAbout>{madeBy}</NCAbout>
+                <LinkWrapper href={url} target="_blank">
                   <NCLogo src={require(`../${icon}`)} alt={name} title={name} />
-                </a>
-              </div>
+                </LinkWrapper>
+              </NCWrapper>
             );
           })}
         </Section>
@@ -85,15 +89,27 @@ export default FooterContainer;
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const Text = styled.p``;
+
+const Content = styled.div``;
+
+const LinkWrapper = styled.div``;
+
 export const QuickContact = styled.section`
-  display: flex;
   background: ${({ theme }) => theme.color.primary};
-  justify-content: space-between;
-  align-items: center;
-  div {
+  ${Wrapper} {
     &:first-child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       color: ${({ theme }) => theme.color.white};
-      p {
+      ${Text} {
         &:first-child {
           font-weight: ${({ theme }) => theme.font.weight.semibold};
           font-size: ${({ theme }) => theme.font.size.xl};
@@ -123,49 +139,36 @@ const PhoneIcon = styled.img`
   width: 20px;
 `;
 
-const ATBLogo = styled.img``;
+const CopyrightWrapper = styled.div``;
+
+const ATBLogo = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+
+const Copyright = styled.p`
+  margin-top: 0;
+`;
+
+const NCWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NCAbout = styled.p`
+  margin-right: 10px;
+`;
 
 const NCLogo = styled.img`
   width: 20px;
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
 export const Section = styled.section`
-  background: rgba(0, 0, 0, 0.01);
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: calc(100% / 3);
   display: flex;
   padding: 40px 0;
-  &:last-child {
-    background: transparent;
-    flex-basis: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 0;
-    div {
-      &:first-child {
-        p {
-          margin-top: 0;
-        }
-      }
-      &:last-child {
-        display: flex;
-        align-items: center;
-        p {
-          margin-right: 10px;
-        }
-      }
-    }
-  }
-
   ul {
     align-items: flex-start;
     flex-direction: column;
@@ -174,6 +177,7 @@ export const Section = styled.section`
       margin-top: 1rem;
       padding: 0;
       a {
+        font-size: ${({ theme }) => theme.font.size.sm};
         &:hover,
         &:focus,
         &:active,
@@ -182,6 +186,34 @@ export const Section = styled.section`
           text-decoration: none;
         }
       }
+    }
+  }
+`;
+
+const NavHeading = styled.h3``;
+
+const Footer = styled.footer`
+  display: flex;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.01);
+  width: 100%;
+  ${Wrapper} {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    & + ${Section} {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0;
+      font-size: ${({ theme }) => theme.font.size.sm};
     }
   }
 `;

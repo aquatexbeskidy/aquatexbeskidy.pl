@@ -80,8 +80,6 @@ const sectionBottom = css`
 `;
 
 const sectionTop = css`
-  background-color: rgba(0, 0, 0, 0.01);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
   height: 3rem;
   justify-content: flex-end;
 
@@ -102,11 +100,15 @@ const Wrapper = styled.div`
 `;
 
 const Section = styled.section`
+  &:first-child {
+    background-color: rgba(0, 0, 0, 0.01);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  }
   ${Wrapper} {
     ${({ isBottom }) => isBottom && sectionBottom}
     ${({ isTop }) => isTop && sectionTop}
 
-  align-items: center;
+    align-items: center;
     display: flex;
   }
 `;
