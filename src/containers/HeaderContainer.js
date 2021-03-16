@@ -55,7 +55,7 @@ const HeaderContainer = (props) => {
         </StyledH1>
 
         <Navbar>
-          <Nav links={bottom.frontmatter.links} />
+          <Nav links={bottom.frontmatter.links.filter((link, index) => index !== 0)} />
           <Hamburger
             onClickHandler={() => handleMobileNavigation()}
             isActive={isMobileNavigation}
