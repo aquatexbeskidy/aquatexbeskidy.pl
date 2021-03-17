@@ -2,11 +2,14 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import React from 'react';
 
 import { stringIncludesHTML } from '~utils';
 import { RootContainer } from '~containers';
+import { Reviews } from '~components';
+import { Review, Wrapper } from '~components/Reviews';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -34,11 +37,12 @@ const BoreholePage = ({
 
   return (
     <RootContainer meta={meta}>
-      <div>
-        <h2>{mainTitle}</h2>
-        <p {...mainContentChildren} />
-        <p {...subContentChildren} />
-      </div>
+      <BoreholeWrapper>
+        <Headline>{mainTitle}</Headline>
+        <Description {...mainContentChildren} />
+        <Reviews reviews={equipmentImgList} />
+        <Description {...subContentChildren} />
+      </BoreholeWrapper>
     </RootContainer>
   );
 };
@@ -48,6 +52,31 @@ export default BoreholePage;
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
+
+const BoreholeWrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 50px;
+  ${Wrapper} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+  }
+  ${Review} {
+    flex-basis: 50%;
+  }
+`;
+
+const Headline = styled.h2`
+  margin: 30px 0 50px;
+`;
+
+const Description = styled.p`
+  line-height: 30px;
+  width: 100%;
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Graphql Query

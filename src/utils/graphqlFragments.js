@@ -156,7 +156,18 @@ export const BOREHOLE_FRAGMENT = graphql`
         mainTitle
         mainContent
         equipmentImgList {
-          photo
+          image {
+            childrenImageSharp {
+              gatsbyImageData(
+                transformOptions: { cropFocus: CENTER }
+                breakpoints: [320, 768, 1024]
+                placeholder: NONE
+                height: 337
+                width: 600
+                quality: 75
+              )
+            }
+          }
         }
         subContent
       }
