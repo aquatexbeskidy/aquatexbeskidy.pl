@@ -43,24 +43,27 @@ const HeaderContainer = (props) => {
   return (
     <>
       <Section isTop>
-        <Nav links={top.frontmatter.links} />
+        <Wrapper>
+          <Nav links={top.frontmatter.links} />
+        </Wrapper>
       </Section>
 
       <Section isBottom>
-        <StyledH1>
-          {site.siteMetadata.siteTitle}
-          <Link to="/">
-            <BrandLogo title={site.siteMetadata.siteTitle} alt={site.siteMetadata.siteTitle} />
-          </Link>
-        </StyledH1>
-
-        <Navbar>
-          <Nav links={bottom.frontmatter.links.filter((link, index) => index !== 0)} />
-          <Hamburger
-            onClickHandler={() => handleMobileNavigation()}
-            isActive={isMobileNavigation}
-          />
-        </Navbar>
+        <Wrapper>
+          <StyledH1>
+            {site.siteMetadata.siteTitle}
+            <Link to="/">
+              <BrandLogo title={site.siteMetadata.siteTitle} alt={site.siteMetadata.siteTitle} />
+            </Link>
+          </StyledH1>
+          <Navbar>
+            <Nav links={bottom.frontmatter.links.filter((link, index) => index !== 0)} />
+            <Hamburger
+              onClickHandler={() => handleMobileNavigation()}
+              isActive={isMobileNavigation}
+            />
+          </Navbar>
+        </Wrapper>
       </Section>
 
       <MobileNavigation
@@ -90,8 +93,6 @@ const sectionBottom = css`
 `;
 
 const sectionTop = css`
-  background-color: rgba(0, 0, 0, 0.01);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
   justify-content: flex-end;
   height: 3rem;
 
@@ -117,12 +118,24 @@ const Navbar = styled.div`
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Section = styled.section`
-  ${({ isBottom }) => isBottom && sectionBottom}
-  ${({ isTop }) => isTop && sectionTop}
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
 
-  align-items: center;
-  display: flex;
+const Section = styled.section`
+  &:first-child {
+    background-color: rgba(0, 0, 0, 0.01);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  }
+  ${Wrapper} {
+    ${({ isBottom }) => isBottom && sectionBottom}
+    ${({ isTop }) => isTop && sectionTop}
+
+    align-items: center;
+    display: flex;
+  }
 `;
 
 const ATBLogo = styled.img`

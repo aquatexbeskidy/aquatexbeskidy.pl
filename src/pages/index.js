@@ -17,10 +17,13 @@ const HomePage = ({ data: { advantages, howWorks, features, reviews, hero, meta,
     <RootContainer meta={meta.frontmatter.meta}>
       <Hero hero={hero.frontmatter.hero} />
       <Features features={features.frontmatter.features} />
-      <Features features={advantages.frontmatter.advantages.advList} />
       <Reviews reviews={reviews.frontmatter.reviews} />
-      <Toggler faq={faq.frontmatter.faq} />
+      <Features
+        features={advantages.frontmatter.advantages.advList}
+        title={advantages.frontmatter.advantages.title}
+      />
       <Hero2 hero2={howWorks.frontmatter.howWorks} />
+      <Toggler faq={faq.frontmatter.faq} />
     </RootContainer>
   );
 };
@@ -97,6 +100,7 @@ export const query = graphql`
     ) {
       frontmatter {
         advantages {
+          title
           advList {
             title
             icon

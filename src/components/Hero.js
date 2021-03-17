@@ -65,7 +65,9 @@ const Wrapper = styled.div`
 
 const Inner = styled.div`
   min-height: ${height}px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 4vw;
   a {
     &:not(:last-child) {
