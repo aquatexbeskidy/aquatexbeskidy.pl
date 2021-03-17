@@ -95,7 +95,18 @@ export const ABOUT_FRAGMENT = graphql`
           }
         }
         viewOfWorkImgList {
-          photo
+          image {
+            childrenImageSharp {
+              gatsbyImageData(
+                transformOptions: { cropFocus: CENTER }
+                breakpoints: [320, 768, 1024]
+                placeholder: NONE
+                height: 225
+                width: 400
+                quality: 75
+              )
+            }
+          }
         }
         subTitle
         whyUsList {
@@ -120,7 +131,18 @@ export const OFFER_FRAGMENT = graphql`
           price
         }
         reviewImgList {
-          photo
+          image {
+            childrenImageSharp {
+              gatsbyImageData(
+                transformOptions: { cropFocus: CENTER }
+                breakpoints: [320, 768, 1024]
+                placeholder: NONE
+                height: 225
+                width: 400
+                quality: 75
+              )
+            }
+          }
         }
       }
     }

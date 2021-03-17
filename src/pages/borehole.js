@@ -38,7 +38,7 @@ const BoreholePage = ({
   return (
     <RootContainer meta={meta}>
       <BoreholeWrapper>
-        <Headline>{mainTitle}</Headline>
+        <Heading>{mainTitle}</Heading>
         <Description {...mainContentChildren} />
         <Reviews reviews={equipmentImgList} />
         <Description {...subContentChildren} />
@@ -69,7 +69,7 @@ const BoreholeWrapper = styled.div`
   }
 `;
 
-const Headline = styled.h2`
+const Heading = styled.h2`
   margin: 30px 0 50px;
 `;
 
