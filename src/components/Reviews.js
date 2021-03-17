@@ -15,7 +15,7 @@ import { stringIncludesHTML } from '~utils';
 
 const Reviews = ({ reviews }) => (
   <Wrapper>
-    {reviews.map(({ description, image: { childrenImageSharp } }, index) => {
+    {reviews.map(({ description, contentList, image: { childrenImageSharp } }, index) => {
       let descriptionChildren = '';
       let imgDetails = description ? description : index.toString();
       if (description) {
@@ -25,7 +25,16 @@ const Reviews = ({ reviews }) => (
       }
       return (
         <Review key={index}>
-          {description && <Description {...descriptionChildren} />}
+          <Content>
+            {description && <Description {...descriptionChildren} />}
+            {contentList && (
+              <List>
+                {contentList.map(({ desc }, index) => (
+                  <Item key={index}>{desc}</Item>
+                ))}
+              </List>
+            )}
+          </Content>
           {childrenImageSharp && (
             <GatsbyImage
               image={getImage(childrenImageSharp[0])}
@@ -47,19 +56,25 @@ export const Wrapper = styled.div`
   margin: 70px 0;
 `;
 
-const Description = styled.p`
+export const Description = styled.p`
   width: 100%;
   max-width: 400px;
   line-height: 30px;
   padding: 0 40px;
 `;
 
+export const Content = styled.div``;
+
+export const List = styled.ul``;
+
+export const Item = styled.li``;
+
 export const Review = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   &:nth-child(2n + 1) {
-    ${Description} {
+    ${Content} {
       order: 2;
     }
   }

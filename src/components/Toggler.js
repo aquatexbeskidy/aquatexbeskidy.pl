@@ -102,17 +102,14 @@ const Content = styled.p`
 const Item = styled.div`
   padding: 10px 0;
   width: 100%;
-
   &.is-active {
     ${Icon} {
       transform: rotate(180deg);
     }
-
     ${Title} {
       text-decoration: underline;
     }
   }
-
   &:not(.is-active) {
     ${Content} {
       display: none;
