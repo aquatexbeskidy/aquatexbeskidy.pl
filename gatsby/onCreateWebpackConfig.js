@@ -25,6 +25,21 @@ module.exports = ({ stage, loaders, actions }) => {
   }
 
   actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: 'svg-url-loader',
+              options: {
+                limit: 10000,
+              },
+            },
+          ],
+        },
+      ],
+    },
     resolve: {
       alias: {
         '~components': path.resolve(__dirname, '../src/components'),

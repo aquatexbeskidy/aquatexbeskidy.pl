@@ -3,49 +3,30 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import React from 'react';
 
+import { Hero2, Hero, Features, Reviews, Toggler } from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const HomePage = ({
-  data: {
-    page: {
-      frontmatter: { meta },
-    },
-    photo1,
-    photo2,
-    photo3,
-    hero,
-    works,
-  },
-}) => (
-  <RootContainer meta={meta}>
-    <div>{meta.title}</div>
-
-    <div
-      style={{
-        maxHeight: `750px`,
-        overflow: `hidden`,
-      }}
-    >
-      <Img
-        style={{ height: '100%' }}
-        imgStyle={{ objectFit: 'contain' }}
-        fluid={hero.childImageSharp.fluid}
-        alt={hero.name}
+const HomePage = ({ data: { advantages, howWorks, features, reviews, hero, meta, faq } }) => {
+  return (
+    <RootContainer meta={meta.frontmatter.meta}>
+      <Hero hero={hero.frontmatter.hero} />
+      <Features features={features.frontmatter.features} />
+      <Reviews reviews={reviews.frontmatter.reviews} />
+      <Features
+        features={advantages.frontmatter.advantages.advList}
+        title={advantages.frontmatter.advantages.title}
       />
-    </div>
-    <Img fixed={photo1.childImageSharp.fixed} alt={photo1.name} />
-    <Img fixed={photo2.childImageSharp.fixed} alt={photo2.name} />
-    <Img fixed={photo3.childImageSharp.fixed} alt={photo3.name} />
-    <Img fluid={works.childImageSharp.fluid} alt={works.name} />
-  </RootContainer>
-);
+      <Hero2 hero2={howWorks.frontmatter.howWorks} />
+      <Toggler faq={faq.frontmatter.faq} />
+    </RootContainer>
+  );
+};
 
 export default HomePage;
 
@@ -59,7 +40,7 @@ export default HomePage;
 
 export const query = graphql`
   {
-    page: mdx(
+    meta: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
       frontmatter: { meta: { permalink: { eq: "/" } } }
     ) {
@@ -68,24 +49,137 @@ export const query = graphql`
       }
     }
 
-    hero: file(relativePath: { eq: "home/home-photo-1.jpg" }) {
-      ...CHILD_FLUID
+    faq: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        faq {
+          headline
+          list {
+            title
+            content
+            icon
+          }
+        }
+      }
     }
 
-    works: file(relativePath: { eq: "home/home-photo-5.jpg" }) {
-      ...CHILD_FLUID
+    howWorks: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        howWorks {
+          heading
+          image {
+            childImageSharp {
+              gatsbyImageData(
+                transformOptions: {
+                  duotone: { highlight: "#176ED3", shadow: "#176ED3", opacity: 90 }
+                }
+                breakpoints: [320, 768, 1024, 1200]
+              )
+            }
+            publicURL
+            name
+            id
+          }
+          buttons {
+            title
+            type
+            link
+          }
+        }
+      }
     }
 
-    photo1: file(relativePath: { eq: "home/home-photo-2.jpg" }) {
-      ...CHILD_FIXED_400_225
+    advantages: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        advantages {
+          title
+          advList {
+            title
+            icon
+            desc
+          }
+        }
+      }
     }
 
-    photo2: file(relativePath: { eq: "home/home-photo-3.jpg" }) {
-      ...CHILD_FIXED_400_225
+    features: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        features {
+          title
+          icon
+          link {
+            title
+            url
+          }
+        }
+      }
     }
 
-    photo3: file(relativePath: { eq: "home/home-photo-4.jpg" }) {
-      ...CHILD_FIXED_400_225
+    hero: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        hero {
+          title
+          subtitle
+          image {
+            childImageSharp {
+              gatsbyImageData(
+                transformOptions: {
+                  duotone: { highlight: "#176ED3", shadow: "#176ED3", opacity: 40 }
+                }
+                breakpoints: [320, 768, 1024, 1200]
+              )
+            }
+            publicURL
+            name
+            id
+          }
+          buttons {
+            title
+            type
+            link
+          }
+        }
+      }
+    }
+
+    reviews: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        reviews {
+          description
+          image {
+            childrenImageSharp {
+              gatsbyImageData(
+                transformOptions: { cropFocus: CENTER }
+                breakpoints: [320, 768, 1024]
+                placeholder: NONE
+                height: 225
+                width: 400
+                quality: 75
+              )
+            }
+            publicURL
+            name
+            id
+          }
+        }
+      }
     }
   }
 `;

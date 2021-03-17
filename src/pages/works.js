@@ -2,10 +2,10 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect } from 'react';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 
 import { Video, ImageLightbox } from '~components';
 import { RootContainer } from '~containers';
@@ -22,6 +22,9 @@ const WorksPage = ({
     videos: {
       frontmatter: { videos },
     },
+    content: {
+      frontmatter: { photosTitle, videosTitle },
+    },
     images_860_480,
     images_400_225,
     images_75_75,
@@ -33,7 +36,6 @@ const WorksPage = ({
   const handleLightbox = () => setIsLightbox((prev) => !prev);
 
   const onChangeHandler = (index) => {
-    console.log('onChangeHandler', index);
     setCurrentImageId(index);
     handleLightbox();
   };
@@ -41,28 +43,35 @@ const WorksPage = ({
   return (
     <RootContainer meta={meta}>
       <div>{meta.title}</div>
+      <h2>{photosTitle}</h2>
+      {images_400_225.nodes && (
+        <Wrapper>
+          {images_400_225.nodes.map(({ id, name, childrenImageSharp }, index) => (
+            <Thumbnail onClick={() => onChangeHandler(index)} key={id}>
+              <GatsbyImage image={getImage(childrenImageSharp[0])} title={name} alt={name} />
+            </Thumbnail>
+          ))}
+        </Wrapper>
+      )}
 
-      <Wrapper>
-        {images_400_225.nodes.map(({ id, name, childrenImageSharp }, index) => (
-          <Thumbnail onClick={() => onChangeHandler(index)} key={id}>
-            <Img fixed={childrenImageSharp[0].fixed} title={name} alt={name} />
-          </Thumbnail>
-        ))}
-      </Wrapper>
+      <h2>{videosTitle}</h2>
+      {videos && (
+        <Wrapper>
+          {videos.map(({ videoId, videoTitle }) => (
+            <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
+          ))}
+        </Wrapper>
+      )}
 
-      <Wrapper>
-        {videos.map(({ videoId, videoTitle }) => (
-          <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
-        ))}
-      </Wrapper>
-
-      <ImageLightbox
-        currentImageId={currentImageId}
-        thumbnails={images_75_75.nodes}
-        images={images_860_480.nodes}
-        onClose={handleLightbox}
-        isOpen={isLightbox}
-      />
+      {images_860_480.nodes && images_75_75.nodes && (
+        <ImageLightbox
+          currentImageId={currentImageId}
+          thumbnails={images_75_75.nodes}
+          images={images_860_480.nodes}
+          onClose={handleLightbox}
+          isOpen={isLightbox}
+        />
+      )}
     </RootContainer>
   );
 };
@@ -94,6 +103,13 @@ export const query = graphql`
       frontmatter {
         ...META_FRAGMENT
       }
+    }
+
+    content: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/works/" } } }
+    ) {
+      ...WORKS_FRAGMENT
     }
 
     images_400_225: allFile(

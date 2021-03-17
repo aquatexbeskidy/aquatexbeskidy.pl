@@ -3,7 +3,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const gatsbyRemarkPlugins = [
-  `gatsby-remark-embedder`, // gatsby-remark-embedder must go before gatsby-remark-[ images, iframe ]
   `gatsby-remark-relative-images`, // gatsby-remark-relative-images must go before gatsby-remark-images
   `gatsby-remark-images`,
   {
@@ -11,6 +10,12 @@ const gatsbyRemarkPlugins = [
     options: {
       backgroundColor: `transparent`,
       linkImagesToOriginal: false,
+    },
+  },
+  {
+    resolve: 'gatsby-remark-normalize-paths',
+    options: {
+      pathFields: ['image'],
     },
   },
 ];
@@ -55,7 +60,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
         name: `images`,
       },
-      __key: `images`,
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -89,6 +93,18 @@ module.exports = {
         display: 'swap',
       },
     },
+    {
+      resolve: 'gatsby-plugin-svgr',
+      options: {
+        // include: `${__dirname}/src/assets/icons`,
+        prettier: true,
+        svgo: true,
+        svgoConfig: {
+          plugins: [{ removeViewBox: true }, { cleanupIDs: true }],
+        },
+      },
+    },
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import { mq } from '~theme';
 
 export { LightTheme, DarkTheme, THEME_LABEL_LIGHT, THEME_LABEL_DARK } from './create';
 export { animationKeyframes } from './animations';
@@ -23,7 +24,13 @@ export const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 12px;
+    ${mq.min.tablet_base} {
+      font-size: 14px;
+    }
+    ${mq.min.desktop_small} {
+      font-size: 16px;
+    }
   }
 
   body {

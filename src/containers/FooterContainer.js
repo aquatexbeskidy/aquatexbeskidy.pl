@@ -6,14 +6,14 @@ import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import React from 'react';
 
-import { Nav } from '~components';
+import { Nav, Link } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
 const FooterContainer = () => {
-  const { footer } = useStaticQuery(graphql`
+  const { footer, site } = useStaticQuery(graphql`
     {
       site: site {
         ...SITE_METADATA
@@ -27,18 +27,59 @@ const FooterContainer = () => {
       }
     }
   `);
-
   return (
-    <Footer>
-      {footer.frontmatter.links.map(({ title, links, type }) => {
-        return (
-          <Section key={title}>
-            <h3>{title}</h3>
-            {type === 'nested' && <Nav links={links} />}
-          </Section>
-        );
-      })}
-    </Footer>
+    <>
+      <QuickContact>
+        <Wrapper>
+          <Content>
+            <Text>{footer.frontmatter.quickContact.title}</Text>
+            <Text>{footer.frontmatter.quickContact.desc}</Text>
+          </Content>
+          <LinkWrapper>
+            {footer.frontmatter.quickContact.link.map(({ text, url, type, icon }) => {
+              return (
+                <Link to={url} look={type} key={text}>
+                  <PhoneIcon src={require(`../${icon}`)} />
+                  {text}
+                </Link>
+              );
+            })}
+          </LinkWrapper>
+        </Wrapper>
+      </QuickContact>
+      <Footer>
+        <Wrapper>
+          {footer.frontmatter.links.map(({ title, links, type }) => {
+            return (
+              <Section key={title}>
+                <NavHeading>{title}</NavHeading>
+                {type === 'nested' && <Nav links={links} />}
+              </Section>
+            );
+          })}
+        </Wrapper>
+        <Section>
+          <CopyrightWrapper>
+            <ATBLogo
+              src={require(`../${footer.frontmatter.atbLogo}`)}
+              alt={site.siteMetadata.siteTitle}
+              title={site.siteMetadata.siteTitle}
+            />
+            <Copyright>{footer.frontmatter.copyright}</Copyright>
+          </CopyrightWrapper>
+          {footer.frontmatter.nomadsCodes.map(({ madeBy, name, url, icon }) => {
+            return (
+              <NCWrapper key={name}>
+                <NCAbout>{madeBy}</NCAbout>
+                <LinkWrapper href={url} target="_blank">
+                  <NCLogo src={require(`../${icon}`)} alt={name} title={name} />
+                </LinkWrapper>
+              </NCWrapper>
+            );
+          })}
+        </Section>
+      </Footer>
+    </>
   );
 };
 
@@ -48,17 +89,86 @@ export default FooterContainer;
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Footer = styled.footer`
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const Text = styled.p``;
+
+const Content = styled.div``;
+
+const LinkWrapper = styled.div``;
+
+export const QuickContact = styled.section`
+  background: ${({ theme }) => theme.color.primary};
+  ${Wrapper} {
+    &:first-child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: ${({ theme }) => theme.color.white};
+      ${Text} {
+        &:first-child {
+          font-weight: ${({ theme }) => theme.font.weight.semibold};
+          font-size: ${({ theme }) => theme.font.size.xl};
+          margin-bottom: 0;
+        }
+        &:last-child {
+          margin: 5px 0 20px;
+          font-weight: ${({ theme }) => theme.font.weight.normal};
+          font-size: ${({ theme }) => theme.font.size.sm};
+        }
+      }
+    }
+    &:last-child {
+      a {
+        font-weight: ${({ theme }) => theme.font.weight.semibold};
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+`;
+
+const PhoneIcon = styled.img`
+  display: inline-block;
+  max-height: 20px;
+  margin-right: 8px;
+  width: 20px;
+`;
+
+const CopyrightWrapper = styled.div``;
+
+const ATBLogo = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+
+const Copyright = styled.p`
+  margin-top: 0;
+`;
+
+const NCWrapper = styled.div`
   display: flex;
+  align-items: center;
+`;
+
+const NCAbout = styled.p`
+  margin-right: 10px;
+`;
+
+const NCLogo = styled.img`
+  width: 20px;
 `;
 
 export const Section = styled.section`
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: calc(100% / 3);
   display: flex;
-
+  padding: 40px 0;
   ul {
     align-items: flex-start;
     flex-direction: column;
@@ -66,9 +176,44 @@ export const Section = styled.section`
     li {
       margin-top: 1rem;
       padding: 0;
-      a.is-active {
-        color: initial;
+      a {
+        font-size: ${({ theme }) => theme.font.size.sm};
+        &:hover,
+        &:focus,
+        &:active,
+        &.is-active {
+          color: ${({ theme }) => theme.color.black};
+          text-decoration: none;
+        }
       }
+    }
+  }
+`;
+
+const NavHeading = styled.h3``;
+
+const Footer = styled.footer`
+  display: flex;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.01);
+  width: 100%;
+  ${Wrapper} {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    & + ${Section} {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0;
+      font-size: ${({ theme }) => theme.font.size.sm};
     }
   }
 `;
