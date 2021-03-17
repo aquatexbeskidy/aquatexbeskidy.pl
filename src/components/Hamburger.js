@@ -2,41 +2,29 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { getSrcSet } from 'gatsby-plugin-image';
 import styled from 'styled-components';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 
-import { stringIncludesHTML, SIZE_HERO } from '~utils';
-import { Link } from '~components';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Hero2 = ({ hero2 }) => {
-  const { heading, image, buttons } = hero2;
-  const { childImageSharp } = image;
-
-  const headingChildren = stringIncludesHTML(heading)
-    ? { dangerouslySetInnerHTML: { __html: heading } }
-    : { children: heading };
-
-  const background = getSrcSet(childImageSharp).split(',')[2].split(' ')[0];
+const Hamburger = ({ onClickHandler, isActive }) => {
+  const ref = useRef();
 
   return (
-    <Wrapper style={{ backgroundImage: `url(${background})` }}>
-      <Inner>
-        {heading && <Heading {...headingChildren} />}
-
-        {buttons &&
-          buttons.map(({ title, link, type }, index) => (
-            <Link to={link} look={type} key={index}>
-              {title}
-            </Link>
-          ))}
-      </Inner>
-    </Wrapper>
+    <Button ref={ref} onClick={onClickHandler}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        {isActive ? (
+          <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z" />
+        ) : (
+          <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
+        )}
+      </svg>
+    </Button>
   );
 };
 
@@ -44,62 +32,30 @@ const Hero2 = ({ hero2 }) => {
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const [, height] = SIZE_HERO.split('x');
+const Button = styled.button`
+  background-color: transparent;
+  border: 0;
 
-const Wrapper = styled.div`
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: cover;
-
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-
-  width: 100%;
-  margin-bottom: 80px;
-`;
-
-const Inner = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 40px 0 70px;
-  a {
-    padding-right: 40px;
-    padding-left: 40px;
+  display: none;
+  ${mq.max.desktop_small} {
+    display: block;
   }
-`;
-
-const Heading = styled.h2`
-  width: 100%;
-  max-width: 580px;
-  margin: 40px auto 30px;
-  padding: 0 20px;
-  text-align: center;
-  color: ${({ theme }) => theme.color.white};
-  font-size: ${({ theme }) => theme.font.size.lg};
-  font-weight: ${({ theme }) => theme.font.weight.medium};
-  line-height: 35px;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
 
-Hero2.displayName = 'Hero2';
+Hamburger.displayName = 'Hamburger';
 
-Hero2.propTypes = {
-  heading: PropTypes.string.isRequired,
-  buttons: PropTypes.arrayOf(PropTypes.object),
-  image: PropTypes.bool,
+Hamburger.propTypes = {
+  props: PropTypes.object,
+  isActive: PropTypes.bool,
 };
 
-Hero2.defaultProps = {
-  heading: '',
-  buttons: [],
-  image: true,
+Hamburger.defaultProps = {
+  props: {},
+  isActive: false,
 };
 
-export default Hero2;
+export default Hamburger;

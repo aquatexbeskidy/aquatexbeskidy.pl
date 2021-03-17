@@ -29,7 +29,6 @@ export const META_FRAGMENT = graphql`
 export const HEADER_NAV_FRAGMENT = graphql`
   fragment HEADER_NAV_FRAGMENT on Mdx {
     frontmatter {
-      icon
       links {
         text
         url

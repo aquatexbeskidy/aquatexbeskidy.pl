@@ -2,7 +2,7 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -33,9 +33,31 @@ const Toggler = ({ faq: { headline, list } }) => (
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
+const BorderLineStyles = css`
+  content: '';
+  display: block;
+  position: absolute;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+`;
+
 const Wrapper = styled.div`
   width: 100%;
-  margin: 40px 0;
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 40px 0;
+  position: relative;
+  &::before {
+    ${BorderLineStyles};
+    top: 0;
+  }
+  &::after {
+    ${BorderLineStyles};
+    bottom: 0;
+  }
 `;
 
 const Item = styled.div`
@@ -53,7 +75,10 @@ const Icon = styled.img`
   transition: all 0.2s ease;
 `;
 
-const Headline = styled.h2``;
+const Headline = styled.h2`
+  text-align: center;
+  margin: 20px 0 70px;
+`;
 
 const Title = styled.label`
   cursor: pointer;
