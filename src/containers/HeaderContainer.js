@@ -49,23 +49,21 @@ const HeaderContainer = (props) => {
       </Section>
 
       <Section isBottom>
-<Wrapper>
-        <StyledH1>
-          {site.siteMetadata.siteTitle}
-          <Link to="/">
-            <BrandLogo title={site.siteMetadata.siteTitle} alt={site.siteMetadata.siteTitle} />
-          </Link>
-        </StyledH1>
-</Wrapper>
-    <Wrapper>
-        <Navbar>
-          <Nav links={bottom.frontmatter.links.filter((link, index) => index !== 0)} />
-          <Hamburger
-            onClickHandler={() => handleMobileNavigation()}
-            isActive={isMobileNavigation}
-          />
-        </Navbar>
-</Wrapper>
+        <Wrapper>
+          <StyledH1>
+            {site.siteMetadata.siteTitle}
+            <Link to="/">
+              <BrandLogo title={site.siteMetadata.siteTitle} alt={site.siteMetadata.siteTitle} />
+            </Link>
+          </StyledH1>
+          <Navbar>
+            <Nav links={bottom.frontmatter.links.filter((link, index) => index !== 0)} />
+            <Hamburger
+              onClickHandler={() => handleMobileNavigation()}
+              isActive={isMobileNavigation}
+            />
+          </Navbar>
+        </Wrapper>
       </Section>
 
       <MobileNavigation
