@@ -71,9 +71,9 @@ const FooterContainer = () => {
             return (
               <NCWrapper key={name}>
                 <NCAbout>{madeBy}</NCAbout>
-                <LinkWrapper href={url} target="_blank">
+                {/* <LinkWrapper href={url} target="_blank">
                   <NCLogo src={require(`../${icon}`)} alt={name} title={name} />
-                </LinkWrapper>
+                </LinkWrapper> */}
               </NCWrapper>
             );
           })}
@@ -99,7 +99,7 @@ const Text = styled.p``;
 
 const Content = styled.div``;
 
-const LinkWrapper = styled.a``;
+const LinkWrapper = styled.div``;
 
 export const QuickContact = styled.section`
   background: ${({ theme }) => theme.color.primary};
