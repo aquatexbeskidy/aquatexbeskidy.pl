@@ -99,7 +99,7 @@ const Text = styled.p``;
 
 const Content = styled.div``;
 
-const LinkWrapper = styled.a``;
+const LinkWrapper = styled.div``;
 
 export const QuickContact = styled.section`
   background: ${({ theme }) => theme.color.primary};

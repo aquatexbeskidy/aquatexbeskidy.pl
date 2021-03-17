@@ -3,29 +3,36 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import styled, { css } from 'styled-components';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
+const TogglerItem = ({ title, content, icon }, index) => {
+  const [toggle, setToggle] = useState(false);
+
+  return (
+    <Item
+      onClick={() => setToggle((prev) => !prev)}
+      className={toggle ? 'is-active' : ''}
+      key={index}
+    >
+      <Title>
+        {title}
+        <Icon src={require(`../${icon}`)} />
+      </Title>
+
+      <Content>{content}</Content>
+    </Item>
+  );
+};
+
 const Toggler = ({ faq: { headline, list } }) => (
   <Wrapper>
     {headline && <Headline>{headline}</Headline>}
-    {list &&
-      list.map(({ title, content, icon }, index) => (
-        <Item key={index}>
-          <CheckBox type="checkbox" id={index} />
-
-          <Title htmlFor={index}>
-            {title}
-            <Icon src={require(`../${icon}`)} />
-          </Title>
-
-          <ContentWrapper children={<Content>{content}</Content>} />
-        </Item>
-      ))}
+    {list && list.map(TogglerItem)}
   </Wrapper>
 );
 
@@ -33,7 +40,7 @@ const Toggler = ({ faq: { headline, list } }) => (
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const BorderLineStyles = css`
+const borderLineStyles = css`
   content: '';
   display: block;
   position: absolute;
@@ -51,22 +58,13 @@ const Wrapper = styled.div`
   padding: 40px 0;
   position: relative;
   &::before {
-    ${BorderLineStyles};
+    ${borderLineStyles};
     top: 0;
   }
   &::after {
-    ${BorderLineStyles};
+    ${borderLineStyles};
     bottom: 0;
   }
-`;
-
-const Item = styled.div`
-  width: 100%;
-  padding: 10px 0;
-`;
-
-const CheckBox = styled.input`
-  display: none;
 `;
 
 const Icon = styled.img`
@@ -80,36 +78,46 @@ const Headline = styled.h2`
   margin: 20px 0 70px;
 `;
 
-const Title = styled.label`
+const Title = styled.div`
   cursor: pointer;
   font-weight: ${({ theme }) => theme.font.weight.semibold};
   font-size: ${({ theme }) => theme.font.size.base};
-  line-height: 25px;
-  padding: 10px 0;
-  user-select: none;
-  width: 100%;
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  ${CheckBox}:checked ~ & {
-    ${Icon} {
-      transform: rotate(180deg);
-    }
-  }
-`;
-
-const ContentWrapper = styled.div`
-  ${CheckBox}:not(:checked) ~ & {
-    display: none;
-  }
+  user-select: none;
+  line-height: 25px;
+  padding: 10px 0;
+  display: flex;
+  width: 100%;
 `;
 
 const Content = styled.p`
-  margin: 5px 0 0;
-  max-width: 90%;
   font-weight: ${({ theme }) => theme.font.weight.normal};
   font-size: ${({ theme }) => theme.font.size.sm};
   line-height: 25px;
+  margin: 5px 0 0;
+  max-width: 90%;
+`;
+
+const Item = styled.div`
+  padding: 10px 0;
+  width: 100%;
+
+  &.is-active {
+    ${Icon} {
+      transform: rotate(180deg);
+    }
+
+    ${Title} {
+      text-decoration: underline;
+    }
+  }
+
+  &:not(.is-active) {
+    ${Content} {
+      display: none;
+    }
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
