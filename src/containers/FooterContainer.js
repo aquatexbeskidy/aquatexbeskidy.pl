@@ -71,9 +71,9 @@ const FooterContainer = () => {
             return (
               <NCWrapper key={name}>
                 <NCAbout>{madeBy}</NCAbout>
-                {/* <LinkWrapper href={url} target="_blank">
+                <LinkWrapper href={url} target="_blank">
                   <NCLogo src={require(`../${icon}`)} alt={name} title={name} />
-                </LinkWrapper> */}
+                </LinkWrapper>
               </NCWrapper>
             );
           })}
