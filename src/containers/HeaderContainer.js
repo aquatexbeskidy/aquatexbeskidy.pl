@@ -4,9 +4,11 @@
 
 import { graphql, useStaticQuery } from 'gatsby';
 import styled, { css } from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Nav, Link } from '~components';
+import { Nav, Link, Hamburger, MobileNavigation } from '~components';
+import { ReactComponent as BrandLogo } from '../assets/icons/atb_logo.svg';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -35,6 +37,9 @@ const HeaderContainer = (props) => {
     }
   `);
 
+  const [isMobileNavigation, setMobileNavigation] = useState(false);
+  const handleMobileNavigation = () => setMobileNavigation((prev) => !prev);
+
   return (
     <>
       <Section isTop>
@@ -44,20 +49,30 @@ const HeaderContainer = (props) => {
       </Section>
 
       <Section isBottom>
-        <Wrapper>
-          <StyledH1>
-            {site.siteMetadata.siteTitle}
-            <Link to="/">
-              <ATBLogo
-                src={require(`../${bottom.frontmatter.icon}`)}
-                title={site.siteMetadata.siteTitle}
-                alt={site.siteMetadata.siteTitle}
-              />
-            </Link>
-          </StyledH1>
-          <Nav links={bottom.frontmatter.links} />
-        </Wrapper>
+<Wrapper>
+        <StyledH1>
+          {site.siteMetadata.siteTitle}
+          <Link to="/">
+            <BrandLogo title={site.siteMetadata.siteTitle} alt={site.siteMetadata.siteTitle} />
+          </Link>
+        </StyledH1>
+</Wrapper>
+    <Wrapper>
+        <Navbar>
+          <Nav links={bottom.frontmatter.links.filter((link, index) => index !== 0)} />
+          <Hamburger
+            onClickHandler={() => handleMobileNavigation()}
+            isActive={isMobileNavigation}
+          />
+        </Navbar>
+</Wrapper>
       </Section>
+
+      <MobileNavigation
+        links={bottom.frontmatter.links}
+        onClose={handleMobileNavigation}
+        isOpen={isMobileNavigation}
+      />
     </>
   );
 };
@@ -80,12 +95,24 @@ const sectionBottom = css`
 `;
 
 const sectionTop = css`
-  height: 3rem;
   justify-content: flex-end;
+  height: 3rem;
 
   a {
     font-size: ${({ theme }) => theme.font.size.xs};
     font-weight: ${({ theme }) => theme.font.weight.light};
+  }
+`;
+
+const Navbar = styled.div`
+  nav {
+    display: none;
+    ${mq.min.desktop_small} {
+      display: block;
+    }
+  }
+  button {
+    margin: 20px 20px 0 0;
   }
 `;
 
