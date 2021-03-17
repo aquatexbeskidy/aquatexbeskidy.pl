@@ -162,8 +162,8 @@ export const BOREHOLE_FRAGMENT = graphql`
                 transformOptions: { cropFocus: CENTER }
                 breakpoints: [320, 768, 1024]
                 placeholder: NONE
-                height: 225
-                width: 400
+                height: 337
+                width: 600
                 quality: 75
               )
             }

@@ -9,6 +9,7 @@ import React from 'react';
 import { stringIncludesHTML } from '~utils';
 import { RootContainer } from '~containers';
 import { Reviews } from '~components';
+import { Review, Wrapper } from '~components/Reviews';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -56,6 +57,16 @@ const BoreholeWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 50px;
+  ${Wrapper} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+  }
+  ${Review} {
+    flex-basis: 50%;
+  }
 `;
 
 const Headline = styled.h2`

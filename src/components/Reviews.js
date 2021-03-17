@@ -16,23 +16,26 @@ import { stringIncludesHTML } from '~utils';
 const Reviews = ({ reviews }) => (
   <Wrapper>
     {reviews.map(({ description, image: { childrenImageSharp } }, index) => {
-      const descriptionChildren = stringIncludesHTML(description)
-        ? { dangerouslySetInnerHTML: { __html: description } }
-        : { children: description };
+      let descriptionChildren = '';
+      let imgDetails = description ? description : index.toString();
+      if (description) {
+        descriptionChildren = stringIncludesHTML(description)
+          ? { dangerouslySetInnerHTML: { __html: description } }
+          : { children: description };
+      }
       return (
         <Review key={index}>
           {description && <Description {...descriptionChildren} />}
           {childrenImageSharp && (
             <GatsbyImage
               image={getImage(childrenImageSharp[0])}
-              title={description}
-              alt={description}
+              title={imgDetails}
+              alt={imgDetails}
             />
           )}
         </Review>
       );
     })}
-    ;
   </Wrapper>
 );
 
@@ -40,7 +43,7 @@ const Reviews = ({ reviews }) => (
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   margin: 70px 0;
 `;
 
@@ -51,7 +54,7 @@ const Description = styled.p`
   padding: 0 40px;
 `;
 
-const Review = styled.div`
+export const Review = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
