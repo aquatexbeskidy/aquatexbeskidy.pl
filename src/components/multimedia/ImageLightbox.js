@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 import { useEventListener, useScrollLock } from '~hooks';
+import { lightBoxAcceptableKeys } from '~utils';
 import { animationKeyframes, mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -42,11 +43,16 @@ const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpe
   const handlePrevious = () => setCurrentIdx((index) => (index + imagesLength - 1) % imagesLength);
   const handleNext = () => setCurrentIdx((index) => (index + 1) % imagesLength);
 
-  useEventListener('keydown', (e) => {
-    e.preventDefault();
-    e.key === 'ArrowLeft' && handlePrevious();
-    e.key === 'ArrowRight' && handleNext();
-    e.key === 'Escape' && onClose();
+  useEventListener('keydown', (event) => {
+    const [left, right, escape] = lightBoxAcceptableKeys;
+    const { key } = event;
+
+    if (lightBoxAcceptableKeys.includes(key)) {
+      event.preventDefault();
+      key === left && handlePrevious();
+      key === right && handleNext();
+      key === escape && onClose();
+    }
   });
 
   useEffect(() => {
