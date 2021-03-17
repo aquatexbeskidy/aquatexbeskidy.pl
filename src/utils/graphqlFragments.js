@@ -156,11 +156,22 @@ export const DEEPWELL_FRAGMENT = graphql`
         mainTitle
         mainContent
         additionList {
-          title
+          description
           contentList {
             desc
           }
-          photo
+          image {
+            childrenImageSharp {
+              gatsbyImageData(
+                transformOptions: { cropFocus: CENTER }
+                breakpoints: [320, 768, 1024]
+                placeholder: NONE
+                height: 337
+                width: 600
+                quality: 75
+              )
+            }
+          }
         }
         waterSearchTitle
         waterSearchDesc

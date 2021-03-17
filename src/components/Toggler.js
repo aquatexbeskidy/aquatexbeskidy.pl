@@ -16,7 +16,7 @@ const Toggler = ({ faq: { headline, list } }) => (
     {list &&
       list.map(({ title, content, icon }, index) => (
         <Item key={index}>
-          <CheckBox type="checkbox" id={index} />
+          <CheckBox value={index} name={index} type="checkbox" id={index} />
 
           <Title htmlFor={index}>
             {title}
@@ -63,6 +63,7 @@ const Wrapper = styled.div`
 const Item = styled.div`
   width: 100%;
   padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 `;
 
 const CheckBox = styled.input`
