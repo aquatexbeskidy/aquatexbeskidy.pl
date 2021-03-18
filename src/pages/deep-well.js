@@ -112,6 +112,7 @@ const DeepWellWrapper = styled.div`
       align-items: flex-start;
       justify-content: flex-start;
       ${Description} {
+        max-width: 400px;
         font-weight: ${({ theme }) => theme.font.weight.semibold};
         line-height: 25px;
         margin-top: 0;
