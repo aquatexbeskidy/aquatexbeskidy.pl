@@ -29,19 +29,70 @@ const fadeUp = animationKeyframes({
   properties: '500ms',
 });
 
+const isElementOutViewport = (node) => {
+  var rect = node.getBoundingClientRect();
+  return (
+    rect.bottom < 0 ||
+    rect.right < 0 ||
+    rect.left > window.innerWidth - 100 ||
+    rect.top > window.innerHeight - 100
+  );
+};
+
 const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpen, onClose }) => {
   const { enableScrollLock, disableScrollLock } = useScrollLock();
   const [currentIdx, setCurrentIdx] = useState(currentImageId);
   const [isPreviews, setIsPreviews] = useState(isPreviewsDefault);
+  const thumbnailsWrapperRef = useRef();
   const closeButtonRef = useRef();
+
+  const gatsbyImageWrapper = '.gatsby-image-wrapper';
+  const isActive = 'is-active';
 
   if (thumbnails.length !== images.length) return null;
 
   const imagesLength = images.length;
   const counterValue = `${currentIdx + 1} / ${imagesLength}`;
 
-  const handlePrevious = () => setCurrentIdx((index) => (index + imagesLength - 1) % imagesLength);
-  const handleNext = () => setCurrentIdx((index) => (index + 1) % imagesLength);
+  const handleCurrentThumnail = (index) => {
+    if (!thumbnailsWrapperRef.current) {
+      return;
+    }
+
+    if (isPreviews && thumbnails) {
+      const buttons = [...thumbnailsWrapperRef.current.querySelectorAll('button')];
+
+      if (buttons) {
+        buttons.forEach((button, i) => {
+          button.querySelector(gatsbyImageWrapper).classList.remove(isActive);
+        });
+
+        const thumbnail = buttons[index].querySelector(gatsbyImageWrapper);
+
+        if (thumbnail && isElementOutViewport(thumbnail)) {
+          thumbnail.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'center' });
+          thumbnail.classList.add(isActive);
+        }
+      }
+    }
+  };
+
+  const handlePrevious = () => {
+    handleCurrentThumnail(currentIdx);
+    setCurrentIdx((index) => {
+      const current = (index + imagesLength - 1) % imagesLength;
+      handleCurrentThumnail(current);
+      return current;
+    });
+  };
+
+  const handleNext = () => {
+    setCurrentIdx((index) => {
+      const current = (index + 1) % imagesLength;
+      handleCurrentThumnail(current);
+      return current;
+    });
+  };
 
   useEventListener('keydown', (event) => {
     const [left, right, escape] = lightBoxAcceptableKeys;
@@ -56,7 +107,11 @@ const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpe
   });
 
   useEffect(() => {
-    isOpen && setCurrentIdx(currentImageId);
+    isOpen &&
+      setCurrentIdx(() => {
+        handleCurrentThumnail(currentImageId);
+        return currentImageId;
+      });
   }, [currentImageId]);
 
   useEffect(() => {
@@ -114,11 +169,12 @@ const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpe
             </Button>
           </Navigation>
         </Header>
+
         <Body>
           <GatsbyImage
             image={getImage(images[currentIdx].childrenImageSharp[0])}
-            title={name}
-            alt={name}
+            title={images[currentIdx].name}
+            alt={images[currentIdx].name}
           />
 
           <Navigation>
@@ -138,12 +194,21 @@ const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpe
             </Button>
           </Navigation>
         </Body>
+
         {isPreviews && thumbnails && (
           <Footer>
-            <FooterInner style={{ width: `${100 * imagesLength}%` }}>
+            <FooterInner ref={thumbnailsWrapperRef} style={{ width: `${100 * imagesLength}%` }}>
               {thumbnails.map(({ id, childrenImageSharp }, index) => (
-                <Button onClick={() => setCurrentIdx(index)} key={id}>
-                  <GatsbyImage image={getImage(childrenImageSharp[0])} title={name} alt={name} />
+                <Button
+                  key={id}
+                  onClick={() =>
+                    setCurrentIdx(() => {
+                      handleCurrentThumnail(index);
+                      return index;
+                    })
+                  }
+                >
+                  <GatsbyImage image={getImage(childrenImageSharp[0])} title="" alt="" />
                 </Button>
               ))}
             </FooterInner>
@@ -266,11 +331,12 @@ const FooterInner = styled.div`
   white-space: nowrap;
   overflow-x: scroll;
 
-  /* ${mq.min.desktop_small} {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    display: flex;
-  } */
+  .gatsby-image-wrapper {
+    border: 2px solid transparent;
+    &.is-active {
+      border: 2px solid ${({ theme }) => theme.color.primary};
+    }
+  }
 `;
 
 const Footer = styled.footer`
