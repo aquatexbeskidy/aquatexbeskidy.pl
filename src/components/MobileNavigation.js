@@ -9,10 +9,21 @@ import ReactDOM from 'react-dom';
 
 import { useEventListener, useScrollLock } from '~hooks';
 import { Nav, Hamburger } from '~components';
+import { animationKeyframes } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
+
+const fade = animationKeyframes({
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+  },
+  properties: '300ms',
+});
 
 const MobileNavigation = ({ links, onClose, isOpen }) => {
   const { enableScrollLock, disableScrollLock } = useScrollLock();
@@ -65,9 +76,12 @@ const Wrapper = styled.div`
       justify-content: center;
       align-items: center;
       padding-left: 1rem;
-      min-height: 6rem;
+      min-height: 5rem;
       &:last-child {
         padding-right: 1rem;
+      }
+      a {
+        font-weight: ${({ theme }) => theme.font.weight.semibold};
       }
     }
   }
@@ -77,6 +91,7 @@ const Portal = styled.div`
   background: rgb(255 255 255);
   min-height: 100vh;
   min-width: 100vw;
+  animation: ${fade};
   padding: 5vw;
   display: flex;
   flex-direction: column;
@@ -89,6 +104,7 @@ const Portal = styled.div`
   top: 0;
 
   button {
+    outline: none;
     position: fixed;
     right: 15px;
     top: 15px;

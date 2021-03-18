@@ -53,7 +53,7 @@ const DefaultStyles = css`
   font-weight: ${({ theme }) => theme.font.weight.normal};
   font-size: ${({ theme }) => theme.font.size.base};
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background 0.3s ease;
 
   &:hover,
   &:focus,
@@ -102,6 +102,7 @@ const ButtonSecondary = css`
   --button-secondary-background: ${({ theme }) => theme.color.transparent};
   --button-secondary-border: ${({ theme }) => theme.color.white};
   --button-secondary-color: ${({ theme }) => theme.color.white};
+  --button-secondary-color-background-hover: ${({ theme }) => theme.color.whiteLight};
 
   ${DefaultButtonCss};
 
@@ -114,6 +115,7 @@ const ButtonSecondary = css`
   &:active,
   &.is-active {
     color: var(--button-secondary-color);
+    background: var(--button-secondary-color-background-hover);
   }
 `;
 
@@ -121,6 +123,7 @@ const ButtonTertiary = css`
   --button-tertiary-background: ${({ theme }) => theme.color.primary};
   --button-tertiary-border: ${({ theme }) => theme.color.primary};
   --button-tertiary-color: ${({ theme }) => theme.color.white};
+  --button-tertiary-color-dark: ${({ theme }) => theme.color.primaryDark};
 
   ${DefaultButtonCss}
 
@@ -133,6 +136,8 @@ const ButtonTertiary = css`
   &:active,
   &.is-active {
     color: var(--button-tertiary-color);
+    background: var(--button-tertiary-color-dark);
+    border-color: var(--button-tertiary-color-dark);
   }
 `;
 
@@ -140,6 +145,7 @@ const ButtonPrimary = css`
   --button-primary-background: ${({ theme }) => theme.color.white};
   --button-primary-border: ${({ theme }) => theme.color.white};
   --button-primary-color: ${({ theme }) => theme.color.black};
+  --button-primary-color-hover: ${({ theme }) => theme.color.whiteDark};
 
   ${DefaultButtonCss};
 
@@ -152,6 +158,8 @@ const ButtonPrimary = css`
   &:active,
   &.is-active {
     color: var(--button-primary-color);
+    background: var(--button-primary-color-hover);
+    border-color: var(--button-primary-color-hover);
   }
 `;
 
