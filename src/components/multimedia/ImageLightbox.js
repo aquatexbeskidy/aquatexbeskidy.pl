@@ -9,6 +9,13 @@ import FocusLock from 'react-focus-lock';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
+import { ReactComponent as ToggleActive } from '../../assets/icons/lightbox/toggle_active.svg';
+import { ReactComponent as ArrowRight } from '../../assets/icons/lightbox/arrow_right.svg';
+import { ReactComponent as ArrowLeft } from '../../assets/icons/lightbox/arrow_left.svg';
+import { ReactComponent as Toggle } from '../../assets/icons/lightbox/toggle.svg';
+import { ReactComponent as Close } from '../../assets/icons/lightbox/close.svg';
+
+import { lightBoxAcceptableKeys, isElementOutViewport } from '~utils';
 import { useEventListener, useScrollLock } from '~hooks';
 import { animationKeyframes, mq } from '~theme';
 
@@ -30,28 +37,82 @@ const fadeUp = animationKeyframes({
 
 const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpen, onClose }) => {
   const { enableScrollLock, disableScrollLock } = useScrollLock();
-  const [currentIdx, setCurrentIdx] = useState(currentImageId);
   const [isPreviews, setIsPreviews] = useState(isPreviewsDefault);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const thumbnailsWrapperRef = useRef();
   const closeButtonRef = useRef();
+
+  const gatsbyImageWrapper = '.gatsby-image-wrapper';
+  const isActive = 'is-active';
 
   if (thumbnails.length !== images.length) return null;
 
   const imagesLength = images.length;
   const counterValue = `${currentIdx + 1} / ${imagesLength}`;
 
-  const handlePrevious = () => setCurrentIdx((index) => (index + imagesLength - 1) % imagesLength);
-  const handleNext = () => setCurrentIdx((index) => (index + 1) % imagesLength);
+  const handleCurrentThumnail = (index) => {
+    if (!thumbnailsWrapperRef.current) {
+      return;
+    }
 
-  useEventListener('keydown', (e) => {
-    e.preventDefault();
-    e.key === 'ArrowLeft' && handlePrevious();
-    e.key === 'ArrowRight' && handleNext();
-    e.key === 'Escape' && onClose();
+    if (isPreviews && thumbnails) {
+      const buttons = [...thumbnailsWrapperRef.current.querySelectorAll('button')];
+
+      if (buttons) {
+        buttons.forEach((button, i) => {
+          button.querySelector(gatsbyImageWrapper).classList.remove(isActive);
+        });
+
+        const thumbnail = buttons[index].querySelector(gatsbyImageWrapper);
+        const options = {
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'end',
+        };
+
+        if (thumbnail) {
+          isElementOutViewport(thumbnail) && thumbnail.scrollIntoView(options);
+          thumbnail.classList.add(isActive);
+        }
+      }
+    }
+  };
+
+  const handlePrevious = () =>
+    setCurrentIdx((index) => {
+      const current = (index + imagesLength - 1) % imagesLength;
+      handleCurrentThumnail(current);
+      return current;
+    });
+
+  const handleNext = () =>
+    setCurrentIdx((index) => {
+      const current = (index + 1) % imagesLength;
+      handleCurrentThumnail(current);
+      return current;
+    });
+
+  useEventListener('keydown', (event) => {
+    const [left, right, escape] = lightBoxAcceptableKeys;
+    const { key } = event;
+
+    if (lightBoxAcceptableKeys.includes(key)) {
+      event.preventDefault();
+      key === left && handlePrevious();
+      key === right && handleNext();
+      key === escape && onClose();
+    }
   });
 
   useEffect(() => {
     isOpen && setCurrentIdx(currentImageId);
   }, [currentImageId]);
+
+  useEffect(() => {
+    if (isPreviews || currentIdx) {
+      handleCurrentThumnail(currentIdx);
+    }
+  }, [isPreviews, currentIdx]);
 
   useEffect(() => {
     if (isOpen) {
@@ -69,75 +130,51 @@ const Lightbox = ({ thumbnails, images, currentImageId, isPreviewsDefault, isOpe
     <FocusLock>
       <Wrapper>
         <Header>
-          <Counter children={counterValue} />
+          <Counter>{counterValue}</Counter>
 
           <Navigation>
             {thumbnails && (
               <Button onClick={() => setIsPreviews((prev) => !prev)}>
-                <Icon>
-                  {isPreviews ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      height="24"
-                      width="24"
-                    >
-                      <path d="M6 18h12c3.311 0 6-2.689 6-6s-2.689-6-6-6h-12.039c-3.293.021-5.961 2.701-5.961 6 0 3.311 2.688 6 6 6zm12-10c-2.208 0-4 1.792-4 4s1.792 4 4 4 4-1.792 4-4-1.792-4-4-4z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      height="24"
-                      width="24"
-                    >
-                      <path d="M18 18h-12c-3.311 0-6-2.689-6-6s2.689-6 6-6h12.039c3.293.021 5.961 2.701 5.961 6 0 3.311-2.688 6-6 6zm0-10h-12c-2.208 0-4 1.792-4 4s1.792 4 4 4h12c2.208 0 4-1.792 4-4 0-2.199-1.778-3.986-3.974-4h-.026zm-12 1c1.656 0 3 1.344 3 3s-1.344 3-3 3-3-1.344-3-3 1.344-3 3-3z" />
-                    </svg>
-                  )}
-                </Icon>
+                {isPreviews ? <ToggleActive /> : <Toggle />}
               </Button>
             )}
             <Button ref={closeButtonRef} onClick={onClose}>
-              <Icon>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z" />
-                </svg>
-              </Icon>
+              <Close />
             </Button>
           </Navigation>
         </Header>
+
         <Body>
           <GatsbyImage
             image={getImage(images[currentIdx].childrenImageSharp[0])}
-            title={name}
-            alt={name}
+            title={images[currentIdx].name}
+            alt={images[currentIdx].name}
           />
 
           <Navigation>
             <Button onClick={handlePrevious}>
-              <Icon>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-                </svg>
-              </Icon>
+              <ArrowLeft />
             </Button>
             <Button onClick={handleNext}>
-              <Icon>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
-                </svg>
-              </Icon>
+              <ArrowRight />
             </Button>
           </Navigation>
         </Body>
+
         {isPreviews && thumbnails && (
           <Footer>
-            <FooterInner style={{ width: `${100 * imagesLength}%` }}>
+            <FooterInner ref={thumbnailsWrapperRef} style={{ width: `${100 * imagesLength}%` }}>
               {thumbnails.map(({ id, childrenImageSharp }, index) => (
-                <Button onClick={() => setCurrentIdx(index)} key={id}>
-                  <GatsbyImage image={getImage(childrenImageSharp[0])} title={name} alt={name} />
+                <Button
+                  key={id}
+                  onClick={() => {
+                    setCurrentIdx(() => {
+                      handleCurrentThumnail(index);
+                      return index;
+                    });
+                  }}
+                >
+                  <GatsbyImage image={getImage(childrenImageSharp[0])} title="" alt="" />
                 </Button>
               ))}
             </FooterInner>
@@ -253,27 +290,41 @@ const Header = styled.header`
 `;
 
 const FooterInner = styled.div`
-  ${mq.max.desktop_small} {
-    white-space: nowrap;
-    overflow-x: scroll;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  &::-webkit-scrollbar {
+    display: none;
   }
 
-  ${mq.min.desktop_small} {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    display: flex;
+  white-space: nowrap;
+  overflow-x: scroll;
 
-    overflow-y: scroll;
-    max-height: 84px;
+  .gatsby-image-wrapper {
+    border: 2px solid transparent;
+    position: relative;
+    opacity: 0.5;
+
+    &::before {
+      background-color: ${({ theme }) => theme.color.black};
+      display: block;
+      height: 100%;
+      width: 100%;
+
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      content: ' ';
+    }
+
+    &:hover,
+    &.is-active {
+      border: 2px solid ${({ theme }) => theme.color.primary};
+      opacity: 1;
+    }
   }
 `;
 
 const Footer = styled.footer`
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: ${({ theme }) => theme.color.white};
 
   display: flex;
   ${padding}
@@ -295,7 +346,7 @@ const Footer = styled.footer`
     }
 
     ${mq.min.desktop_small} {
-      margin: 4px 6px;
+      margin: 0 2px;
     }
   }
 `;
