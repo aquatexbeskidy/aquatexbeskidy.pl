@@ -1,3 +1,4 @@
+export { default as isElementOutViewport } from './isElementOutViewport';
 export { default as isExternalURL } from './isExternalURL';
 
 export const SIZE_400_225 = '400x225';
