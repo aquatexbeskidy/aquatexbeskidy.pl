@@ -128,9 +128,6 @@ const DeepWellWrapper = styled.div`
         margin: 0 0 10px;
         padding: 0;
         text-align: left;
-        ${mq.min.tablet_base} {
-          margin: 0;
-        }
       }
       ${List} {
         list-style-type: none;
