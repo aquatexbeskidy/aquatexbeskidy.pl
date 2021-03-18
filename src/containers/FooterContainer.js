@@ -6,6 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import React from 'react';
 
+import { ReactComponent as BrandLogo } from '../assets/icons/atb_logo.svg';
 import { Nav, Link } from '~components';
 import { mq } from '~theme';
 
@@ -61,11 +62,7 @@ const FooterContainer = () => {
         </Wrapper>
         <Section>
           <CopyrightWrapper>
-            <ATBLogo
-              src={require(`../${footer.frontmatter.atbLogo}`)}
-              alt={site.siteMetadata.siteTitle}
-              title={site.siteMetadata.siteTitle}
-            />
+            <BrandLogo title={site.siteMetadata.siteTitle} alt={site.siteMetadata.siteTitle} />
             <Copyright>{footer.frontmatter.copyright}</Copyright>
           </CopyrightWrapper>
           {footer.frontmatter.nomadsCodes.map(({ madeBy, name, url, icon }) => {
@@ -181,7 +178,7 @@ const ATBLogo = styled.img`
 const Copyright = styled.p`
   margin-top: 10px;
   ${mq.min.mobile_big} {
-    margin-top: 0;
+    margin-top: 5px;
   }
 `;
 
