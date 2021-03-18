@@ -102,7 +102,7 @@ const Title = styled.div`
 
 const Content = styled.p`
   font-weight: ${({ theme }) => theme.font.weight.normal};
-  font-size: ${({ theme }) => theme.font.size.sm};
+  font-size: ${({ theme }) => theme.font.size.base};
   line-height: 25px;
   margin: 5px 0 0;
   max-width: 90%;
