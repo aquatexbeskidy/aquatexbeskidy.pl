@@ -100,7 +100,7 @@ const SubHeading = styled.p`
   color: ${({ theme }) => theme.color.white};
   line-height: 30px;
   font-weight: 500;
-  font-size: ${({ theme }) => theme.font.size['2xl']};
+  font-size: ${({ theme }) => theme.font.size.xxl};
   margin: 15px 0 40px;
   text-align: center;
   ${mq.min.tablet_base} {
@@ -114,7 +114,7 @@ const Heading = styled.h2`
   line-height: 50px;
   font-weight: 600;
   text-align: center;
-  font-size: ${({ theme }) => theme.font.size['4xl']};
+  font-size: ${({ theme }) => theme.font.size.xxxxl};
   ${mq.min.tablet_base} {
     text-align: left;
   }

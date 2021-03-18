@@ -211,12 +211,10 @@ const Wrapper = styled.div`
 
 const Counter = styled.p`
   align-self: center;
-`;
 
-const Navigation = styled.div`
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
+  ${mq.max.tablet_big} {
+    font-size: ${({ theme }) => theme.font.size.xxl};
+  }
 `;
 
 const Button = styled.button`
@@ -225,19 +223,21 @@ const Button = styled.button`
   outline: none;
   border: none;
   padding: 0;
-  margin: 0;
-
-  &:hover,
-  &:focus {
-    box-shadow: 0 0 0 2px rgba(0 0 0 0 / 90%);
-  }
 
   cursor: pointer;
 `;
 
-const Body = styled.div`
-  ${padding}
+const Navigation = styled.div`
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
 
+  ${Button} {
+    margin: 0 20px;
+  }
+`;
+
+const Body = styled.div`
   min-height: 100vh;
   max-height: 100%;
 
@@ -248,6 +248,7 @@ const Body = styled.div`
 
   ${mq.min.desktop_base} {
     max-width: 80vw;
+    ${padding}
   }
 
   .gatsby-image-wrapper {
@@ -261,10 +262,6 @@ const Body = styled.div`
   }
 
   ${Navigation} {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-
     position: fixed;
     padding: 0 2vw;
     z-index: 899;
@@ -273,11 +270,29 @@ const Body = styled.div`
     right: 0;
     left: 0;
     top: 0;
+
+    ${Button} {
+      align-items: center;
+      display: flex;
+
+      height: 100vh;
+      width: 50vw;
+
+      box-shadow: none;
+      outline: none;
+
+      &:nth-child(1) {
+        justify-content: flex-start;
+      }
+      &:nth-child(2) {
+        justify-content: flex-end;
+      }
+    }
   }
 `;
 
 const Header = styled.header`
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: ${({ theme }) => theme.color.white};
   justify-content: space-between;
   display: flex;
   ${padding}
@@ -301,19 +316,6 @@ const FooterInner = styled.div`
     border: 2px solid transparent;
     position: relative;
     opacity: 0.5;
-
-    &::before {
-      background-color: ${({ theme }) => theme.color.black};
-      display: block;
-      height: 100%;
-      width: 100%;
-
-      position: absolute;
-      left: 0;
-      top: 0;
-
-      content: ' ';
-    }
 
     &:hover,
     &.is-active {
@@ -349,10 +351,6 @@ const Footer = styled.footer`
       margin: 0 2px;
     }
   }
-`;
-
-const Icon = styled.div`
-  margin: 0 6px;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
