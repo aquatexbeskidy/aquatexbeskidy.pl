@@ -82,17 +82,23 @@ const WorksPage = ({
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
+const Headline = styled.h2`
+  margin: 30px 0 35px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 50px;
+  }
+`;
+
 const WorksWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 50px;
   padding: 0 20px;
-`;
-
-const Headline = styled.h2`
-  margin: 30px 0 35px;
-  ${mq.min.tablet_base} {
-    margin-bottom: 50px;
+  ${Headline} {
+    margin-top: 50px;
+    &:first-child {
+      margin-top: 30px;
+    }
   }
 `;
 

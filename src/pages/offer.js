@@ -66,6 +66,12 @@ const OfferWrapper = styled.div`
     ${Review} {
       display: flex;
       padding: 0;
+      &:not(:last-child) {
+        margin-bottom: 15px;
+        ${mq.min.mobile_big} {
+          margin-bottom: 0;
+        }
+      }
     }
     ${mq.min.mobile_big} {
       flex-direction: row;

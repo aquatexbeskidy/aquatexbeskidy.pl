@@ -96,7 +96,13 @@ const sectionBottom = css`
 `;
 
 const sectionTop = css`
-  justify-content: flex-end;
+  justify-content: center;
+  ul {
+    padding: 0;
+  }
+  ${mq.min.tablet_base} {
+    justify-content: flex-end;
+  }
   height: 3rem;
 
   a {

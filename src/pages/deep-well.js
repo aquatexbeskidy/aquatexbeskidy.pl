@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { stringIncludesHTML } from '~utils';
 import { RootContainer } from '~containers';
 import { Reviews } from '~components';
-import { Review, Description, Content, List, Item } from '~components/Reviews';
+import { Wrapper, Review, Description, Content, List, Item } from '~components/Reviews';
 import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -76,6 +76,12 @@ const DeepWellWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto 50px;
   padding: 0 20px;
+  ${Wrapper} {
+    margin: 50px 0;
+    ${mq.min.tablet_base} {
+      margin: 70px 0;
+    }
+  }
   ${Review} {
     padding: 0;
     text-align: left;
@@ -84,6 +90,9 @@ const DeepWellWrapper = styled.div`
     ${mq.min.tablet_big} {
       flex-direction: row;
       align-items: flex-start;
+    }
+    ${mq.min.desktop_small} {
+      align-items: center;
     }
     &:last-child {
       margin-top: 0;
@@ -127,8 +136,11 @@ const DeepWellWrapper = styled.div`
         ${Item} {
           width: 100%;
           max-width: 400px;
-          padding: 10px 0;
+          padding: 5px 0;
           line-height: 25px;
+          ${mq.min.tablet_base} {
+            padding: 10px 0;
+          }
         }
       }
       ${mq.min.tablet_big} {
