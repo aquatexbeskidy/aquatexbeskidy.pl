@@ -29,8 +29,10 @@ const DeepWellPage = ({
           additionList,
           waterSearchTitle,
           waterSearchDesc,
+          waterSearchId,
           waterConnectTitle,
           waterConnectDesc,
+          waterConnectId,
         },
       },
     },
@@ -54,9 +56,9 @@ const DeepWellPage = ({
         <Heading>{mainTitle}</Heading>
         <Text {...mainContentChildren} />
         <Reviews reviews={additionList} />
-        <SubHeading>{waterSearchTitle}</SubHeading>
+        <SubHeading id={waterSearchId}>{waterSearchTitle}</SubHeading>
         <Text {...waterSearchDescChildren} />
-        <SubHeading>{waterConnectTitle}</SubHeading>
+        <SubHeading id={waterConnectId}>{waterConnectTitle}</SubHeading>
         <Text {...waterConnectDescChildren} />
       </DeepWellWrapper>
     </RootContainer>
@@ -153,7 +155,8 @@ const Text = styled.p`
 `;
 
 const SubHeading = styled.h3`
-  margin: 30px 0 30px;
+  margin: 10px 0 30px;
+  padding: 20px 0 0;
   ${mq.min.tablet_base} {
     margin-bottom: 50px;
   }
