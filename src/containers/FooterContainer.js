@@ -134,9 +134,12 @@ export const QuickContact = styled.section`
           margin: 5px 0 20px;
           line-height: 20px;
           text-align: center;
+          width: 100%;
+          max-width: 270px;
           font-weight: ${({ theme }) => theme.font.weight.normal};
           font-size: ${({ theme }) => theme.font.size.base};
           ${mq.min.tablet_base} {
+            max-width: 100%;
             text-align: left;
             line-height: 18px;
           }

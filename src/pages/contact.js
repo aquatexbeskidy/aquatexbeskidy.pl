@@ -67,6 +67,7 @@ const ContactWrapper = styled.div`
     display: none;
   }
   .leaflet-container {
+    cursor: move;
     ${mq.max.tablet_base} {
       height: 350px !important;
     }

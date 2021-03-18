@@ -104,6 +104,7 @@ const Portal = styled.div`
   top: 0;
 
   button {
+    cursor: pointer;
     outline: none;
     position: fixed;
     right: 15px;

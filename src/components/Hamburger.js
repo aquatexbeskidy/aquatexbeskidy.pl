@@ -34,6 +34,7 @@ const Hamburger = ({ onClickHandler, isActive }) => {
 
 const Button = styled.button`
   background-color: transparent;
+  cursor: pointer;
   border: 0;
 
   display: none;
