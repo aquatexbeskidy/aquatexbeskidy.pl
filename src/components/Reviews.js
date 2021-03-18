@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { stringIncludesHTML } from '~utils';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -59,8 +60,14 @@ export const Wrapper = styled.div`
 export const Description = styled.p`
   width: 100%;
   max-width: 400px;
-  line-height: 30px;
-  padding: 0 40px;
+  margin: 20px auto;
+  line-height: 25px;
+  text-align: center;
+  ${mq.min.tablet_base} {
+    text-align: left;
+    line-height: 30px;
+    padding: 0 40px;
+  }
 `;
 
 export const Content = styled.div``;
@@ -70,13 +77,18 @@ export const List = styled.ul``;
 export const Item = styled.li``;
 
 export const Review = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  text-align: center;
+  padding: 0 20px;
   &:nth-child(2n + 1) {
     ${Content} {
       order: 2;
     }
+  }
+  ${mq.min.tablet_base} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

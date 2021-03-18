@@ -9,7 +9,8 @@ import React from 'react';
 import { stringIncludesHTML } from '~utils';
 import { RootContainer } from '~containers';
 import { Reviews } from '~components';
-import { Wrapper } from '~components/Reviews';
+import { Wrapper, Review } from '~components/Reviews';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -83,13 +84,19 @@ const AboutWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 50px;
+  padding: 0 20px;
   ${Wrapper} {
     margin: 40px 0;
     padding: 30px 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
+    ${Review} {
+      display: flex;
+      padding: 0;
+    }
     &::before {
       ${BorderLineStyles};
       top: 0;
@@ -98,26 +105,50 @@ const AboutWrapper = styled.div`
       ${BorderLineStyles};
       bottom: 0;
     }
+    ${mq.min.mobile_big} {
+      flex-direction: row;
+    }
   }
 `;
 
 const Heading = styled.h2`
-  margin: 30px 0 34px;
+  margin: 30px 0 16px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 34px;
+  }
 `;
 
 const Section = styled.section`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
+  &:last-child {
+    justify-content: center;
+    align-items: center;
+  }
+  ${mq.min.tablet_base} {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
 `;
 
 const Block = styled.div`
   flex-basis: 50%;
+  &:last-child {
+    ${mq.min.tablet_base} {
+      padding-left: 30px;
+    }
+  }
 `;
 
 const Text = styled.p`
-  line-height: 30px;
+  line-height: 25px;
+  ${mq.min.tablet_base} {
+    line-height: 30px;
+  }
   strong {
     color: ${({ theme }) => theme.color.primary};
   }
@@ -155,12 +186,17 @@ const SubHeading = styled.h3`
 
 const WhyUsList = styled.ul`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style-type: none;
+  ${mq.min.tablet_base} {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 `;
 
 const Item = styled.div`
@@ -169,7 +205,10 @@ const Item = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 15px;
+  margin: 15px auto;
+  ${mq.min.tablet_base} {
+    margin: 15px;
+  }
 `;
 
 const Title = styled.h4`
@@ -179,8 +218,13 @@ const Title = styled.h4`
 
 const Description = styled.p`
   text-align: center;
-  line-height: 30px;
-  margin-top: 0;
+  line-height: 25px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  ${mq.min.tablet_base} {
+    line-height: 30px;
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────

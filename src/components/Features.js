@@ -8,6 +8,7 @@ import React from 'react';
 
 import { ReactComponent as ArrowRight } from '../assets/icons/arrow_right.svg';
 import { Link } from '~components';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -63,9 +64,13 @@ const Wrapper = styled.div`
   padding: 50px 0;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  ${mq.min.tablet_base} {
+    flex-direction: row;
+  }
   &::before {
     ${BorderLineStyles};
     top: 0;
@@ -82,7 +87,14 @@ const Inner = styled.div`
   justify-content: center;
   align-items: center;
   &:not(:last-child) {
-    margin-right: 70px;
+    margin-bottom: 50px;
+    ${mq.min.tablet_base} {
+      margin-right: 50px;
+      margin-bottom: 0;
+    }
+    ${mq.min.desktop_small} {
+      margin-right: 90px;
+    }
   }
   a {
     display: flex;
@@ -96,10 +108,14 @@ const Title = styled.div`
   font-size: ${({ theme }) => theme.font.size.base};
   color: ${({ theme }) => theme.color.black};
   width: 100%;
-  max-width: 120px;
+  max-width: 160px;
   text-align: center;
   margin: 20px 0;
   line-height: 20px;
+  ${mq.min.tablet_base} {
+    max-width: 120px;
+    height: 40px;
+  }
 `;
 
 const Text = styled.span`

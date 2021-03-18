@@ -10,6 +10,7 @@ import { stringIncludesHTML } from '~utils';
 import { RootContainer } from '~containers';
 import { Reviews } from '~components';
 import { Review, Wrapper } from '~components/Reviews';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -57,6 +58,7 @@ const BoreholeWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 50px;
+  padding: 0 20px;
   ${Wrapper} {
     display: flex;
     flex-wrap: wrap;
@@ -66,16 +68,24 @@ const BoreholeWrapper = styled.div`
   }
   ${Review} {
     flex-basis: 50%;
+    display: flex;
+    padding: 0;
   }
 `;
 
 const Heading = styled.h2`
-  margin: 30px 0 50px;
+  margin: 30px 0 30px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 50px;
+  }
 `;
 
 const Description = styled.p`
-  line-height: 30px;
+  line-height: 25px;
   width: 100%;
+  ${mq.min.tablet_base} {
+    line-height: 30px;
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────

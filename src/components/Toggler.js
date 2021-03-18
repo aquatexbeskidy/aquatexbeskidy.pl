@@ -5,6 +5,7 @@
 import styled, { css } from 'styled-components';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -55,7 +56,7 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 80px;
-  padding: 40px 0;
+  padding: 40px 20px;
   position: relative;
   &::before {
     ${borderLineStyles};
@@ -68,9 +69,12 @@ const Wrapper = styled.div`
 `;
 
 const Icon = styled.img`
-  width: 20px;
-  margin-left: 10px;
+  width: 15px;
+  margin-left: 15px;
   transition: all 0.2s ease;
+  ${mq.min.tablet_base} {
+    width: 20px;
+  }
 `;
 
 const Headline = styled.h2`

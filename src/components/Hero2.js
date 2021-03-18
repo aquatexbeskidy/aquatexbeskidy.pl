@@ -9,6 +9,7 @@ import React from 'react';
 
 import { stringIncludesHTML, SIZE_HERO } from '~utils';
 import { Link } from '~components';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -65,10 +66,13 @@ const Inner = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 40px 0 70px;
+  padding: 20px 0 50px;
   a {
     padding-right: 40px;
     padding-left: 40px;
+  }
+  ${mq.min.tablet_base} {
+    padding: 40px 0 70px;
   }
 `;
 

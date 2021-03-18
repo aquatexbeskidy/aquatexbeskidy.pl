@@ -82,8 +82,11 @@ export default HeaderContainer;
 // ─────────────────────────────────────────────────────────────────────────────
 
 const sectionBottom = css`
-  height: 5rem;
+  height: 7rem;
   justify-content: space-between;
+  ${mq.min.tablet_base} {
+    height: 5rem;
+  }
 
   h1 {
     a {
@@ -110,7 +113,7 @@ const Navbar = styled.div`
     }
   }
   button {
-    margin: 20px 20px 0 0;
+    margin: 0;
   }
 `;
 
@@ -122,6 +125,7 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
 `;
 
 const Section = styled.section`
