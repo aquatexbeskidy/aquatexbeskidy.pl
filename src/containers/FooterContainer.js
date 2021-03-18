@@ -41,7 +41,7 @@ const FooterContainer = () => {
             {footer.frontmatter.quickContact.link.map(({ text, url, type, icon }) => {
               return (
                 <Link to={url} look={type} key={text}>
-                  <PhoneIcon src={require(`../${icon}`)} />
+                  <PhoneIcon alt={text} src={require(`../${icon}`)} />
                   {text}
                 </Link>
               );

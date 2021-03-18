@@ -21,7 +21,7 @@ const Features = ({ features, title }) => {
       {features &&
         features.map(({ title, icon, link, desc }, index) => (
           <Inner key={index}>
-            {icon && icon.includes('/icons/') && <Image src={require(`../${icon}`)} />}
+            {icon && icon.includes('/icons/') && <Image alt={index} src={require(`../${icon}`)} />}
             <Title>{title}</Title>
             {link && (
               <Link to={link.url} look="primary">
