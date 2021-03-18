@@ -27,6 +27,10 @@ const Video = ({ videoId, videoTitle, width, height }) => {
       height: 100%;
     }
 
+    img {
+      height: 100%;
+    }
+
     img,
     span {
       position: absolute;
