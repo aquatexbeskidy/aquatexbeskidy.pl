@@ -27,7 +27,8 @@ const SEOContainer = ({ meta }) => {
   const { title, description, permalink } = meta;
 
   const hemletMetaData = [
-    { name: 'description', content: description },
+    { name: 'description', content: `${description}` },
+    { name: 'title', content: `${title}` },
 
     { property: 'og:url', content: `${siteUrl}${permalink}` },
     { property: 'og:title', content: `${title}` },
