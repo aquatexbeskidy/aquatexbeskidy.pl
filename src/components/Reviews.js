@@ -59,7 +59,7 @@ export const Wrapper = styled.div`
 
 export const Description = styled.p`
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin: 20px auto;
   line-height: 25px;
   text-align: center;

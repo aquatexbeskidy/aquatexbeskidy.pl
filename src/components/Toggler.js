@@ -30,12 +30,16 @@ const TogglerItem = ({ title, content, icon }, index) => {
   );
 };
 
-const Toggler = ({ faq: { headline, list } }) => (
-  <Wrapper>
-    {headline && <Headline>{headline}</Headline>}
-    {list && list.map(TogglerItem)}
-  </Wrapper>
-);
+const Toggler = ({ faq: { headline, list } }) => {
+  const togglerId = 'faq-section';
+
+  return (
+    <Wrapper>
+      {headline && <Headline id={togglerId}>{headline}</Headline>}
+      {list && list.map(TogglerItem)}
+    </Wrapper>
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
@@ -79,7 +83,8 @@ const Icon = styled.img`
 
 const Headline = styled.h2`
   text-align: center;
-  margin: 20px 0 70px;
+  margin: 0 0 70px;
+  padding: 20px 0;
 `;
 
 const Title = styled.div`

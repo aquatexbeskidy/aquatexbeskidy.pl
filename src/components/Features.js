@@ -89,11 +89,11 @@ const Inner = styled.div`
   &:not(:last-child) {
     margin-bottom: 50px;
     ${mq.min.tablet_base} {
-      margin-right: 50px;
+      margin-right: 60px;
       margin-bottom: 0;
     }
     ${mq.min.desktop_small} {
-      margin-right: 90px;
+      margin-right: 110px;
     }
   }
   a {
