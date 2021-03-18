@@ -22,7 +22,7 @@ const TogglerItem = ({ title, content, icon }, index) => {
     >
       <Title>
         {title}
-        <Icon alt={index} src={require(`../${icon}`)} />
+        <Icon alt={`arrow-${index}`} src={require(`../${icon}`)} />
       </Title>
 
       <Content>{content}</Content>

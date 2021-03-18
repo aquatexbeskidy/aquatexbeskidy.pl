@@ -35,7 +35,7 @@ const ContactPage = ({
           <Buttons>
             {contact.buttons.map(({ text, url, type, icon }, index) => (
               <Link to={url} look={type} key={index}>
-                <Image src={require(`../${icon}`)} />
+                <Image alt={text} src={require(`../${icon}`)} />
                 {text}
               </Link>
             ))}
