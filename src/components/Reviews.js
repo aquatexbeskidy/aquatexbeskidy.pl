@@ -18,7 +18,7 @@ const Reviews = ({ reviews }) => (
   <Wrapper>
     {reviews.map(({ description, contentList, image: { childrenImageSharp } }, index) => {
       let descriptionChildren = '';
-      let imgDetails = description ? description : index.toString();
+      let imgDetails = description ? description : `review-photo-${index.toString()}`;
       if (description) {
         descriptionChildren = stringIncludesHTML(description)
           ? { dangerouslySetInnerHTML: { __html: description } }
