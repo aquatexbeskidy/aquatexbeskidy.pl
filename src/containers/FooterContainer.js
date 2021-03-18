@@ -136,7 +136,7 @@ export const QuickContact = styled.section`
           line-height: 20px;
           text-align: center;
           font-weight: ${({ theme }) => theme.font.weight.normal};
-          font-size: ${({ theme }) => theme.font.size.sm};
+          font-size: ${({ theme }) => theme.font.size.base};
           ${mq.min.tablet_base} {
             text-align: left;
             line-height: 18px;
