@@ -107,8 +107,8 @@ const Portal = styled.div`
     cursor: pointer;
     outline: none;
     position: fixed;
-    right: 15px;
-    top: 15px;
+    right: 35px;
+    top: 63px;
   }
 `;
 

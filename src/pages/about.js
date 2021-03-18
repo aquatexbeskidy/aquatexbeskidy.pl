@@ -96,6 +96,12 @@ const AboutWrapper = styled.div`
     ${Review} {
       display: flex;
       padding: 0;
+      &:not(:last-child) {
+        margin-bottom: 15px;
+        ${mq.min.mobile_big} {
+          margin-bottom: 0;
+        }
+      }
     }
     &::before {
       ${BorderLineStyles};

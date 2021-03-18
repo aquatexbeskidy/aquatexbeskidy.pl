@@ -106,7 +106,7 @@ export const QuickContact = styled.section`
   ${Wrapper} {
     padding: 20px;
     ${mq.min.tablet_base} {
-      padding: 0 20px;
+      padding: 10px 20px;
     }
     &:first-child {
       display: flex;
@@ -139,6 +139,7 @@ export const QuickContact = styled.section`
           font-weight: ${({ theme }) => theme.font.weight.normal};
           font-size: ${({ theme }) => theme.font.size.base};
           ${mq.min.tablet_base} {
+            margin-top: 10px;
             max-width: 100%;
             text-align: left;
             line-height: 18px;
@@ -179,10 +180,7 @@ const ATBLogo = styled.img`
 `;
 
 const Copyright = styled.p`
-  margin-top: 10px;
-  ${mq.min.mobile_big} {
-    margin-top: 5px;
-  }
+  margin-top: 15px;
 `;
 
 const NCWrapper = styled.div`
@@ -213,12 +211,16 @@ export const Section = styled.section`
       padding: 0;
       a {
         font-size: ${({ theme }) => theme.font.size.sm};
-        &:hover,
+
         &:focus,
         &:active,
         &.is-active {
           color: ${({ theme }) => theme.color.black};
-          text-decoration: none;
+        }
+
+        &:hover {
+          color: ${({ theme }) => theme.color.black};
+          text-decoration: underline;
         }
       }
     }

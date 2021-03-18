@@ -9,6 +9,7 @@ import { graphql } from 'gatsby';
 
 import { Video, ImageLightbox } from '~components';
 import { RootContainer } from '~containers';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -42,36 +43,37 @@ const WorksPage = ({
 
   return (
     <RootContainer meta={meta}>
-      <div>{meta.title}</div>
-      <h2>{photosTitle}</h2>
-      {images_400_225.nodes && (
-        <Wrapper>
-          {images_400_225.nodes.map(({ id, name, childrenImageSharp }, index) => (
-            <Thumbnail onClick={() => onChangeHandler(index)} key={id}>
-              <GatsbyImage image={getImage(childrenImageSharp[0])} title={name} alt={name} />
-            </Thumbnail>
-          ))}
-        </Wrapper>
-      )}
+      <WorksWrapper>
+        <Headline>{photosTitle}</Headline>
+        {images_400_225.nodes && (
+          <Wrapper>
+            {images_400_225.nodes.map(({ id, name, childrenImageSharp }, index) => (
+              <Thumbnail onClick={() => onChangeHandler(index)} key={id}>
+                <GatsbyImage image={getImage(childrenImageSharp[0])} title={name} alt={name} />
+              </Thumbnail>
+            ))}
+          </Wrapper>
+        )}
 
-      <h2>{videosTitle}</h2>
-      {videos && (
-        <Wrapper>
-          {videos.map(({ videoId, videoTitle }) => (
-            <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
-          ))}
-        </Wrapper>
-      )}
+        <Headline>{videosTitle}</Headline>
+        {videos && (
+          <Wrapper>
+            {videos.map(({ videoId, videoTitle }) => (
+              <Video videoId={videoId} videoTitle={videoTitle} key={videoId} />
+            ))}
+          </Wrapper>
+        )}
 
-      {images_860_480.nodes && images_75_75.nodes && (
-        <ImageLightbox
-          currentImageId={currentImageId}
-          thumbnails={images_75_75.nodes}
-          images={images_860_480.nodes}
-          onClose={handleLightbox}
-          isOpen={isLightbox}
-        />
-      )}
+        {images_860_480.nodes && images_75_75.nodes && (
+          <ImageLightbox
+            currentImageId={currentImageId}
+            thumbnails={images_75_75.nodes}
+            images={images_860_480.nodes}
+            onClose={handleLightbox}
+            isOpen={isLightbox}
+          />
+        )}
+      </WorksWrapper>
     </RootContainer>
   );
 };
@@ -80,14 +82,43 @@ const WorksPage = ({
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
+const Headline = styled.h2`
+  margin: 30px 0 35px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 50px;
+  }
+`;
+
+const WorksWrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+  ${Headline} {
+    margin-top: 50px;
+    &:first-child {
+      margin-top: 30px;
+    }
+  }
+`;
+
 const Thumbnail = styled.div`
   display: inline-flex;
   cursor: pointer;
 `;
 
 const Wrapper = styled.div`
-  flex-wrap: wrap;
-  display: flex;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(1, 1fr);
+  ${mq.min.mobile_big} {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+  }
+  ${mq.min.tablet_big} {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 18px;
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────

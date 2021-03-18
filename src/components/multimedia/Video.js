@@ -27,6 +27,10 @@ const Video = ({ videoId, videoTitle, width, height }) => {
       height: 100%;
     }
 
+    img {
+      height: 100%;
+    }
+
     img,
     span {
       position: absolute;
@@ -59,7 +63,7 @@ const Video = ({ videoId, videoTitle, width, height }) => {
   `; // TODO: svg icon instead of <span>▶</span>
 
   return (
-    <div>
+    <VideoWrapper>
       <IFrameStyled
         src={`https://www.youtube.com/embed/${videoId}`}
         srcDoc={srcdoc}
@@ -73,7 +77,7 @@ const Video = ({ videoId, videoTitle, width, height }) => {
         width={width}
         height={height}
       />
-    </div>
+    </VideoWrapper>
   );
 };
 
@@ -81,9 +85,14 @@ const Video = ({ videoId, videoTitle, width, height }) => {
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const IFrameStyled = styled.iframe`
+const VideoWrapper = styled.div`
   height: ${({ height }) => (height ? height : `${fheight}px`)};
-  width: ${({ width }) => (width ? width : `${fwidth}px`)};
+  max-width: ${({ width }) => (width ? width : `${fwidth}px`)};
+`;
+
+const IFrameStyled = styled.iframe`
+  height: 100%;
+  width: 100%;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
