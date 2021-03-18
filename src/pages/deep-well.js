@@ -122,12 +122,15 @@ const DeepWellWrapper = styled.div`
       justify-content: flex-start;
       ${Description} {
         max-width: 400px;
+        font-size: ${({ theme }) => theme.font.size['xl']};
         font-weight: ${({ theme }) => theme.font.weight.semibold};
         line-height: 25px;
-        margin-top: 0;
+        margin: 0 0 10px;
         padding: 0;
         text-align: left;
-        margin: 0;
+        ${mq.min.tablet_base} {
+          margin: 0;
+        }
       }
       ${List} {
         list-style-type: none;
