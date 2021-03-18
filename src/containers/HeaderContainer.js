@@ -102,6 +102,12 @@ const sectionTop = css`
   a {
     font-size: ${({ theme }) => theme.font.size.xs};
     font-weight: ${({ theme }) => theme.font.weight.light};
+    &:hover,
+    &:focus,
+    &:active,
+    &.is-active {
+      color: ${({ theme }) => theme.color.black};
+    }
   }
 `;
 

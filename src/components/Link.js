@@ -53,6 +53,7 @@ const DefaultStyles = css`
   font-weight: ${({ theme }) => theme.font.weight.normal};
   font-size: ${({ theme }) => theme.font.size.base};
   text-decoration: none;
+  transition: color 0.3s ease;
 
   &:hover,
   &:focus,
@@ -70,6 +71,13 @@ const AnchorPrimary = css`
   ${DefaultStyles};
 
   color: ${({ theme }) => theme.color.black};
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.is-active {
+    color: ${({ theme }) => theme.color.primary};
+  }
 `;
 
 const AnchorSecondary = css`
