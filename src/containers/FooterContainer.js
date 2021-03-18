@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 import { Nav, Link } from '~components';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -104,21 +105,42 @@ const LinkWrapper = styled.div``;
 export const QuickContact = styled.section`
   background: ${({ theme }) => theme.color.primary};
   ${Wrapper} {
+    padding: 20px;
+    ${mq.min.tablet_base} {
+      padding: 0 20px;
+    }
     &:first-child {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
+      ${mq.min.tablet_base} {
+        flex-direction: row;
+        justify-content: space-between;
+      }
       color: ${({ theme }) => theme.color.white};
       ${Text} {
         &:first-child {
           font-weight: ${({ theme }) => theme.font.weight.semibold};
           font-size: ${({ theme }) => theme.font.size.xl};
-          margin-bottom: 0;
+          margin-top: 0;
+          text-align: center;
+          ${mq.min.tablet_base} {
+            text-align: left;
+            margin-bottom: 0;
+            margin-top: 16px;
+          }
         }
         &:last-child {
           margin: 5px 0 20px;
+          line-height: 20px;
+          text-align: center;
           font-weight: ${({ theme }) => theme.font.weight.normal};
-          font-size: ${({ theme }) => theme.font.size.sm};
+          font-size: ${({ theme }) => theme.font.size.base};
+          ${mq.min.tablet_base} {
+            text-align: left;
+            line-height: 18px;
+          }
         }
       }
     }
@@ -127,6 +149,10 @@ export const QuickContact = styled.section`
         font-weight: ${({ theme }) => theme.font.weight.semibold};
         display: flex;
         align-items: center;
+        padding: 10px 25px;
+        ${mq.min.tablet_base} {
+          padding: 12px 30px;
+        }
       }
     }
   }
@@ -134,9 +160,13 @@ export const QuickContact = styled.section`
 
 const PhoneIcon = styled.img`
   display: inline-block;
-  max-height: 20px;
+  max-height: 15px;
+  width: 15px;
   margin-right: 8px;
-  width: 20px;
+  ${mq.min.tablet_base} {
+    max-height: 20px;
+    width: 20px;
+  }
 `;
 
 const CopyrightWrapper = styled.div``;
@@ -147,7 +177,10 @@ const ATBLogo = styled.img`
 `;
 
 const Copyright = styled.p`
-  margin-top: 0;
+  margin-top: 10px;
+  ${mq.min.mobile_big} {
+    margin-top: 0;
+  }
 `;
 
 const NCWrapper = styled.div`
@@ -204,16 +237,22 @@ const Footer = styled.footer`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    padding: 0 20px;
     & + ${Section} {
+      padding: 0 20px 10px;
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: 0;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
       font-size: ${({ theme }) => theme.font.size.sm};
+      ${mq.min.mobile_big} {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
     }
   }
 `;

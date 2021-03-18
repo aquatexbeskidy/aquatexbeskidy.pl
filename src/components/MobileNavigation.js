@@ -61,8 +61,11 @@ const Wrapper = styled.div`
     margin: 0;
 
     li {
-      padding: 0;
+      padding-left: 1rem;
       min-height: 6rem;
+      &:last-child {
+        padding-right: 1rem;
+      }
     }
   }
 `;
@@ -71,17 +74,17 @@ const Portal = styled.div`
   background: rgb(255 255 255 / 98%);
   min-height: 100vh;
   min-width: 100vw;
-  padding: 10vw;
+  padding: 25vw 10vw;
 
   position: fixed;
-  z-index: 900;
+  z-index: 9999;
   left: 0;
   top: 0;
 
   button {
     position: fixed;
-    right: 0;
-    top: 0;
+    right: 15px;
+    top: 15px;
   }
 `;
 

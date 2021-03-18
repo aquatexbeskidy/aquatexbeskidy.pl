@@ -9,6 +9,7 @@ import React from 'react';
 
 import { stringIncludesHTML, SIZE_HERO } from '~utils';
 import { Link } from '~components';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
@@ -64,15 +65,34 @@ const Wrapper = styled.div`
 `;
 
 const Inner = styled.div`
-  min-height: ${height}px;
+  min-height: 400px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 4vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   a {
+    padding: 10px 20px;
     &:not(:last-child) {
-      margin-right: 15px;
+      margin-bottom: 20px;
+      ${mq.min.tablet_base} {
+        margin-right: 15px;
+        margin-bottom: 0;
+      }
     }
+  }
+  ${mq.min.tablet_base} {
+    margin-bottom: 0;
+    display: block;
+    min-height: 500px;
+  }
+  ${mq.min.desktop_small} {
+    margin-bottom: 0;
+    display: block;
+    min-height: ${height}px;
   }
 `;
 
@@ -80,15 +100,24 @@ const SubHeading = styled.p`
   color: ${({ theme }) => theme.color.white};
   line-height: 30px;
   font-weight: 500;
-  font-size: 22px;
-  margin: 30px 0 50px;
+  font-size: ${({ theme }) => theme.font.size['2xl']};
+  margin: 15px 0 40px;
+  text-align: center;
+  ${mq.min.tablet_base} {
+    margin: 30px 0 50px;
+    text-align: left;
+  }
 `;
 
 const Heading = styled.h2`
   color: ${({ theme }) => theme.color.white};
-  line-height: 60px;
+  line-height: 50px;
   font-weight: 600;
-  font-size: 36px;
+  text-align: center;
+  font-size: ${({ theme }) => theme.font.size['4xl']};
+  ${mq.min.tablet_base} {
+    text-align: left;
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────

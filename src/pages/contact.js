@@ -9,6 +9,7 @@ import React from 'react';
 import { RootContainer } from '~containers';
 import { QuickContact } from '~containers/FooterContainer';
 import { MapLeaflet, Link } from '~components';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
@@ -65,6 +66,11 @@ const ContactWrapper = styled.div`
   & + ${QuickContact} {
     display: none;
   }
+  .leaflet-container {
+    ${mq.max.tablet_base} {
+      height: 350px !important;
+    }
+  }
   .leaflet-popup-content {
     p {
       margin: 10px 0 0;
@@ -76,16 +82,23 @@ const Details = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 50px;
+  padding: 0 20px;
 `;
 
 const Headline = styled.h2`
-  margin: 30px 0 50px;
+  margin: 30px 0 35px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 50px;
+  }
 `;
 
 const Description = styled.p`
-  line-height: 30px;
+  line-height: 25px;
   max-width: 450px;
   width: 100%;
+  ${mq.min.tablet_base} {
+    line-height: 30px;
+  }
 `;
 
 const Buttons = styled.div`
@@ -120,8 +133,16 @@ const Buttons = styled.div`
       padding-left: 15px;
       padding-right: 20px;
       img {
-        max-height: 18px;
-        width: 18px;
+        max-height: 14px;
+        width: 14px;
+        ${mq.min.tablet_base} {
+          max-height: 16px;
+          width: 16px;
+        }
+        ${mq.min.desktop_small} {
+          max-height: 18px;
+          width: 18px;
+        }
       }
     }
   }
