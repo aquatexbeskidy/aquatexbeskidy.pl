@@ -61,6 +61,9 @@ const Wrapper = styled.div`
     margin: 0;
 
     li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding-left: 1rem;
       min-height: 6rem;
       &:last-child {
@@ -71,10 +74,14 @@ const Wrapper = styled.div`
 `;
 
 const Portal = styled.div`
-  background: rgb(255 255 255 / 98%);
+  background: rgb(255 255 255);
   min-height: 100vh;
   min-width: 100vw;
-  padding: 25vw 10vw;
+  padding: 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   position: fixed;
   z-index: 9999;
