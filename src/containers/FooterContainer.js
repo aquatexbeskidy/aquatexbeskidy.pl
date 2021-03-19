@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 import { ReactComponent as BrandLogo } from '../assets/icons/atb_logo.svg';
-import { Nav, Link } from '~components';
+import { Nav, Link, NomadsCodes } from '~components';
 import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -29,16 +29,22 @@ const FooterContainer = () => {
       }
     }
   `);
+
+  const { nomadsCodes, quickContact, links, copyright } = footer.frontmatter;
+  const {
+    siteMetadata: { siteTitle },
+  } = site;
+
   return (
     <>
       <QuickContact>
         <Wrapper>
-          <Content>
-            <Text>{footer.frontmatter.quickContact.title}</Text>
-            <Text>{footer.frontmatter.quickContact.desc}</Text>
-          </Content>
-          <LinkWrapper>
-            {footer.frontmatter.quickContact.link.map(({ text, url, type, icon }) => {
+          <div>
+            <Text>{quickContact.title}</Text>
+            <Text>{quickContact.desc}</Text>
+          </div>
+          <div>
+            {quickContact.link.map(({ text, url, type, icon }) => {
               return (
                 <Link to={url} look={type} key={text}>
                   <PhoneIcon alt={text} src={require(`../${icon}`)} />
@@ -46,35 +52,29 @@ const FooterContainer = () => {
                 </Link>
               );
             })}
-          </LinkWrapper>
+          </div>
         </Wrapper>
       </QuickContact>
+
       <Footer>
         <Wrapper>
-          {footer.frontmatter.links.map(({ title, links, type }) => {
+          {links.map(({ title, links, type }) => {
             return (
               <Section key={title}>
-                <NavHeading>{title}</NavHeading>
+                <h3>{title}</h3>
                 {type === 'nested' && <Nav links={links} />}
               </Section>
             );
           })}
         </Wrapper>
+
         <Section>
-          <CopyrightWrapper>
-            <BrandLogo title={site.siteMetadata.siteTitle} alt={site.siteMetadata.siteTitle} />
-            <Copyright>{footer.frontmatter.copyright}</Copyright>
-          </CopyrightWrapper>
-          {footer.frontmatter.nomadsCodes.map(({ madeBy, name, url, icon }) => {
-            return (
-              <NCWrapper key={name}>
-                <NCAbout>{madeBy}</NCAbout>
-                <NCLink href={url} target="_blank">
-                  <NCLogo src={require(`../${icon}`)} alt={name} title={name} />
-                </NCLink>
-              </NCWrapper>
-            );
-          })}
+          <div>
+            <BrandLogo title={siteTitle} alt={siteTitle} />
+            <Copyright>{copyright}</Copyright>
+          </div>
+
+          <NomadsCodes nomadsCodes={nomadsCodes} />
         </Section>
       </Footer>
     </>
@@ -88,71 +88,74 @@ export default FooterContainer;
 // ─────────────────────────────────────────────────────────────────────────────
 
 const Wrapper = styled.div`
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 `;
 
-const Text = styled.p``;
+const Text = styled.p`
+  &:first-child {
+    font-weight: ${({ theme }) => theme.font.weight.semibold};
+    font-size: ${({ theme }) => theme.font.size.xl};
+    text-align: center;
+    margin-top: 0;
 
-const LinkWrapper = styled.div``;
+    ${mq.min.tablet_base} {
+      text-align: left;
+      margin-bottom: 0;
+      margin-top: 16px;
+    }
+  }
 
-const Content = styled.div``;
+  &:last-child {
+    font-weight: ${({ theme }) => theme.font.weight.normal};
+    font-size: ${({ theme }) => theme.font.size.base};
+    margin: 5px 0 20px;
+    text-align: center;
+    line-height: 20px;
+    max-width: 270px;
+    width: 100%;
 
-const NCLink = styled.a``;
+    ${mq.min.tablet_base} {
+      line-height: 18px;
+      text-align: left;
+      margin-top: 10px;
+      max-width: 100%;
+    }
+  }
+`;
 
 export const QuickContact = styled.section`
   background: ${({ theme }) => theme.color.primary};
+
   ${Wrapper} {
     padding: 20px;
+
     ${mq.min.tablet_base} {
       padding: 10px 20px;
     }
+
     &:first-child {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      ${mq.min.tablet_base} {
-        flex-direction: row;
-        justify-content: space-between;
-      }
       color: ${({ theme }) => theme.color.white};
-      ${Text} {
-        &:first-child {
-          font-weight: ${({ theme }) => theme.font.weight.semibold};
-          font-size: ${({ theme }) => theme.font.size.xl};
-          margin-top: 0;
-          text-align: center;
-          ${mq.min.tablet_base} {
-            text-align: left;
-            margin-bottom: 0;
-            margin-top: 16px;
-          }
-        }
-        &:last-child {
-          margin: 5px 0 20px;
-          line-height: 20px;
-          text-align: center;
-          width: 100%;
-          max-width: 270px;
-          font-weight: ${({ theme }) => theme.font.weight.normal};
-          font-size: ${({ theme }) => theme.font.size.base};
-          ${mq.min.tablet_base} {
-            margin-top: 10px;
-            max-width: 100%;
-            text-align: left;
-            line-height: 18px;
-          }
-        }
+
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      display: flex;
+
+      ${mq.min.tablet_base} {
+        justify-content: space-between;
+        flex-direction: row;
       }
     }
     &:last-child {
       a {
         font-weight: ${({ theme }) => theme.font.weight.semibold};
-        display: flex;
-        align-items: center;
         padding: 10px 25px;
+
+        align-items: center;
+        display: flex;
+
         ${mq.min.tablet_base} {
           padding: 12px 30px;
         }
@@ -163,52 +166,37 @@ export const QuickContact = styled.section`
 
 const PhoneIcon = styled.img`
   display: inline-block;
+  margin-right: 8px;
   max-height: 15px;
   width: 15px;
-  margin-right: 8px;
+
   ${mq.min.tablet_base} {
     max-height: 20px;
     width: 20px;
   }
 `;
 
-const CopyrightWrapper = styled.div``;
-
-const ATBLogo = styled.img`
-  max-width: 100%;
-  height: auto;
-`;
-
 const Copyright = styled.p`
   margin-top: 15px;
 `;
 
-const NCWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const NCAbout = styled.p`
-  margin-right: 10px;
-`;
-
-const NCLogo = styled.img`
-  width: 20px;
-`;
-
 export const Section = styled.section`
+  padding: 40px 0;
+
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
   display: flex;
-  padding: 40px 0;
+
   ul {
     align-items: flex-start;
     flex-direction: column;
     padding: 0;
+
     li {
       margin-top: 1rem;
       padding: 0;
+
       a {
         font-size: ${({ theme }) => theme.font.size.sm};
 
@@ -227,35 +215,39 @@ export const Section = styled.section`
   }
 `;
 
-const NavHeading = styled.h3``;
-
 const Footer = styled.footer`
-  display: flex;
-  flex-wrap: wrap;
   background: rgba(0, 0, 0, 0.01);
   width: 100%;
+
+  flex-wrap: wrap;
+  display: flex;
+
   ${Wrapper} {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    display: flex;
+
+    max-width: 1200px;
     padding: 0 20px;
+    margin: 0 auto;
+    width: 100%;
+
     & + ${Section} {
+      font-size: ${({ theme }) => theme.font.size.sm};
       padding: 0 20px 10px;
-      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+      width: 100%;
+
       justify-content: flex-start;
       align-items: flex-start;
-      font-size: ${({ theme }) => theme.font.size.sm};
+      flex-direction: column;
+      display: flex;
+
       ${mq.min.mobile_big} {
-        flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
+        flex-direction: row;
       }
     }
   }

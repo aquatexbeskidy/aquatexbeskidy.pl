@@ -103,7 +103,10 @@ const SubHeading = styled.p`
   font-size: ${({ theme }) => theme.font.size.xxl};
   margin: 15px 0 40px;
   text-align: center;
+  width: 100%;
+  max-width: 230px;
   ${mq.min.tablet_base} {
+    max-width: 100%;
     margin: 30px 0 50px;
     text-align: left;
   }
