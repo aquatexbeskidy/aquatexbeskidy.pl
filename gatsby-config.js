@@ -21,7 +21,6 @@ const gatsbyRemarkPlugins = [
 ];
 
 module.exports = {
-  pathPrefix: '/aquatexbeskidy.pl',
   siteMetadata: {
     siteGithub: `https://github.com/nomads-codes/aquatexbeskidy.pl`,
     siteUrl: `https://aquatexbeskidy.pl`,
