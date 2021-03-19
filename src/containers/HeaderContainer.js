@@ -82,32 +82,34 @@ export default HeaderContainer;
 // ─────────────────────────────────────────────────────────────────────────────
 
 const sectionBottom = css`
-  height: 7rem;
   justify-content: space-between;
+  height: 7rem;
+
   ${mq.min.tablet_base} {
     height: 5rem;
   }
 
-  h1 {
-    a {
-      font-size: ${({ theme }) => theme.font.size.xxl};
-    }
+  h1 a {
+    font-size: ${({ theme }) => theme.font.size.xxl};
   }
 `;
 
 const sectionTop = css`
   justify-content: center;
+  height: 3rem;
+
   ul {
     padding: 0;
   }
+
   ${mq.min.tablet_base} {
     justify-content: flex-end;
   }
-  height: 3rem;
 
   a {
-    font-size: ${({ theme }) => theme.font.size.xs};
     font-weight: ${({ theme }) => theme.font.weight.light};
+    font-size: ${({ theme }) => theme.font.size.xs};
+
     &:hover,
     &:focus,
     &:active,
@@ -120,10 +122,12 @@ const sectionTop = css`
 const Navbar = styled.div`
   nav {
     display: none;
+
     ${mq.min.desktop_small} {
       display: block;
     }
   }
+
   button {
     margin: 0;
   }
@@ -134,17 +138,18 @@ const Navbar = styled.div`
 // ─────────────────────────────────────────────────────────────────────────────
 
 const Wrapper = styled.div`
-  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
   padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
 `;
 
 const Section = styled.section`
   &:first-child {
-    background-color: rgba(0, 0, 0, 0.01);
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.01);
   }
+
   ${Wrapper} {
     ${({ isBottom }) => isBottom && sectionBottom}
     ${({ isTop }) => isTop && sectionTop}
@@ -152,11 +157,6 @@ const Section = styled.section`
     align-items: center;
     display: flex;
   }
-`;
-
-const ATBLogo = styled.img`
-  max-width: 100%;
-  height: auto;
 `;
 
 const StyledH1 = styled.h1`
