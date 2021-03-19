@@ -267,7 +267,6 @@ export const CHILDREN_FLUID = graphql`
         breakpoints: [320, 768, 1024]
         layout: FULL_WIDTH
         placeholder: NONE
-        width: 540
         quality: 75
       )
     }
@@ -285,8 +284,6 @@ export const CHILDREN_FLUID_860_480 = graphql`
         breakpoints: [320, 768, 1024]
         layout: FULL_WIDTH
         placeholder: NONE
-        height: 480
-        width: 840
         quality: 75
       )
     }
