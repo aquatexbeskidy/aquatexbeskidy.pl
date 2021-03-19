@@ -90,7 +90,7 @@ const sectionBottom = css`
 
   h1 {
     a {
-      font-size: ${({ theme }) => theme.font.size['2xl']};
+      font-size: ${({ theme }) => theme.font.size.xxl};
     }
   }
 `;

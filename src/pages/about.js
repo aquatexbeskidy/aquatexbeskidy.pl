@@ -186,7 +186,7 @@ const Content = styled.div``;
 const SubHeading = styled.h3`
   flex-basis: 100%;
   text-align: center;
-  font-size: ${({ theme }) => theme.font.size['2xl']};
+  font-size: ${({ theme }) => theme.font.size.xxl};
   margin: 40px 20px;
 `;
 
