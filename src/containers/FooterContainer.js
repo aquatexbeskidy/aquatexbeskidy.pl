@@ -177,7 +177,7 @@ const PhoneIcon = styled.img`
 `;
 
 const Copyright = styled.p`
-  margin: 15px 0;
+  margin: 15px 0 25px;
 
   ${mq.min.tablet_base} {
     margin-bottom: 0;
@@ -293,7 +293,7 @@ const Footer = styled.footer`
 
     & + ${Section} {
       font-size: ${({ theme }) => theme.font.size.sm};
-      padding: 0 20px 10px;
+      padding: 0 20px 15px;
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
