@@ -177,7 +177,11 @@ const PhoneIcon = styled.img`
 `;
 
 const Copyright = styled.p`
-  margin-top: 15px;
+  margin: 15px 0 25px;
+
+  ${mq.min.tablet_base} {
+    margin-bottom: 0;
+  }
 `;
 
 export const Section = styled.section`
@@ -198,7 +202,11 @@ export const Section = styled.section`
       padding: 0;
 
       a {
-        font-size: ${({ theme }) => theme.font.size.sm};
+        font-size: ${({ theme }) => theme.font.size.base};
+
+        ${mq.min.tablet_base} {
+          font-size: ${({ theme }) => theme.font.size.sm};
+        }
 
         &:focus,
         &:active,
@@ -224,27 +232,88 @@ const Footer = styled.footer`
 
   ${Wrapper} {
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     display: flex;
+    flex-direction: column;
 
     max-width: 1200px;
     padding: 0 20px;
     margin: 0 auto;
     width: 100%;
 
+    ${mq.min.tablet_base} {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    ul {
+      align-items: center;
+      ${mq.min.tablet_base} {
+        align-items: flex-start;
+      }
+      li {
+        padding: 0;
+
+        &:not(:last-child) {
+          padding-bottom: 5px;
+
+          ${mq.min.tablet_base} {
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+
+    ${Section} {
+      align-items: center;
+      padding: 15px 0;
+
+      &:first-child {
+        padding-top: 35px;
+
+        ${mq.min.tablet_base} {
+          padding-top: 40px;
+        }
+      }
+
+      &:last-child {
+        padding-bottom: 35px;
+
+        ${mq.min.tablet_base} {
+          padding-bottom: 40px;
+        }
+      }
+
+      ${mq.min.tablet_base} {
+        align-items: flex-start;
+        padding: 40px 0;
+      }
+    }
+
     & + ${Section} {
       font-size: ${({ theme }) => theme.font.size.sm};
-      padding: 0 20px 10px;
+      padding: 0 20px 15px;
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
 
+      div {
+        &:first-child {
+          text-align: center;
+
+          ${mq.min.tablet_base} {
+            text-align: left;
+          }
+        }
+      }
+
       justify-content: flex-start;
-      align-items: flex-start;
+      align-items: center;
       flex-direction: column;
       display: flex;
 
-      ${mq.min.mobile_big} {
+      ${mq.min.tablet_base} {
         justify-content: space-between;
         align-items: flex-end;
         flex-direction: row;

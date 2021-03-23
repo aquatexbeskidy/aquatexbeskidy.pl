@@ -30,17 +30,18 @@ const NomadsCodes = ({ nomadsCodes }) =>
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
-
-  ${mq.min.tablet_base} {
-  }
 `;
 
 const Logo = styled.img`
-  width: 25px;
+  width: 20px;
+
+  ${mq.min.tablet_base} {
+    width: 25px;
+  }
 `;
 
 const P = styled.p`
-  margin-right: 10px;
+  margin: 0 10px;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
