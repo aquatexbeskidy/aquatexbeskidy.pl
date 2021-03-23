@@ -254,6 +254,14 @@ const Footer = styled.footer`
       }
       li {
         padding: 0;
+
+        &:not(:last-child) {
+          padding-bottom: 5px;
+
+          ${mq.min.tablet_base} {
+            padding-bottom: 0;
+          }
+        }
       }
     }
 
