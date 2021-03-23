@@ -76,4 +76,16 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
+
+  *::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.color.white};
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.color.primary};
+  }
 `;
