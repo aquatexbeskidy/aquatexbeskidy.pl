@@ -14,9 +14,10 @@ import { Link } from '~components';
 const Nav = ({ links }) => (
   <NavStyled>
     <ul>
-      {links.map(({ text, url }) => (
+      {links.map(({ icon, text, url }) => (
         <li key={url}>
           <Link to={url} look="primary">
+            {icon && <SocialIcon alt={text} src={require(`../${icon}`)} />}
             {text}
           </Link>
         </li>
@@ -38,10 +39,19 @@ const NavStyled = styled.nav`
     display: flex;
     list-style: none;
 
+    li {
+      display: flex;
+    }
+
     li:not(:last-child) {
       padding-right: 1rem;
     }
   }
+`;
+
+const SocialIcon = styled.img`
+  max-width: 100%;
+  height: auto;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
