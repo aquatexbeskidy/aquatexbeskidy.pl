@@ -32,6 +32,7 @@ export const HEADER_NAV_FRAGMENT = graphql`
       links {
         text
         url
+        icon
       }
     }
   }

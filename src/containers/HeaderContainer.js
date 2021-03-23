@@ -100,6 +100,13 @@ const sectionTop = css`
 
   ul {
     padding: 0;
+    li {
+      &:last-child {
+        a {
+          font-size: 0;
+        }
+      }
+    }
   }
 
   ${mq.min.tablet_base} {
