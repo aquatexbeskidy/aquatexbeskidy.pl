@@ -22,7 +22,7 @@ const fade = animationKeyframes({
   to: {
     opacity: 1,
   },
-  properties: '300ms',
+  properties: '200ms',
 });
 
 const MobileNavigation = ({ links, onClose, isOpen }) => {
@@ -107,8 +107,9 @@ const Portal = styled.div`
     cursor: pointer;
     outline: none;
     position: fixed;
-    right: 35px;
-    top: 63px;
+    padding: 0;
+    right: 26px;
+    top: 65px;
   }
 `;
 
