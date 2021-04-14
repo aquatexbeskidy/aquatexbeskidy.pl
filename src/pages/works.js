@@ -145,7 +145,6 @@ export const query = graphql`
 
     images_400_225: allFile(
       filter: { absolutePath: { regex: "/works/" }, extension: { regex: "/(jpg)|(jpeg)|(png)/" } }
-      sort: { order: DESC, fields: name }
     ) {
       nodes {
         ...CHILDREN_FIXED_400_225
