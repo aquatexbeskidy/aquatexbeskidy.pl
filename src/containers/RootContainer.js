@@ -5,6 +5,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { CookieInfo } from '~components';
 import { HeaderContainer, FooterContainer, SEOContainer } from '~containers';
 import { ThemeProvider } from '~theme';
 
@@ -15,6 +16,7 @@ import { ThemeProvider } from '~theme';
 const RootContainer = ({ children, meta }) => (
   <ThemeProvider>
     <SEOContainer meta={meta} />
+    <CookieInfo />
     <div>
       <HeaderContainer />
       {children}
