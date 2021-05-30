@@ -5,6 +5,7 @@
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import React from 'react';
+import { MDXProvider } from '@mdx-js/react';
 
 import { stringIncludesHTML } from '~utils';
 import { RootContainer } from '~containers';
@@ -22,23 +23,26 @@ const PrivacyPolicyPage = ({
       frontmatter: { meta },
     },
     content: {
-      frontmatter: {
-        borehole: { mainTitle, mainContent, equipmentImgList, subContent },
-      },
+      // frontmatter: {
+      //   borehole: { mainTitle, mainContent, equipmentImgList, subContent },
+      // },
+      body,
     },
   },
 }) => {
-  const mainContentChildren = stringIncludesHTML(mainContent)
-    ? { dangerouslySetInnerHTML: { __html: mainContent } }
-    : { children: mainContent };
+  const mainContentChildren = body
+    ? { dangerouslySetInnerHTML: { __html: body } }
+    : { children: body };
 
-  const subContentChildren = stringIncludesHTML(subContent)
-    ? { dangerouslySetInnerHTML: { __html: subContent } }
-    : { children: subContent };
+  // const subContentChildren = stringIncludesHTML(subContent)
+  //   ? { dangerouslySetInnerHTML: { __html: subContent } }
+  //   : { children: subContent };
 
   return (
     <RootContainer meta={meta}>
-      asdsadsadada
+      <p {...mainContentChildren} />
+      <p>{body}</p>
+      {/* {mainContentChildren} */}
       {/* <BoreholeWrapper>
         <Heading>{mainTitle}</Heading>
         <Description {...mainContentChildren} />
@@ -55,40 +59,6 @@ export default PrivacyPolicyPage;
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const BoreholeWrapper = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto 50px;
-  padding: 0 20px;
-  ${Wrapper} {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 30px 0;
-  }
-  ${Review} {
-    flex-basis: 50%;
-    display: flex;
-    padding: 0;
-  }
-`;
-
-const Heading = styled.h2`
-  margin: 30px 0 30px;
-  ${mq.min.tablet_base} {
-    margin-bottom: 50px;
-  }
-`;
-
-const Description = styled.p`
-  line-height: 25px;
-  width: 100%;
-  ${mq.min.tablet_base} {
-    line-height: 30px;
-  }
-`;
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Graphql Query
 // ─────────────────────────────────────────────────────────────────────────────
@@ -97,7 +67,7 @@ export const query = graphql`
   {
     page: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/borehole/" } } }
+      frontmatter: { meta: { permalink: { eq: "/privacy-policy/" } } }
     ) {
       frontmatter {
         ...META_FRAGMENT
@@ -106,9 +76,9 @@ export const query = graphql`
 
     content: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/borehole/" } } }
+      frontmatter: { meta: { permalink: { eq: "/privacy-policy/" } } }
     ) {
-      ...BOREHOLE_FRAGMENT
+      ...PRIVACYPOLICY_FRAGMENT
     }
   }
 `;

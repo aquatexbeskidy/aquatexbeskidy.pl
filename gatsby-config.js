@@ -25,6 +25,9 @@ module.exports = {
     siteGithub: `https://github.com/nomads-codes/aquatexbeskidy.pl`,
     siteUrl: `https://aquatexbeskidy.pl`,
     siteTitle: `AQUA-TEX Beskidy`,
+    cookieContent: `Ta strona korzysta z plików cookies, aby świadczyć usługi na najwyższym poziomie. Więcej informacji na ten temat znajdziesz w`,
+    cookieBtnText: `Rozumiem`,
+    cookiePrivacyLink: `Polityce prywatności`,
   },
   flags: {
     // EXPERIMENTAL
@@ -55,6 +58,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: gatsbyRemarkPlugins,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/images`,
@@ -78,12 +87,6 @@ module.exports = {
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: gatsbyRemarkPlugins,
-      },
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: gatsbyRemarkPlugins,
       },
     },
     {

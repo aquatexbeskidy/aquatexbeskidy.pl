@@ -211,6 +211,12 @@ export const BOREHOLE_FRAGMENT = graphql`
   }
 `;
 
+export const PRIVACYPOLICY_FRAGMENT = graphql`
+  fragment PRIVACYPOLICY_FRAGMENT on Mdx {
+    body
+  }
+`;
+
 export const CONTACT_FRAGMENT = graphql`
   fragment CONTACT_FRAGMENT on Mdx {
     frontmatter {
