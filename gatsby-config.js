@@ -26,6 +26,7 @@ module.exports = {
     siteUrl: `https://aquatexbeskidy.pl`,
     siteTitle: `AQUA-TEX Beskidy`,
     cookieContent: `Ta strona korzysta z plików cookies, aby świadczyć usługi na najwyższym poziomie. Więcej informacji na ten temat znajdziesz w`,
+    cookieBrowserName: `PrivacyPolicy`,
     cookieBtnText: `Rozumiem`,
     cookiePrivacyLink: `Polityce prywatności`,
   },

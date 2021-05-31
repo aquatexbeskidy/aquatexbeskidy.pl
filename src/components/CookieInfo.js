@@ -4,7 +4,7 @@
 
 import CookieConsent from 'react-cookie-consent';
 import { graphql, useStaticQuery } from 'gatsby';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Link } from '~components';
 
@@ -18,6 +18,7 @@ const CookieInfo = ({}) => {
       site {
         siteMetadata {
           cookieContent
+          cookieBrowserName
           cookieBtnText
           cookiePrivacyLink
         }
@@ -25,12 +26,17 @@ const CookieInfo = ({}) => {
     }
   `);
 
-  const { cookieContent, cookieBtnText, cookiePrivacyLink } = query.site.siteMetadata;
+  const {
+    cookieContent,
+    cookieBrowserName,
+    cookieBtnText,
+    cookiePrivacyLink,
+  } = query.site.siteMetadata;
 
   return (
     <CookieConsent
       buttonText={cookieBtnText}
-      cookieName="PrivacyPolicy"
+      cookieName={cookieBrowserName}
       expires={30}
       style={{
         background: '#ffffff',
