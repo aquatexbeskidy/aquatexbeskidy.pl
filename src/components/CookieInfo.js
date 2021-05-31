@@ -2,9 +2,9 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
 import CookieConsent from 'react-cookie-consent';
+import { graphql, useStaticQuery } from 'gatsby';
+import React, { useState } from 'react';
 
 import { Link } from '~components';
 
@@ -30,6 +30,7 @@ const CookieInfo = ({}) => {
   return (
     <CookieConsent
       buttonText={cookieBtnText}
+      cookieName="PrivacyPolicy"
       expires={30}
       style={{
         background: '#ffffff',
@@ -50,6 +51,16 @@ const CookieInfo = ({}) => {
         borderRadius: '30px',
         padding: '12px 30px',
         margin: '10px 0 0',
+      }}
+      onAccept={() => {
+        if (window.fbq) {
+          fbq('init', '1369004450132215');
+          fbq('track', 'PageView');
+        }
+        if (window.gtag) {
+          gtag('js', new Date());
+          gtag('config', 'G-GF3EERM084');
+        }
       }}
     >
       {cookieContent}

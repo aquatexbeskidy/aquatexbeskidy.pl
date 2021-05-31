@@ -52,21 +52,16 @@ const SEOContainer = ({ meta }) => {
       n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1369004450132215');
-      fbq('track', 'PageView');`,
+      'https://connect.facebook.net/en_US/fbevents.js');`,
     },
     {
       type: 'text/javascript',
-      //async={true},
       src: 'https://www.googletagmanager.com/gtag/js?id=G-GF3EERM084',
     },
     {
       type: 'text/javascript',
-      innerHTML: ` window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GF3EERM084');`,
+      innerHTML: `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}`,
     },
   ];
 
