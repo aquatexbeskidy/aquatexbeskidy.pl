@@ -18,12 +18,14 @@ const SEOContainer = ({ meta }) => {
         siteMetadata {
           siteTitle
           siteUrl
+          fbPixelId
+          googleId
         }
       }
     }
   `);
 
-  const { siteUrl, siteTitle } = query.site.siteMetadata;
+  const { siteUrl, siteTitle, fbPixelId, googleId } = query.site.siteMetadata;
   const { title, description, permalink } = meta;
 
   const hemletMetaData = [
@@ -56,7 +58,7 @@ const SEOContainer = ({ meta }) => {
     },
     {
       type: 'text/javascript',
-      src: 'https://www.googletagmanager.com/gtag/js?id=G-GF3EERM084',
+      src: `https://www.googletagmanager.com/gtag/js?id=${googleId}`,
     },
     {
       type: 'text/javascript',
@@ -69,7 +71,7 @@ const SEOContainer = ({ meta }) => {
     {
       type: 'text/javascript',
       innerHTML: `<img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1369004450132215&ev=PageView&noscript=1"
+      src="https://www.facebook.com/tr?id=${fbPixelId}&ev=PageView&noscript=1"
       />`,
     },
   ];

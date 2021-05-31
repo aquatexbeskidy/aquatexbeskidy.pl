@@ -25,10 +25,15 @@ module.exports = {
     siteGithub: `https://github.com/nomads-codes/aquatexbeskidy.pl`,
     siteUrl: `https://aquatexbeskidy.pl`,
     siteTitle: `AQUA-TEX Beskidy`,
-    cookieContent: `Ta strona korzysta z plików cookies, aby świadczyć usługi na najwyższym poziomie. Więcej informacji na ten temat znajdziesz w`,
-    cookieBrowserName: `PrivacyPolicy`,
-    cookieBtnText: `Rozumiem`,
-    cookiePrivacyLink: `Polityce prywatności`,
+    googleId: `G-GF3EERM084`,
+    fbPixelId: `1369004450132215`,
+    cookies: {
+      content: `Ta strona korzysta z plików cookies, aby świadczyć usługi na najwyższym poziomie. Więcej informacji na ten temat znajdziesz w`,
+      browserName: `PrivacyPolicy`,
+      btnText: `Rozumiem`,
+      privacyLink: `Polityce prywatności`,
+      expiresDays: 30,
+    },
   },
   flags: {
     // EXPERIMENTAL

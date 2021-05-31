@@ -17,27 +17,31 @@ const CookieInfo = ({}) => {
     {
       site {
         siteMetadata {
-          cookieContent
-          cookieBrowserName
-          cookieBtnText
-          cookiePrivacyLink
+          fbPixelId
+          googleId
+          cookies {
+            content
+            browserName
+            btnText
+            privacyLink
+            expiresDays
+          }
         }
       }
     }
   `);
 
   const {
-    cookieContent,
-    cookieBrowserName,
-    cookieBtnText,
-    cookiePrivacyLink,
+    fbPixelId,
+    googleId,
+    cookies: { content, browserName, btnText, privacyLink, expiresDays },
   } = query.site.siteMetadata;
 
   return (
     <CookieConsent
-      buttonText={cookieBtnText}
-      cookieName={cookieBrowserName}
-      expires={30}
+      buttonText={btnText}
+      cookieName={browserName}
+      expires={expiresDays}
       style={{
         background: '#ffffff',
         color: '#1f262e',
@@ -60,18 +64,18 @@ const CookieInfo = ({}) => {
       }}
       onAccept={() => {
         if (window.fbq) {
-          fbq('init', '1369004450132215');
+          fbq('init', `${fbPixelId}`);
           fbq('track', 'PageView');
         }
         if (window.gtag) {
           gtag('js', new Date());
-          gtag('config', 'G-GF3EERM084');
+          gtag('config', `${googleId}`);
         }
       }}
     >
-      {cookieContent}
+      {content}
       <Link to="/privacy-policy/" look="secondary" style={{ fontWeight: '500', marginLeft: '5px' }}>
-        {cookiePrivacyLink}
+        {privacyLink}
       </Link>
       .
     </CookieConsent>
