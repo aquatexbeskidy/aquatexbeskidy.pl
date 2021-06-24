@@ -22,7 +22,8 @@ const CookieInfo = ({}) => {
           cookies {
             content
             browserName
-            btnText
+            btnAccText
+            btnDecText
             privacyLink
             expiresDays
           }
@@ -34,12 +35,14 @@ const CookieInfo = ({}) => {
   const {
     fbPixelId,
     googleId,
-    cookies: { content, browserName, btnText, privacyLink, expiresDays },
+    cookies: { content, browserName, btnAccText, btnDecText, privacyLink, expiresDays },
   } = query.site.siteMetadata;
 
   return (
     <CookieConsent
-      buttonText={btnText}
+      enableDeclineButton={true}
+      buttonText={btnAccText}
+      declineButtonText={btnDecText}
       cookieName={browserName}
       expires={expiresDays}
       style={{
@@ -51,7 +54,16 @@ const CookieInfo = ({}) => {
       }}
       contentStyle={{
         flex: '1 0 230px',
-        lineHeight: '20px',
+        lineHeight: '25px',
+        margin: '10px 25px 0 0',
+      }}
+      declineButtonStyle={{
+        color: '#176ED3',
+        fontWeight: '500',
+        borderRadius: '30px',
+        border: '1px solid #176ED3',
+        background: 'transparent',
+        padding: '10px 28px',
         margin: '10px 20px 0 0',
       }}
       buttonStyle={{
@@ -59,7 +71,8 @@ const CookieInfo = ({}) => {
         fontWeight: '500',
         background: '#176ED3',
         borderRadius: '30px',
-        padding: '12px 30px',
+        border: '1px solid #176ED3',
+        padding: '10px 28px',
         margin: '10px 0 0',
       }}
       onAccept={() => {
