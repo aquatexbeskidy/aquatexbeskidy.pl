@@ -28,9 +28,10 @@ module.exports = {
     googleId: `G-GF3EERM084`,
     fbPixelId: `1369004450132215`,
     cookies: {
-      content: `Ta strona korzysta z plików cookies, aby świadczyć usługi na najwyższym poziomie. Więcej informacji na ten temat znajdziesz w`,
+      content: `Ta strona korzysta z plików cookies (Google Analitics i Facebook Pixel), aby świadczyć usługi na najwyższym poziomie. Czy zgadzasz się na pliki cookies? Więcej informacji na ten temat znajdziesz w`,
       browserName: `PrivacyPolicy`,
-      btnText: `Rozumiem`,
+      btnAccText: `Zgoda`,
+      btnDecText: `Odmawiam`,
       privacyLink: `Polityce prywatności`,
       expiresDays: 30,
     },
