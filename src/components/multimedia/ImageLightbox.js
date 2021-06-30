@@ -17,13 +17,13 @@ import { ReactComponent as Close } from '../../assets/icons/lightbox/close.svg';
 
 import { lightBoxAcceptableKeys, isElementOutViewport } from '~utils';
 import { useEventListener, useScrollLock } from '~hooks';
-import { animationKeyframes, mq } from '~theme';
+import { animationKeyframesFromTo, mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const fadeUp = animationKeyframes({
+const fadeUp = animationKeyframesFromTo({
   from: {
     opacity: 0,
     transform: 'translateY(1vh)',

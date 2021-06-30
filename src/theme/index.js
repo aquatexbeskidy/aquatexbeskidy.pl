@@ -3,7 +3,7 @@ import { normalize } from 'styled-normalize';
 import { mq } from '~theme';
 
 export { LightTheme, DarkTheme, THEME_LABEL_LIGHT, THEME_LABEL_DARK } from './create';
-export { animationKeyframes } from './animations';
+export { animationKeyframesFromTo, animationKeyframesPercent } from './animations';
 export { default as mq } from './_breakpoints';
 export { ThemeProvider } from './provider';
 export { ThemeContext } from './context';

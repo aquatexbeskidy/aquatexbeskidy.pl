@@ -3,90 +3,81 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import styled from 'styled-components';
+import { graphql } from 'gatsby';
 import React from 'react';
 
-import { Link } from '~components';
-import { animationKeyframesPercent } from '~theme';
+import { RootContainer } from '~containers';
+import { QuickContact } from '~containers/FooterContainer';
+import { MapLeaflet, Link } from '~components';
+import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Component
+//  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const pulse = animationKeyframesPercent({
-  start: {
-    opacity: 0.8,
-    transform: 'scale(1)',
+const NoveltiesPage = ({
+  data: {
+    page: {
+      frontmatter: { meta },
+    },
+    content: {
+      frontmatter: {
+        novelties: { mainTitle },
+      },
+    },
   },
-  middle: {
-    opacity: 1,
-    transform: 'scale(1.02)',
-  },
-  end: {
-    opacity: 0.8,
-    transform: 'scale(1)',
-  },
-  properties: '2000ms',
-});
-
-const Nav = ({ links }) => (
-  <NavStyled>
-    <ul>
-      {links.map(({ icon, text, url, specialClass }) => (
-        <li key={url} className={specialClass ? specialClass : ''}>
-          <Link to={url} look="primary">
-            {icon && <SocialIcon alt={text} src={require(`../${icon}`)} />}
-            {text}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </NavStyled>
+}) => (
+  <RootContainer meta={meta}>
+    <NoveltiesWrapper>
+      <Heading>{mainTitle}</Heading>
+    </NoveltiesWrapper>
+  </RootContainer>
 );
 
-export default Nav;
+export default NoveltiesPage;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const NavStyled = styled.nav`
-  ul {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    list-style: none;
+const NoveltiesWrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+`;
 
-    li {
-      display: flex;
-      &.is-pulse {
-        a {
-          color: ${({ theme }) => theme.color.danger};
-          font-weight: ${({ theme }) => theme.font.weight.medium};
-          animation: ${pulse} infinite;
-          &:hover {
-            animation-play-state: paused;
-          }
-          &.is-active {
-            color: ${({ theme }) => theme.color.primary};
-            animation-play-state: paused;
-          }
-        }
-      }
-    }
-
-    li:not(:last-child) {
-      padding-right: 1rem;
-    }
+const Heading = styled.h2`
+  margin: 30px 0 30px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 50px;
   }
 `;
 
-const SocialIcon = styled.img`
-  max-width: 100%;
-  height: auto;
+// ─────────────────────────────────────────────────────────────────────────────
+// Graphql Query
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const query = graphql`
+  {
+    page: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/novelties/" } } }
+    ) {
+      frontmatter {
+        ...META_FRAGMENT
+      }
+    }
+
+    content: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/novelties/" } } }
+    ) {
+      ...NOVELTIES_FRAGMENT
+    }
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
-
-Nav.displayName = 'Nav';

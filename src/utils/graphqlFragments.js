@@ -33,6 +33,7 @@ export const HEADER_NAV_FRAGMENT = graphql`
         text
         url
         icon
+        specialClass
       }
     }
   }
@@ -206,6 +207,16 @@ export const BOREHOLE_FRAGMENT = graphql`
           }
         }
         subContent
+      }
+    }
+  }
+`;
+
+export const NOVELTIES_FRAGMENT = graphql`
+  fragment NOVELTIES_FRAGMENT on Mdx {
+    frontmatter {
+      novelties {
+        mainTitle
       }
     }
   }
