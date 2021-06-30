@@ -29,9 +29,11 @@ const NoveltiesPage = ({
   <RootContainer meta={meta}>
     <NoveltiesWrapper>
       <Heading>{mainTitle}</Heading>
-      {fbPosts.map(({ postId, postHeight }) => (
-        <FBPost postId={postId} postHeight={postHeight} key={postId} />
-      ))}
+      <NoveltiesColumns>
+        {fbPosts.map(({ postId, postHeight }) => (
+          <FBPost postId={postId} postHeight={postHeight} key={postId} />
+        ))}
+      </NoveltiesColumns>
     </NoveltiesWrapper>
   </RootContainer>
 );
@@ -47,6 +49,16 @@ const NoveltiesWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto 50px;
   padding: 0 20px;
+`;
+
+const NoveltiesColumns = styled.div`
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-gap: 10px;
+
+  ${mq.min.desktop_small} {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const Heading = styled.h2`
