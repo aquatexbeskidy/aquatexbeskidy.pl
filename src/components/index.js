@@ -2,6 +2,7 @@ export { default as ImagePlaceholder } from './multimedia/ImagePlaceholder';
 export { default as ImageLightbox } from './multimedia/ImageLightbox';
 export { default as MobileNavigation } from './MobileNavigation';
 export { default as Video } from './multimedia/Video';
+export { default as FBPost } from './multimedia/FBPost';
 
 export { default as CookieInfo } from './CookieInfo';
 export { default as NomadsCodes } from './NomadsCodes';

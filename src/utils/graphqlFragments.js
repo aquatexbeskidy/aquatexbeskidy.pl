@@ -217,6 +217,10 @@ export const NOVELTIES_FRAGMENT = graphql`
     frontmatter {
       novelties {
         mainTitle
+        fbPosts {
+          postId
+          postHeight
+        }
       }
     }
   }

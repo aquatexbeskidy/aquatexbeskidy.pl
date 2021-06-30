@@ -3,83 +3,55 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import styled from 'styled-components';
-import { graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 import React from 'react';
-
-import { RootContainer } from '~containers';
-import { FBPost } from '~components';
-import { mq } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const NoveltiesPage = ({
-  data: {
-    page: {
-      frontmatter: { meta },
-    },
-    content: {
-      frontmatter: {
-        novelties: { mainTitle, fbPosts },
-      },
-    },
-  },
-}) => (
-  <RootContainer meta={meta}>
-    <NoveltiesWrapper>
-      <Heading>{mainTitle}</Heading>
-      {fbPosts.map(({ postId, postHeight }) => (
-        <FBPost postId={postId} postHeight={postHeight} key={postId} />
-      ))}
-    </NoveltiesWrapper>
-  </RootContainer>
-);
-
-export default NoveltiesPage;
+const FBPost = ({ postId, postHeight }) => {
+  return (
+    <FBPostWrapper>
+      <IFrameStyled
+        src={`https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Faquatexbeskidy%2Fposts%${postId}&show_text=true`}
+        scrolling="no"
+        frameborder="0"
+        loading="lazy"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        height={postHeight}
+      />
+    </FBPostWrapper>
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extended Default Styles
 // ─────────────────────────────────────────────────────────────────────────────
 
-const NoveltiesWrapper = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto 50px;
-  padding: 0 20px;
+const FBPostWrapper = styled.div`
+  margin-top: 20px;
 `;
 
-const Heading = styled.h2`
-  margin: 30px 0 30px;
-  ${mq.min.tablet_base} {
-    margin-bottom: 50px;
-  }
-`;
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Graphql Query
-// ─────────────────────────────────────────────────────────────────────────────
-
-export const query = graphql`
-  {
-    page: mdx(
-      fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/novelties/" } } }
-    ) {
-      frontmatter {
-        ...META_FRAGMENT
-      }
-    }
-
-    content: mdx(
-      fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/novelties/" } } }
-    ) {
-      ...NOVELTIES_FRAGMENT
-    }
-  }
+const IFrameStyled = styled.iframe`
+  border: none;
+  overflow: hidden;
+  width: 600px;
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Others
 // ─────────────────────────────────────────────────────────────────────────────
+
+FBPost.propTypes = {
+  postId: PropTypes.string.isRequired,
+  postHeight: PropTypes.string,
+};
+
+FBPost.defaultProps = {
+  postId: '',
+  postHeight: '',
+};
+
+export default FBPost;
