@@ -9,13 +9,13 @@ import ReactDOM from 'react-dom';
 
 import { useEventListener, useScrollLock } from '~hooks';
 import { Nav, Hamburger } from '~components';
-import { animationKeyframes } from '~theme';
+import { animationKeyframesFromTo } from '~theme';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const fade = animationKeyframes({
+const fade = animationKeyframesFromTo({
   from: {
     opacity: 0,
   },

@@ -1,0 +1,6 @@
+- title: Najnowsze informacje i ciekawostki
+  routes:
+    novelties: /novelties
+    novelties.paginated: /novelties/:page
+  template: novelties-template.js
+  helper: novelties-helper.js

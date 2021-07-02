@@ -90,6 +90,14 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/markdown/novelties`,
+        name: `novelties`,
+      },
+    },
+    `gatsby-plugin-advanced-pages`,
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
