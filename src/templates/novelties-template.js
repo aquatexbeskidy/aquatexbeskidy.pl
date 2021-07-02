@@ -43,16 +43,24 @@ const NoveltiesTemplate = ({ data }) => {
 
         <div>
           {data.novelties.edges.map(({ node }) => (
-            <div key={node.frontmatter.slug}>
-              <h2>{node.frontmatter.title}</h2>
+            <Card key={node.frontmatter.slug}>
               {node.frontmatter.image && (
                 <GatsbyImage
                   image={getImage(node.frontmatter.image)}
                   alt={node.frontmatter.title}
                 />
               )}
-              <p>{node.excerpt}</p>
-            </div>
+              <Box>
+                <Header>{node.frontmatter.title}</Header>
+                <Content>
+                  {node.excerpt}
+                  <FBLink href={node.frontmatter.url} target="_blank">
+                    Czytaj więcej na fb!
+                  </FBLink>
+                  {node.frontmatter.showDate && <PublishDate>{node.frontmatter.date}</PublishDate>}
+                </Content>
+              </Box>
+            </Card>
           ))}
         </div>
 
@@ -82,21 +90,101 @@ const NoveltiesWrapper = styled.div`
   max-width: 1200px;
   padding: 0 20px;
   width: 100%;
-
-  > div {
-    /* ${mq.min.mobile_big} {} */
-  }
 `;
 
 const Heading = styled.h2`
-  /* ${mq.min.tablet_base} {} */
+  margin: 30px 0 30px;
+  line-height: 28px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 50px;
+  }
 `;
 
-const NoveltiesPaginationLink = styled(Link)``;
+const PublishDate = styled.span`
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: ${({ theme }) => theme.font.weight.medium};
+`;
 
-const NoveltiesPaginationInfo = styled.span``;
+const Card = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 40px;
+  ${mq.min.tablet_big} {
+    flex-direction: row;
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+`;
 
-const NoveltiesPagination = styled.div``;
+const Header = styled.h3`
+  width: 100%;
+  max-width: 530px;
+  margin-right: auto;
+  margin: 10px 0 20px;
+  line-height: 25px;
+  ${mq.min.tablet_base} {
+    margin-bottom: 30px;
+  }
+`;
+
+const Box = styled.div`
+  padding: 10px 0 0;
+  ${mq.min.tablet_big} {
+    padding-left: 30px;
+  }
+`;
+
+const Content = styled.p`
+  width: 100%;
+  max-width: 530px;
+  margin-right: auto;
+  line-height: 25px;
+  ${mq.min.tablet_base} {
+    line-height: 30px;
+  }
+`;
+
+const FBLink = styled.a`
+  text-decoration: none;
+  color: ${({ theme }) => theme.color.primary};
+  font-weight: ${({ theme }) => theme.font.weight.medium};
+  display: block;
+  margin: 10px 0 20px;
+`;
+
+const NoveltiesPaginationLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.color.primary};
+  font-weight: ${({ theme }) => theme.font.weight.medium};
+  margin-right: 10px;
+`;
+
+const NoveltiesPaginationInfo = styled.span`
+  display: block;
+  margin-top: 15px;
+`;
+
+const NoveltiesPagination = styled.div`
+  margin-top: 50px;
+  font-size: ${({ theme }) => theme.font.size.lg};
+  a {
+    &:nth-child(2) {
+      position: relative;
+      &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: -6px;
+        width: 1px;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Graphql Query
@@ -118,6 +206,7 @@ export const query = graphql`
     novelties: allMdx(
       limit: $limit
       skip: $offset
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { type: { eq: "novelties" } } }
     ) {
       edges {
@@ -125,11 +214,14 @@ export const query = graphql`
           frontmatter {
             title
             slug
+            url
             image {
               childImageSharp {
-                gatsbyImageData(layout: FIXED, width: 600)
+                gatsbyImageData(layout: CONSTRAINED, width: 450, height: 350)
               }
             }
+            showDate
+            date(formatString: "DD-MM-YYYY")
           }
           excerpt(pruneLength: 200)
         }

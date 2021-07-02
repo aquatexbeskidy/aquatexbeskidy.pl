@@ -101,7 +101,7 @@ const sectionTop = css`
   ul {
     padding: 0;
     li {
-      &:last-child {
+      &:nth-last-child(-n + 2) {
         a {
           font-size: 0;
         }

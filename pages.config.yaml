@@ -1,4 +1,4 @@
-- title: Nowości
+- title: Najnowsze informacje i ciekawostki
   routes:
     novelties: /novelties
     novelties.paginated: /novelties/:page

@@ -18,7 +18,7 @@ module.exports = async function ({ graphql, page, createAdvancedPage }) {
     pagination: {
       route: 'novelties.paginated',
       count: result.data.allMdx.totalCount,
-      limit: 1,
+      limit: 5,
     },
   });
 };

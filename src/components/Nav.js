@@ -14,15 +14,15 @@ import { animationKeyframesPercent } from '~theme';
 
 const pulse = animationKeyframesPercent({
   start: {
-    opacity: 0.8,
+    opacity: 1,
     transform: 'scale(1)',
   },
   middle: {
-    opacity: 1,
-    transform: 'scale(1.02)',
+    opacity: 0.8,
+    transform: 'scale(0.95)',
   },
   end: {
-    opacity: 0.8,
+    opacity: 1,
     transform: 'scale(1)',
   },
   properties: '2000ms',
@@ -61,13 +61,10 @@ const NavStyled = styled.nav`
       &.is-pulse {
         a {
           color: ${({ theme }) => theme.color.danger};
-          font-weight: ${({ theme }) => theme.font.weight.medium};
+          font-size: ${({ theme }) => theme.font.size.lg};
+          font-weight: ${({ theme }) => theme.font.weight.semibold};
           animation: ${pulse} infinite;
           &:hover {
-            animation-play-state: paused;
-          }
-          &.is-active {
-            color: ${({ theme }) => theme.color.primary};
             animation-play-state: paused;
           }
         }
