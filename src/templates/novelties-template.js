@@ -64,15 +64,16 @@ const NoveltiesTemplate = ({ data }) => {
           ))}
         </div>
 
-        {/* <Pagination route="novelties" pageInfo={data.novelties.pageInfo} ui="simple" /> */}
-
         <NoveltiesPagination>
           {hasPreviousPage && <NoveltiesPaginationLink {...prevLinkProps} children="Poprzednia" />}
           {hasNextPage && <NoveltiesPaginationLink {...nextLinkProps} children="Następna" />}
 
-          <NoveltiesPaginationInfo>
-            strona {currentPage} z {pageCount}
-          </NoveltiesPaginationInfo>
+          <Pagination
+            className="is-navigation"
+            route="novelties"
+            pageInfo={data.novelties.pageInfo}
+            ui="simple"
+          />
         </NoveltiesPagination>
       </NoveltiesWrapper>
     </RootContainer>
@@ -115,7 +116,7 @@ const Card = styled.div`
     flex-direction: row;
   }
   &:first-child {
-    margin-top: 0;
+    margin-top: 50px;
   }
 `;
 
@@ -159,19 +160,15 @@ const NoveltiesPaginationLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.color.primary};
   font-weight: ${({ theme }) => theme.font.weight.medium};
-  margin-right: 10px;
-`;
-
-const NoveltiesPaginationInfo = styled.span`
-  display: block;
-  margin-top: 15px;
 `;
 
 const NoveltiesPagination = styled.div`
   margin-top: 50px;
+  text-align: center;
   font-size: ${({ theme }) => theme.font.size.lg};
   a {
     &:nth-child(2) {
+      margin-left: 10px;
       position: relative;
       &::before {
         position: absolute;
@@ -181,6 +178,34 @@ const NoveltiesPagination = styled.div`
         width: 1px;
         height: 100%;
         background: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+  .is-navigation {
+    ul {
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      li {
+        margin-right: 8px;
+        &.active {
+          a {
+            color: ${({ theme }) => theme.color.primary};
+            font-weight: ${({ theme }) => theme.font.weight.medium};
+          }
+        }
+        &:first-child,
+        &:last-child {
+          font-size: 0;
+        }
+        &:nth-last-child(2) {
+          margin: 0;
+        }
+        a {
+          text-decoration: none;
+        }
       }
     }
   }
