@@ -114,14 +114,24 @@ const sectionTop = css`
   }
 
   a {
-    font-weight: ${({ theme }) => theme.font.weight.light};
-    font-size: ${({ theme }) => theme.font.size.xs};
+    font-weight: ${({ theme }) => theme.font.weight.medium};
+    font-size: ${({ theme }) => theme.font.size.sm};
+    color: ${({ theme }) => theme.color.primary};
 
     &:hover,
     &:focus,
     &:active,
     &.is-active {
-      color: ${({ theme }) => theme.color.black};
+      color: ${({ theme }) => theme.color.primary};
+      text-decoration: none;
+    }
+
+    img {
+      width: 22px;
+
+      ${mq.min.desktop_small} {
+        width: 25px;
+      }
     }
   }
 `;
