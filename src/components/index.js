@@ -4,6 +4,7 @@ export { default as MobileNavigation } from './MobileNavigation';
 export { default as Video } from './multimedia/Video';
 export { default as FBPost } from './multimedia/FBPost';
 
+export { default as CustomModal } from './CustomModal';
 export { default as CookieInfo } from './CookieInfo';
 export { default as NomadsCodes } from './NomadsCodes';
 export { default as MapLeaflet } from './MapLeaflet';

@@ -5,16 +5,19 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import { Hero2, Hero, Features, Reviews, Toggler } from '~components';
+import { Hero2, Hero, Features, Reviews, Toggler, CustomModal } from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const HomePage = ({ data: { advantages, howWorks, features, reviews, hero, meta, faq } }) => {
+const HomePage = ({
+  data: { advantages, howWorks, features, reviews, homeInfoModal, hero, meta, faq },
+}) => {
   return (
     <RootContainer meta={meta.frontmatter.meta}>
+      <CustomModal homeInfoModal={homeInfoModal.frontmatter.homeInfoModal} />
       <Hero hero={hero.frontmatter.hero} />
       <Features features={features.frontmatter.features} />
       <Reviews reviews={reviews.frontmatter.reviews} />
@@ -46,6 +49,35 @@ export const query = graphql`
     ) {
       frontmatter {
         ...META_FRAGMENT
+      }
+    }
+
+    homeInfoModal: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        homeInfoModal {
+          title
+          mainText
+          subText
+          summaryText
+          warning
+          success
+          image {
+            childImageSharp {
+              gatsbyImageData(breakpoints: [320, 768, 1024, 1200])
+            }
+            publicURL
+            name
+            id
+          }
+          buttons {
+            title
+            type
+            link
+          }
+        }
       }
     }
 

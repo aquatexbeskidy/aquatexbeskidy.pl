@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 `;
 
 const Inner = styled.div`
-  min-height: 400px;
+  min-height: 440px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -76,6 +76,10 @@ const Inner = styled.div`
   align-items: center;
   a {
     padding: 10px 20px;
+    &:nth-child(2n) {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
     &:not(:last-child) {
       margin-bottom: 20px;
       ${mq.min.tablet_base} {
