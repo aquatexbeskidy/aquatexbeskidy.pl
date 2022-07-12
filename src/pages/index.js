@@ -5,7 +5,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import { Hero2, Hero, Features, Reviews, Toggler, CustomModal } from '~components';
+import { Hero2, Hero, Features, Spot, Reviews, Toggler, CustomModal } from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -13,13 +13,14 @@ import { RootContainer } from '~containers';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const HomePage = ({
-  data: { advantages, howWorks, features, reviews, homeInfoModal, hero, meta, faq },
+  data: { advantages, howWorks, features, spot, reviews, homeInfoModal, hero, meta, faq },
 }) => {
   return (
     <RootContainer meta={meta.frontmatter.meta}>
       <CustomModal homeInfoModal={homeInfoModal.frontmatter.homeInfoModal} />
       <Hero hero={hero.frontmatter.hero} />
       <Features features={features.frontmatter.features} />
+      <Spot spot={spot.frontmatter.spot} />
       <Reviews reviews={reviews.frontmatter.reviews} />
       <Features
         features={advantages.frontmatter.advantages.advList}
@@ -154,6 +155,18 @@ export const query = graphql`
             title
             url
           }
+        }
+      }
+    }
+
+    spot: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        spot {
+          videoId
+          videoTitle
         }
       }
     }
