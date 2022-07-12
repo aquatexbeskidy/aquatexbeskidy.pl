@@ -10,6 +10,7 @@ export { default as NomadsCodes } from './NomadsCodes';
 export { default as MapLeaflet } from './MapLeaflet';
 export { default as Hamburger } from './Hamburger';
 export { default as Features } from './Features';
+export { default as Spot } from './Spot';
 export { default as Toggler } from './Toggler';
 export { default as Reviews } from './Reviews';
 export { default as Hero2 } from './Hero2';
