@@ -42,6 +42,7 @@ const CustomModal = ({ homeInfoModal }) => {
         onAfterOpen={afterOpenModal}
         onRequestClose={handleModalClose}
         className="SGModal"
+        ariaHideApp={false}
         overlayClassName="SGModalOverlay"
       >
         <div>

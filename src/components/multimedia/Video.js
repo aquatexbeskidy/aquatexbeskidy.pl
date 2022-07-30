@@ -14,7 +14,7 @@ import { SIZE_400_225 } from '~utils';
 
 const [fwidth, fheight] = SIZE_400_225.split('x');
 
-const Video = ({ videoId, videoTitle, width, height }) => {
+const Video = ({ videoId, videoTitle, srcDocCss, width, height }) => {
   const srcDocStyles = css`
     * {
       padding: 0;
@@ -66,7 +66,7 @@ const Video = ({ videoId, videoTitle, width, height }) => {
     <VideoWrapper>
       <IFrameStyled
         src={`https://www.youtube.com/embed/${videoId}`}
-        srcDoc={srcdoc}
+        srcDoc={srcDocCss ? srcdoc : undefined}
         title={videoTitle}
         loading="lazy"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -104,6 +104,7 @@ Video.propTypes = {
   videoTitle: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
+  srcDocCss: PropTypes.bool,
 };
 
 Video.defaultProps = {
@@ -111,6 +112,7 @@ Video.defaultProps = {
   videoTitle: '',
   width: `${fwidth}px`,
   height: `${fheight}px`,
+  srcDocCss: true,
 };
 
 export default Video;
