@@ -17,7 +17,7 @@ const Spot = ({ spot }) => {
 
   return (
     <Wrapper>
-      <Video videoId={videoId} videoTitle={videoTitle} />
+      <Video videoId={videoId} srcDocCss={false} videoTitle={videoTitle} />
     </Wrapper>
   );
 };
