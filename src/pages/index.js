@@ -13,15 +13,16 @@ import { RootContainer } from '~containers';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const HomePage = ({
-  data: { advantages, howWorks, features, spot, reviews, homeInfoModal, hero, meta, faq },
+  data: { advantages, howWorks, features, spot, masSpot, reviews, homeInfoModal, hero, meta, faq },
 }) => {
   return (
     <RootContainer meta={meta.frontmatter.meta}>
       <CustomModal homeInfoModal={homeInfoModal.frontmatter.homeInfoModal} />
       <Hero hero={hero.frontmatter.hero} />
       <Features features={features.frontmatter.features} />
-      <Spot spot={spot.frontmatter.spot} />
+      <Spot spot={masSpot.frontmatter.masSpot} />
       <Reviews reviews={reviews.frontmatter.reviews} />
+      <Spot spot={spot.frontmatter.spot} />
       <Features
         features={advantages.frontmatter.advantages.advList}
         title={advantages.frontmatter.advantages.title}
@@ -165,6 +166,18 @@ export const query = graphql`
     ) {
       frontmatter {
         spot {
+          videoId
+          videoTitle
+        }
+      }
+    }
+
+    masSpot: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        masSpot {
           videoId
           videoTitle
         }
