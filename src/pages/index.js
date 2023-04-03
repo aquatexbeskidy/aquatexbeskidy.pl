@@ -66,8 +66,6 @@ export const query = graphql`
           summaryText
           warning
           success
-          info
-          infoContent
           image {
             childImageSharp {
               gatsbyImageData(breakpoints: [320, 768, 1024, 1200])
