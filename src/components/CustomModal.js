@@ -20,7 +20,18 @@ const CustomModal = ({ homeInfoModal }) => {
   const handleModalClose = () => setModalOpen(false);
   const afterOpenModal = () => sessionStorage.setItem('alreadyShow', 'already shown');
 
-  const { title, mainText, subText, summaryText, warning, success, image, buttons } = homeInfoModal;
+  const {
+    title,
+    mainText,
+    subText,
+    summaryText,
+    warning,
+    success,
+    info,
+    infoContent,
+    image,
+    buttons,
+  } = homeInfoModal;
   const { childImageSharp } = image;
 
   const background = getSrcSet(childImageSharp).split(',')[2].split(' ')[0];
@@ -53,6 +64,10 @@ const CustomModal = ({ homeInfoModal }) => {
             {subText}
             <StrongSuccess>{success}</StrongSuccess>
             {summaryText}
+            <Info>
+              <StrongInfo>{info}</StrongInfo>
+              <StrongInfoContent>{infoContent}</StrongInfoContent>
+            </Info>
           </ContentWrapper>
           <BannerWrapper style={{ backgroundImage: `url(${background})` }} />
           <ActionsWrapper>
@@ -182,6 +197,18 @@ const StrongWarning = styled.strong`
 
 const StrongSuccess = styled.strong`
   margin: 0 7px;
+  color: ${({ theme }) => theme.color.primary};
+`;
+
+const Info = styled.div`
+  margin: 20px 0 0;
+`;
+
+const StrongInfo = styled.strong`
+  margin-right: 5px;
+`;
+
+const StrongInfoContent = styled.strong`
   color: ${({ theme }) => theme.color.primary};
 `;
 
