@@ -128,6 +128,8 @@ export const OFFER_FRAGMENT = graphql`
         mainContent
         subContent
         subTitle
+        bonusInfo
+        bonusInfoStrong
         offerList {
           title
           price
@@ -157,6 +159,7 @@ export const DEEPWELL_FRAGMENT = graphql`
       deepWell {
         mainTitle
         mainContent
+        bonusContent
         additionList {
           description
           contentList {

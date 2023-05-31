@@ -22,7 +22,16 @@ const OfferPage = ({
     },
     content: {
       frontmatter: {
-        offer: { mainTitle, mainContent, subContent, subTitle, offerList, reviewImgList },
+        offer: {
+          mainTitle,
+          mainContent,
+          subContent,
+          subTitle,
+          bonusInfo,
+          bonusInfoStrong,
+          offerList,
+          reviewImgList,
+        },
       },
     },
   },
@@ -32,6 +41,8 @@ const OfferPage = ({
       <Heading>{mainTitle}</Heading>
       <Text>{mainContent}</Text>
       <Text>{subContent}</Text>
+      <StrongInfo>{bonusInfo}</StrongInfo>
+      <StrongInfoContent>{bonusInfoStrong}</StrongInfoContent>
       <SubHeading>{subTitle}</SubHeading>
       <OfferList>
         {offerList.map(({ title, price }, index) => (
@@ -92,6 +103,24 @@ const Text = styled.p`
   ${mq.min.tablet_base} {
     line-height: 30px;
   }
+`;
+
+const StrongInfo = styled.strong`
+  margin-right: 5px;
+  line-height: 25px;
+  width: 100%;
+  ${mq.min.tablet_base} {
+    line-height: 30px;
+  }
+`;
+
+const StrongInfoContent = styled.strong`
+  line-height: 25px;
+  width: 100%;
+  ${mq.min.tablet_base} {
+    line-height: 30px;
+  }
+  color: ${({ theme }) => theme.color.primary};
 `;
 
 const SubHeading = styled.h3`
