@@ -26,6 +26,7 @@ const DeepWellPage = ({
         deepWell: {
           mainTitle,
           mainContent,
+          bonusContent,
           additionList,
           waterSearchTitle,
           waterSearchDesc,
@@ -42,6 +43,10 @@ const DeepWellPage = ({
     ? { dangerouslySetInnerHTML: { __html: mainContent } }
     : { children: mainContent };
 
+  const bonusContentChildren = stringIncludesHTML(bonusContent)
+    ? { dangerouslySetInnerHTML: { __html: bonusContent } }
+    : { children: bonusContent };
+
   const waterSearchDescChildren = stringIncludesHTML(waterSearchDesc)
     ? { dangerouslySetInnerHTML: { __html: waterSearchDesc } }
     : { children: waterSearchDesc };
@@ -55,6 +60,7 @@ const DeepWellPage = ({
       <DeepWellWrapper>
         <Heading>{mainTitle}</Heading>
         <Text {...mainContentChildren} />
+        <Text {...bonusContentChildren} />
         <Reviews reviews={additionList} />
         <SubHeading id={waterSearchId}>{waterSearchTitle}</SubHeading>
         <Text {...waterSearchDescChildren} />

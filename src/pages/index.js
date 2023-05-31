@@ -5,7 +5,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import { Hero2, Hero, Features, Spot, Reviews, Toggler, CustomModal } from '~components';
+import { Hero2, Hero, Features, Spot, Reviews, Toggler, CountMeUp } from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -13,16 +13,15 @@ import { RootContainer } from '~containers';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const HomePage = ({
-  data: { advantages, howWorks, features, spot, masSpot, reviews, homeInfoModal, hero, meta, faq },
+  data: { advantages, howWorks, features, spot, reviews, homeCountUp, hero, meta, faq },
 }) => {
   return (
     <RootContainer meta={meta.frontmatter.meta}>
-      <CustomModal homeInfoModal={homeInfoModal.frontmatter.homeInfoModal} />
       <Hero hero={hero.frontmatter.hero} />
+      <CountMeUp homeCountUp={homeCountUp.frontmatter.homeCountUp} />
       <Features features={features.frontmatter.features} />
-      <Spot spot={masSpot.frontmatter.masSpot} />
-      <Reviews reviews={reviews.frontmatter.reviews} />
       <Spot spot={spot.frontmatter.spot} />
+      <Reviews reviews={reviews.frontmatter.reviews} />
       <Features
         features={advantages.frontmatter.advantages.advList}
         title={advantages.frontmatter.advantages.title}
@@ -54,33 +53,15 @@ export const query = graphql`
       }
     }
 
-    homeInfoModal: mdx(
+    homeCountUp: mdx(
       fileAbsolutePath: { regex: "/markdown/pages/" }
       frontmatter: { meta: { permalink: { eq: "/" } } }
     ) {
       frontmatter {
-        homeInfoModal {
+        homeCountUp {
           title
-          mainText
-          subText
-          summaryText
-          warning
-          success
-          info
-          infoContent
-          image {
-            childImageSharp {
-              gatsbyImageData(breakpoints: [320, 768, 1024, 1200])
-            }
-            publicURL
-            name
-            id
-          }
-          buttons {
-            title
-            type
-            link
-          }
+          count
+          icon
         }
       }
     }
@@ -168,18 +149,6 @@ export const query = graphql`
     ) {
       frontmatter {
         spot {
-          videoId
-          videoTitle
-        }
-      }
-    }
-
-    masSpot: mdx(
-      fileAbsolutePath: { regex: "/markdown/pages/" }
-      frontmatter: { meta: { permalink: { eq: "/" } } }
-    ) {
-      frontmatter {
-        masSpot {
           videoId
           videoTitle
         }
