@@ -72,7 +72,7 @@ const Wrapper = styled.div`
   position: relative;
 
   ${mq.min.desktop_small} {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.01);
   }
 
   &::before {

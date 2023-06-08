@@ -130,6 +130,17 @@ export const OFFER_FRAGMENT = graphql`
         subTitle
         bonusInfo
         bonusInfoStrong
+        quickOfferTitle
+        quickOfferList {
+          title
+          icon
+          desc
+        }
+        link {
+          text
+          url
+          type
+        }
         offerList {
           title
           price
