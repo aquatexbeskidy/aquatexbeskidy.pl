@@ -15,7 +15,7 @@ import { mq } from '~theme';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const HeaderContainer = (props) => {
-  const { top, bottom, site } = useStaticQuery(graphql`
+  const { top, bottom, site, infoBar } = useStaticQuery(graphql`
     {
       site: site {
         ...SITE_METADATA
@@ -34,6 +34,15 @@ const HeaderContainer = (props) => {
       ) {
         ...HEADER_NAV_FRAGMENT
       }
+
+      infoBar: mdx(
+        fileAbsolutePath: { regex: "/markdown/globals/" }
+        frontmatter: { title: { eq: "Content" } }
+      ) {
+        frontmatter {
+          infoBar
+        }
+      }
     }
   `);
 
@@ -43,6 +52,7 @@ const HeaderContainer = (props) => {
   return (
     <>
       <Section isTop>
+        <InfoBar>{infoBar.frontmatter.infoBar}</InfoBar>
         <Wrapper>
           <Nav links={top.frontmatter.links} />
         </Wrapper>
@@ -92,6 +102,18 @@ const sectionBottom = css`
   h1 a {
     font-size: ${({ theme }) => theme.font.size.xxl};
   }
+`;
+
+const InfoBar = styled.div`
+  max-width: 100vw;
+  padding: 8px 20px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: ${({ theme }) => theme.font.size.l};
+  font-weight: ${({ theme }) => theme.font.weight.bold};
+  color: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.color.primary};
+  width: 100%;
 `;
 
 const sectionTop = css`

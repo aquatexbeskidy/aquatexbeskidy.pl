@@ -39,6 +39,18 @@ export const HEADER_NAV_FRAGMENT = graphql`
   }
 `;
 
+export const CALL_ME_UP_FRAGMENT = graphql`
+  fragment CALL_ME_UP_FRAGMENT on Mdx {
+    frontmatter {
+      callMeUp {
+        title
+        icon
+        url
+      }
+    }
+  }
+`;
+
 export const FOOTER_NAV_FRAGMENT = graphql`
   fragment FOOTER_NAV_FRAGMENT on Mdx {
     frontmatter {
