@@ -60,8 +60,17 @@ export const query = graphql`
       frontmatter {
         homeCountUp {
           title
+          subTitle
           count
-          icon
+          score
+          iconSmile
+          iconStars
+          iconGoogle
+          googleOpinions
+          opinions {
+            user
+            message
+          }
         }
       }
     }

@@ -6,6 +6,7 @@ export { default as FBPost } from './multimedia/FBPost';
 
 export { default as CustomModal } from './CustomModal';
 export { default as CountMeUp } from './CountMeUp';
+export { default as CallMeUp } from './CallMeUp';
 export { default as CookieInfo } from './CookieInfo';
 export { default as NomadsCodes } from './NomadsCodes';
 export { default as MapLeaflet } from './MapLeaflet';
