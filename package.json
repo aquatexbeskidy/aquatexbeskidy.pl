@@ -60,7 +60,7 @@
   },
   "resolutions": {
     "cheerio": "1.0.0-rc.12"
-  }
+  },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.13.3",
     "concurrently": "^6.5.1",
