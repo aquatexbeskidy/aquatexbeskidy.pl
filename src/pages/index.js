@@ -5,7 +5,16 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import { Hero2, Hero, Features, Spot, Reviews, Toggler, CountMeUp } from '~components';
+import {
+  Hero2,
+  Hero,
+  Features,
+  Spot,
+  Reviews,
+  Toggler,
+  CountMeUp,
+  MoreAdvantages,
+} from '~components';
 import { RootContainer } from '~containers';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -13,12 +22,24 @@ import { RootContainer } from '~containers';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const HomePage = ({
-  data: { advantages, howWorks, features, spot, reviews, homeCountUp, hero, meta, faq },
+  data: {
+    advantages,
+    howWorks,
+    features,
+    moreAdvantages,
+    spot,
+    reviews,
+    homeCountUp,
+    hero,
+    meta,
+    faq,
+  },
 }) => {
   return (
     <RootContainer meta={meta.frontmatter.meta}>
       <Hero hero={hero.frontmatter.hero} />
       <CountMeUp homeCountUp={homeCountUp.frontmatter.homeCountUp} />
+      <MoreAdvantages moreAdvantages={moreAdvantages.frontmatter.moreAdvantages} />
       <Features features={features.frontmatter.features} />
       <Spot spot={spot.frontmatter.spot} />
       <Reviews reviews={reviews.frontmatter.reviews} />
@@ -128,6 +149,22 @@ export const query = graphql`
         advantages {
           title
           advList {
+            title
+            icon
+            desc
+          }
+        }
+      }
+    }
+
+    moreAdvantages: mdx(
+      fileAbsolutePath: { regex: "/markdown/pages/" }
+      frontmatter: { meta: { permalink: { eq: "/" } } }
+    ) {
+      frontmatter {
+        moreAdvantages {
+          title
+          advantages {
             title
             icon
             desc
