@@ -168,6 +168,21 @@ export const query = graphql`
             title
             icon
             desc
+            image {
+              childrenImageSharp {
+                gatsbyImageData(
+                  transformOptions: { cropFocus: CENTER }
+                  breakpoints: [320, 768, 1024]
+                  placeholder: NONE
+                  height: 250
+                  width: 350
+                  quality: 90
+                )
+              }
+              publicURL
+              name
+              id
+            }
           }
         }
       }

@@ -2,6 +2,7 @@
 // Import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -18,7 +19,7 @@ const MoreAdvantages = ({ moreAdvantages: { advantages, title } }) => {
     <Wrapper>
       {title && <Header>{title}</Header>}
       <AdvantagesList>
-        {advantages.map(({ title, icon, desc }, index) => {
+        {advantages.map(({ title, icon, desc, image }, index) => {
           const descChildren = stringIncludesHTML(desc)
             ? { dangerouslySetInnerHTML: { __html: desc } }
             : { children: desc };
@@ -30,6 +31,13 @@ const MoreAdvantages = ({ moreAdvantages: { advantages, title } }) => {
               <div>
                 <SubSmallHeading>{title}</SubSmallHeading>
                 <Text {...descChildren} />
+                {image && (
+                  <GatsbyImage
+                    image={getImage(image.childrenImageSharp[0])}
+                    title={'Karta gwarancyjna'}
+                    alt={'Karta gwarancyjna'}
+                  />
+                )}
               </div>
             </AdvantageItem>
           );
@@ -61,6 +69,14 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  .gatsby-image-wrapper {
+    margin: 0;
+    img {
+      object-fit: contain !important;
+    }
+  }
+
   ${mq.min.tablet_base} {
     flex-direction: row;
   }
