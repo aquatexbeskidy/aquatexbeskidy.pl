@@ -51,6 +51,30 @@ export const CALL_ME_UP_FRAGMENT = graphql`
   }
 `;
 
+export const FACEBOOK_FRAGMENT = graphql`
+  fragment FACEBOOK_FRAGMENT on Mdx {
+    frontmatter {
+      facebook {
+        title
+        icon
+        url
+      }
+    }
+  }
+`;
+
+export const YOUTUBE_FRAGMENT = graphql`
+  fragment YOUTUBE_FRAGMENT on Mdx {
+    frontmatter {
+      youtube {
+        title
+        icon
+        url
+      }
+    }
+  }
+`;
+
 export const FOOTER_NAV_FRAGMENT = graphql`
   fragment FOOTER_NAV_FRAGMENT on Mdx {
     frontmatter {
