@@ -2,3 +2,7 @@ node_modules/
 .cache/
 public
 .DS_Store
+.next/
+_bmad/
+.opencode/
+.claude/

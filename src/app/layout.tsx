@@ -1,0 +1,50 @@
+import type { Metadata } from 'next'
+
+import { Montserrat } from 'next/font/google'
+
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { getLayoutData } from '@/lib/mdx'
+import './globals.css'
+
+const montserrat = Montserrat({
+  display: 'swap',
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-montserrat',
+})
+
+export const metadata: Metadata = {
+  description:
+    'Profesjonalne wiercenie studni głębinowych w Beskidach. Ponad 20 lat doświadczenia, 3 lata gwarancji na usługi.',
+  title: {
+    default: 'AQUA-TEX Beskidy - Studnie głębinowe i odwierty',
+    template: '%s | AQUA-TEX Beskidy',
+  },
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { siteTitle, header, footer } = await getLayoutData()
+
+  return (
+    <html className={montserrat.variable} lang='pl'>
+      <body className='font-montserrat antialiased'>
+        <Header
+          bottomLinks={header.bottomLinks}
+          infoBar={header.infoBar}
+          siteTitle={siteTitle}
+          topLinks={header.topLinks}
+        />
+
+        {children}
+
+        <Footer
+          copyright={footer.copyright}
+          links={footer.links}
+          nomadsCodes={footer.nomadsCodes}
+          quickContact={footer.quickContact}
+          siteTitle={siteTitle}
+        />
+      </body>
+    </html>
+  )
+}
