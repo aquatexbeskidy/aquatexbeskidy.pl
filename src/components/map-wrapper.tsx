@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
-const MapLeaflet = dynamic(() => import('@/components/map-leaflet'), {
+const MapLeaflet = dynamic(() => import('@/components/map-leaflet').then((mod) => ({ default: mod.MapLeaflet })), {
   loading: () => (
     <div className='flex h-[400px] w-full items-center justify-center bg-white-dark'>Ładowanie mapy...</div>
   ),
