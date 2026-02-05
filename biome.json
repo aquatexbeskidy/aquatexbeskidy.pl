@@ -85,7 +85,7 @@
       },
       "recommended": true,
       "security": {
-        "noDangerouslySetInnerHtml": "off"
+        "noDangerouslySetInnerHtml": "on"
       },
       "suspicious": {
         "noArrayIndexKey": "off"

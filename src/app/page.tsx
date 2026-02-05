@@ -54,6 +54,7 @@ export default async function HomePage() {
                   <Image alt={item.title} className='mx-auto mb-4' height={48} src={`/${item.icon}`} width={48} />
                 )}
                 <h3 className='mb-3 font-semibold text-lg'>{item.title}</h3>
+                {/* biome-ignore lint/security/noDangerouslySetInnerHtml: trusted MDX frontmatter content */}
                 {item.desc && <p className='text-text leading-6' dangerouslySetInnerHTML={{ __html: item.desc }} />}
               </div>
             ))}

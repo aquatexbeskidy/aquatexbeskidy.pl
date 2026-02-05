@@ -19,6 +19,7 @@ export function Hero({ title, subtitle, image, buttons }: HeroProps) {
           (stringIncludesHTML(title) ? (
             <h1
               className='tablet:text-left text-center font-semibold text-4xl text-white leading-tight'
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted MDX frontmatter content
               dangerouslySetInnerHTML={{ __html: title }}
             />
           ) : (
@@ -29,6 +30,7 @@ export function Hero({ title, subtitle, image, buttons }: HeroProps) {
           (stringIncludesHTML(subtitle) ? (
             <p
               className='my-4 tablet:my-8 max-w-[230px] tablet:max-w-none tablet:text-left text-center font-medium text-2xl text-white leading-8'
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted MDX frontmatter content
               dangerouslySetInnerHTML={{ __html: subtitle }}
             />
           ) : (

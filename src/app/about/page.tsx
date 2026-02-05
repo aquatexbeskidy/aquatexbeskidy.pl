@@ -30,7 +30,9 @@ export default async function AboutPage() {
           {about.contentBlocks?.map((block, index) => (
             <div key={index}>
               {block.contentList?.map((item, i) => (
-                <p className='mb-4 text-text leading-7' dangerouslySetInnerHTML={{ __html: item.desc }} key={i} />
+                <p className='mb-4 text-text leading-7' key={i}>
+                  {item.desc}
+                </p>
               ))}
             </div>
           ))}

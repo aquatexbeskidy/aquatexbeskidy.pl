@@ -27,9 +27,11 @@ export default async function DeepWellPage() {
 
       <section className='container-main py-16'>
         <div className='mx-auto max-w-4xl'>
+          {/* biome-ignore lint/security/noDangerouslySetInnerHtml: trusted MDX frontmatter content */}
           <p className='mb-8 text-lg text-text leading-8' dangerouslySetInnerHTML={{ __html: deepWell.mainContent }} />
           {deepWell.bonusContent && (
             <div className='rounded-lg bg-primary/10 p-6'>
+              {/* biome-ignore lint/security/noDangerouslySetInnerHtml: trusted MDX frontmatter content */}
               <p className='text-text leading-7' dangerouslySetInnerHTML={{ __html: deepWell.bonusContent }} />
             </div>
           )}

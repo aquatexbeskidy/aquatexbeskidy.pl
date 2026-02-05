@@ -27,7 +27,7 @@ export default async function BoreholePage() {
 
       <section className='container-main py-16'>
         <div className='mx-auto max-w-4xl'>
-          <p className='text-lg text-text leading-8' dangerouslySetInnerHTML={{ __html: borehole.mainContent }} />
+          <p className='text-lg text-text leading-8'>{borehole.mainContent}</p>
         </div>
       </section>
 
@@ -53,7 +53,7 @@ export default async function BoreholePage() {
 
       <section className='container-main py-16'>
         <div className='mx-auto max-w-4xl'>
-          <p className='text-lg text-text leading-8' dangerouslySetInnerHTML={{ __html: borehole.subContent }} />
+          <p className='text-lg text-text leading-8'>{borehole.subContent}</p>
         </div>
       </section>
     </main>

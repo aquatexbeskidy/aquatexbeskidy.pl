@@ -46,6 +46,7 @@ export default async function OfferPage() {
               <div className='flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-sm' key={index}>
                 {item.icon && <Image alt='' className='mb-4' height={64} src={`/${item.icon}`} width={64} />}
                 <h3 className='mb-3 font-semibold text-lg text-primary'>{item.title}</h3>
+                {/* biome-ignore lint/security/noDangerouslySetInnerHtml: trusted MDX frontmatter content */}
                 <p className='text-text leading-6' dangerouslySetInnerHTML={{ __html: item.desc }} />
               </div>
             ))}
