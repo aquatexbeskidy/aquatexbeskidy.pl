@@ -14,7 +14,7 @@ export function Hero({ title, subtitle, image, buttons }: HeroProps) {
       className='filter-duotone w-full bg-cover bg-left bg-no-repeat'
       style={{ backgroundImage: `url(${imagePath})` }}
     >
-      <div className='container-main flex desktop-sm:min-h-[600px] min-h-[440px] tablet:min-h-[500px] flex-col tablet:items-start items-center justify-center py-16'>
+      <div className='container-main flex desktop-sm:min-h-[600px] min-h-110 tablet:min-h-[500px] flex-col tablet:items-start items-center justify-center py-16'>
         {title &&
           (stringIncludesHTML(title) ? (
             <h1
@@ -29,12 +29,12 @@ export function Hero({ title, subtitle, image, buttons }: HeroProps) {
         {subtitle &&
           (stringIncludesHTML(subtitle) ? (
             <p
-              className='my-4 tablet:my-8 max-w-[230px] tablet:max-w-none tablet:text-left text-center font-medium text-2xl text-white leading-8'
+              className='my-4 tablet:my-8 max-w-58 tablet:max-w-none tablet:text-left text-center font-medium text-2xl text-white leading-8'
               // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted MDX frontmatter content
               dangerouslySetInnerHTML={{ __html: subtitle }}
             />
           ) : (
-            <p className='my-4 tablet:my-8 max-w-[230px] tablet:max-w-none tablet:text-left text-center font-medium text-2xl text-white leading-8'>
+            <p className='my-4 tablet:my-8 max-w-58 tablet:max-w-none tablet:text-left text-center font-medium text-2xl text-white leading-8'>
               {subtitle}
             </p>
           ))}

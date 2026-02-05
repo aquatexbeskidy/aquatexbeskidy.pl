@@ -45,7 +45,7 @@ export default async function HomePage() {
       )}
 
       {frontmatter.moreAdvantages && (
-        <section className='mx-auto my-16 w-full max-w-[1200px] px-5'>
+        <section className='mx-auto my-16 w-full max-w-300 px-5'>
           <h2 className='mb-12 text-center font-semibold text-2xl'>{frontmatter.moreAdvantages.title}</h2>
           <div className='grid desktop-sm:grid-cols-3 grid-cols-1 tablet:grid-cols-2 gap-8'>
             {frontmatter.moreAdvantages.advantages?.map((item: Feature, index: number) => (
