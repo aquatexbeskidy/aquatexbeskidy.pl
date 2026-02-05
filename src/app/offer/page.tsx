@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { OfferPageContent } from '@/types/content'
 
+import Image from 'next/image'
+
 import { getPageContent } from '@/lib/mdx'
 import { buttonStyles } from '@/types/components'
 
@@ -42,7 +44,7 @@ export default async function OfferPage() {
           <div className='grid desktop-sm:grid-cols-3 grid-cols-1 tablet:grid-cols-2 gap-8'>
             {offer.quickOfferList?.map((item, index) => (
               <div className='flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-sm' key={index}>
-                {item.icon && <img alt='' className='mb-4 h-16 w-16' src={`/${item.icon}`} />}
+                {item.icon && <Image alt='' className='mb-4' height={64} src={`/${item.icon}`} width={64} />}
                 <h3 className='mb-3 font-semibold text-lg text-primary'>{item.title}</h3>
                 <p className='text-text leading-6' dangerouslySetInnerHTML={{ __html: item.desc }} />
               </div>
@@ -85,10 +87,12 @@ export default async function OfferPage() {
         <section className='container-main pb-16'>
           <div className='grid grid-cols-1 tablet:grid-cols-3 gap-6'>
             {offer.reviewImgList.map((item, index) => (
-              <div className='aspect-video overflow-hidden rounded-lg' key={index}>
-                <img
+              <div className='relative aspect-video overflow-hidden rounded-lg' key={index}>
+                <Image
                   alt={`Zdjęcie z realizacji ${index + 1}`}
-                  className='h-full w-full object-cover transition-transform duration-300 hover:scale-105'
+                  className='object-cover transition-transform duration-300 hover:scale-105'
+                  fill
+                  sizes='(max-width: 768px) 100vw, 33vw'
                   src={`/${item.image}`}
                 />
               </div>

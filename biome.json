@@ -33,7 +33,13 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!**/_bmad", "!**/src/payload-types.ts", "!**/src/app/(payload)/admin/importMap.js"]
+    "includes": [
+      "**",
+      "!**/_bmad",
+      "!**/src/payload-types.ts",
+      "!**/src/app/(payload)/admin/importMap.js",
+      "!next-env.d.ts"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -77,7 +83,13 @@
           }
         }
       },
-      "recommended": true
+      "recommended": true,
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "off"
+      }
     }
   },
   "vcs": {

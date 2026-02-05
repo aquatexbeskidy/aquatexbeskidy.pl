@@ -3,6 +3,7 @@
 import type { FAQItem, FAQProps } from '@/types/components'
 
 import { clsx } from 'clsx'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export function FAQItemComponent({ title, content, icon }: FAQItem) {
@@ -13,12 +14,15 @@ export function FAQItemComponent({ title, content, icon }: FAQItem) {
       <button
         className='flex w-full cursor-pointer select-none items-center justify-between py-2 text-left'
         onClick={() => setIsOpen((prev) => !prev)}
+        type='button'
       >
         <span className='pr-4 font-semibold text-base leading-6'>{title}</span>
-        <img
+        <Image
           alt=''
           className={clsx('tablet:w-5 w-4 transition-transform duration-200', isOpen && 'rotate-180')}
+          height={20}
           src={icon ? `/${icon}` : '/assets/icons/arrow_down.svg'}
+          width={20}
         />
       </button>
 

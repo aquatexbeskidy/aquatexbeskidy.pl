@@ -30,7 +30,7 @@ export default async function NoveltiesPaginatedPage({ params }: Props) {
   const { page } = await params
   const pageNum = parseInt(page, 10)
 
-  if (isNaN(pageNum) || pageNum < 2) {
+  if (Number.isNaN(pageNum) || pageNum < 2) {
     notFound()
   }
 

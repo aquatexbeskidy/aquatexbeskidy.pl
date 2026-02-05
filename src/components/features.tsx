@@ -1,5 +1,6 @@
 import type { FeaturesProps } from '@/types/components'
 
+import Image from 'next/image'
 import Link from 'next/link'
 
 export function Features({ features, title }: FeaturesProps) {
@@ -10,8 +11,8 @@ export function Features({ features, title }: FeaturesProps) {
       <div className='flex tablet:flex-row flex-col flex-wrap items-center justify-center desktop-sm:gap-28 gap-12 tablet:gap-16'>
         {features.map((feature, index) => (
           <div className='flex flex-col items-center justify-center text-center' key={index}>
-            {feature.icon && feature.icon.includes('/icons/') && (
-              <img alt={feature.title} className='h-10 w-10' src={`/${feature.icon}`} />
+            {feature.icon?.includes('/icons/') && (
+              <Image alt={feature.title} height={40} src={`/${feature.icon}`} width={40} />
             )}
 
             <div className='my-5 tablet:h-10 max-w-[160px] tablet:max-w-[120px] font-semibold text-base text-black leading-5'>
@@ -22,6 +23,7 @@ export function Features({ features, title }: FeaturesProps) {
               <Link className='flex items-center gap-1 text-primary hover:text-primary-dark' href={feature.link.url}>
                 <span>{feature.link.title}</span>
                 <svg
+                  aria-hidden='true'
                   className='h-4 w-4'
                   fill='none'
                   stroke='currentColor'

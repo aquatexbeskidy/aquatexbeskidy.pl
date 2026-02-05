@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { ContactPageContent } from '@/types/content'
 
+import Image from 'next/image'
+
 import { MapWrapper } from '@/components/map-wrapper'
 import { getPageContent } from '@/lib/mdx'
 import { buttonStyles } from '@/types/components'
@@ -41,7 +43,7 @@ export default async function ContactPage() {
                   rel={button.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                   target={button.url.startsWith('http') ? '_blank' : undefined}
                 >
-                  {button.icon && <img alt='' className='h-5 w-5' src={`/${button.icon}`} />}
+                  {button.icon && <Image alt='' height={20} src={`/${button.icon}`} width={20} />}
                   {button.text}
                 </a>
               ))}

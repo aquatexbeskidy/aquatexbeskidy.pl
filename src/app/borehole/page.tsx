@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { BoreholePageContent } from '@/types/content'
 
+import Image from 'next/image'
+
 import { getPageContent } from '@/lib/mdx'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,10 +36,12 @@ export default async function BoreholePage() {
           <div className='container-main'>
             <div className='grid desktop-sm:grid-cols-4 grid-cols-1 tablet:grid-cols-2 gap-6'>
               {borehole.equipmentImgList.map((item, index) => (
-                <div className='aspect-square overflow-hidden rounded-lg' key={index}>
-                  <img
+                <div className='relative aspect-square overflow-hidden rounded-lg' key={index}>
+                  <Image
                     alt={`Sprzęt do odwiertów ${index + 1}`}
-                    className='h-full w-full object-cover transition-transform duration-300 hover:scale-105'
+                    className='object-cover transition-transform duration-300 hover:scale-105'
+                    fill
+                    sizes='(max-width: 768px) 100vw, 25vw'
                     src={`/${item.image}`}
                   />
                 </div>

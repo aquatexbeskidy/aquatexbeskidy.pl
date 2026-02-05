@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { DeepWellPageContent } from '@/types/content'
 
+import Image from 'next/image'
+
 import { getPageContent } from '@/lib/mdx'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -41,8 +43,14 @@ export default async function DeepWellPage() {
               {deepWell.additionList.map((item, index) => (
                 <div className='overflow-hidden rounded-lg bg-white shadow-sm' key={index}>
                   {item.image && (
-                    <div className='aspect-video'>
-                      <img alt='' className='h-full w-full object-cover' src={`/${item.image}`} />
+                    <div className='relative aspect-video'>
+                      <Image
+                        alt=''
+                        className='object-cover'
+                        fill
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        src={`/${item.image}`}
+                      />
                     </div>
                   )}
                   <div className='p-6'>

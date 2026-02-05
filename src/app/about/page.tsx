@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { AboutPageContent } from '@/types/content'
 
+import Image from 'next/image'
+
 import { getPageContent } from '@/lib/mdx'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -39,10 +41,12 @@ export default async function AboutPage() {
         <section className='container-main pb-16'>
           <div className='grid grid-cols-1 tablet:grid-cols-3 gap-6'>
             {about.viewOfWorkImgList.map((item, index) => (
-              <div className='aspect-video overflow-hidden rounded-lg' key={index}>
-                <img
+              <div className='relative aspect-video overflow-hidden rounded-lg' key={index}>
+                <Image
                   alt={`Zdjęcie z pracy ${index + 1}`}
-                  className='h-full w-full object-cover transition-transform duration-300 hover:scale-105'
+                  className='object-cover transition-transform duration-300 hover:scale-105'
+                  fill
+                  sizes='(max-width: 768px) 100vw, 33vw'
                   src={`/${item.image}`}
                 />
               </div>

@@ -1,5 +1,6 @@
 import type { FooterProps } from '@/types/components'
 
+import Image from 'next/image'
 import Link from 'next/link'
 
 export function Footer({ links, quickContact, copyright, nomadsCodes, siteTitle }: FooterProps) {
@@ -14,7 +15,15 @@ export function Footer({ links, quickContact, copyright, nomadsCodes, siteTitle 
           <div className='flex gap-3'>
             {quickContact.link.map((item) => (
               <a className='btn btn-secondary flex items-center gap-2 font-semibold' href={item.url} key={item.text}>
-                {item.icon && <img alt='' className='h-4 tablet:h-5 tablet:w-5 w-4' src={`/${item.icon}`} />}
+                {item.icon && (
+                  <Image
+                    alt=''
+                    className='h-4 tablet:h-5 tablet:w-5 w-4'
+                    height={20}
+                    src={`/${item.icon}`}
+                    width={20}
+                  />
+                )}
                 {item.text}
               </a>
             ))}
@@ -55,7 +64,13 @@ export function Footer({ links, quickContact, copyright, nomadsCodes, siteTitle 
 
         <div className='container-main flex tablet:flex-row flex-col items-center justify-between gap-4 py-4 text-sm'>
           <div className='tablet:text-left text-center'>
-            <img alt={siteTitle} className='mx-auto tablet:mx-0 mb-4 h-8' src='/assets/icons/atb_logo.svg' />
+            <Image
+              alt={siteTitle}
+              className='mx-auto tablet:mx-0 mb-4 h-8 w-auto'
+              height={32}
+              src='/assets/icons/atb_logo.svg'
+              width={80}
+            />
             <p className='text-text'>{copyright}</p>
           </div>
 
@@ -69,7 +84,7 @@ export function Footer({ links, quickContact, copyright, nomadsCodes, siteTitle 
                 target='_blank'
               >
                 <span>{item.madeBy}:</span>
-                <img alt={item.name} className='h-5' src={`/${item.icon}`} />
+                <Image alt={item.name} className='h-5 w-auto' height={20} src={`/${item.icon}`} width={20} />
                 <span className='font-medium'>{item.name}</span>
               </a>
             ))}

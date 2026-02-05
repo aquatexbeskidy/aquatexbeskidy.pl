@@ -2,6 +2,7 @@
 
 import type { CountUpProps } from '@/types/components'
 
+import Image from 'next/image'
 import ReactCountUp from 'react-countup'
 
 export function CountUp({
@@ -21,12 +22,14 @@ export function CountUp({
 
       {subTitle && <p className='desktop-sm:mt-4 mt-2 desktop-sm:mb-5 text-center text-xl leading-5'>{subTitle}</p>}
 
-      {iconSmile && iconSmile.includes('/icons/') && (
+      {iconSmile?.includes('/icons/') && (
         <div className='my-5'>
-          <img
+          <Image
             alt={title}
             className='h-12 tablet-lg:h-16 tablet:h-14 tablet-lg:w-16 tablet:w-14 w-12'
+            height={64}
             src={`/${iconSmile}`}
+            width={64}
           />
         </div>
       )}
@@ -44,8 +47,12 @@ export function CountUp({
 
       <div className='mb-8 flex items-center justify-center gap-2'>
         {score && <span className='font-bold'>{score}</span>}
-        {iconStars && iconStars.includes('/icons/') && <img alt='Rating stars' className='h-5' src={`/${iconStars}`} />}
-        {iconGoogle && iconGoogle.includes('/icons/') && <img alt='Google' className='h-5' src={`/${iconGoogle}`} />}
+        {iconStars?.includes('/icons/') && (
+          <Image alt='Rating stars' className='h-5 w-auto' height={20} src={`/${iconStars}`} width={100} />
+        )}
+        {iconGoogle?.includes('/icons/') && (
+          <Image alt='Google' className='h-5 w-auto' height={20} src={`/${iconGoogle}`} width={100} />
+        )}
       </div>
 
       <div className='mb-8 grid grid-cols-2 tablet-lg:grid-cols-3 gap-4 tablet-lg:gap-7'>

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { Feature, HomePageContent } from '@/types/content'
 
+import Image from 'next/image'
+
 import { CountUp } from '@/components/count-up'
 import { FAQ } from '@/components/faq'
 import { Hero } from '@/components/hero'
@@ -48,7 +50,9 @@ export default async function HomePage() {
           <div className='grid desktop-sm:grid-cols-3 grid-cols-1 tablet:grid-cols-2 gap-8'>
             {frontmatter.moreAdvantages.advantages?.map((item: Feature, index: number) => (
               <div className='rounded-lg bg-white-dark/30 p-6 text-center' key={index}>
-                {item.icon && <img alt={item.title} className='mx-auto mb-4 h-12 w-12' src={`/${item.icon}`} />}
+                {item.icon && (
+                  <Image alt={item.title} className='mx-auto mb-4' height={48} src={`/${item.icon}`} width={48} />
+                )}
                 <h3 className='mb-3 font-semibold text-lg'>{item.title}</h3>
                 {item.desc && <p className='text-text leading-6' dangerouslySetInnerHTML={{ __html: item.desc }} />}
               </div>
@@ -65,10 +69,12 @@ export default async function HomePage() {
               {frontmatter.advantages.advList?.map((item: Feature, index: number) => (
                 <div className='text-center' key={index}>
                   {item.icon && (
-                    <img
+                    <Image
                       alt={item.title}
-                      className='mx-auto mb-4 h-12 w-12 brightness-0 invert'
+                      className='mx-auto mb-4 brightness-0 invert'
+                      height={48}
                       src={`/${item.icon}`}
+                      width={48}
                     />
                   )}
                   <h3 className='mb-2 font-semibold text-lg'>{item.title}</h3>

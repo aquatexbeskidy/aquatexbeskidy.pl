@@ -4,6 +4,7 @@ import type { HeaderProps } from '@/types/components'
 
 import { clsx } from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -32,7 +33,7 @@ export function Header({ topLinks, bottomLinks, siteTitle, infoBar }: HeaderProp
                     rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                     target={link.url.startsWith('http') ? '_blank' : undefined}
                   >
-                    {link.icon && <img alt='' className='h-5 w-5' src={`/${link.icon}`} />}
+                    {link.icon && <Image alt='' height={20} src={`/${link.icon}`} width={20} />}
                     <span className={link.icon ? 'tablet:inline hidden' : ''}>{link.text}</span>
                   </a>
                 </li>
@@ -45,7 +46,13 @@ export function Header({ topLinks, bottomLinks, siteTitle, infoBar }: HeaderProp
       <section className='sticky top-0 z-50 bg-white shadow-sm'>
         <div className='container-main flex h-28 tablet:h-20 items-center justify-between'>
           <Link className='flex items-center' href='/'>
-            <img alt={siteTitle} className='h-12 tablet:h-10' src='/assets/icons/atb_logo.svg' />
+            <Image
+              alt={siteTitle}
+              className='h-12 tablet:h-10 w-auto'
+              height={48}
+              src='/assets/icons/atb_logo.svg'
+              width={120}
+            />
           </Link>
 
           <nav className='desktop-sm:block hidden'>
@@ -66,7 +73,12 @@ export function Header({ topLinks, bottomLinks, siteTitle, infoBar }: HeaderProp
             </ul>
           </nav>
 
-          <button aria-label='Menu' className='flex desktop-sm:hidden flex-col gap-1.5 p-2' onClick={toggleMobileMenu}>
+          <button
+            aria-label='Menu'
+            className='flex desktop-sm:hidden flex-col gap-1.5 p-2'
+            onClick={toggleMobileMenu}
+            type='button'
+          >
             <span
               className={clsx('h-0.5 w-6 bg-black transition-transform', isMobileMenuOpen && 'translate-y-2 rotate-45')}
             />
