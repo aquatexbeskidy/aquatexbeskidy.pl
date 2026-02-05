@@ -3,7 +3,9 @@ import type { BoreholePageContent } from '@/types/content'
 
 import Image from 'next/image'
 
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter } = await getPageContent<BoreholePageContent>('borehole')
@@ -17,8 +19,19 @@ export default async function BoreholePage() {
   const { frontmatter } = await getPageContent<BoreholePageContent>('borehole')
   const { borehole } = frontmatter
 
+  const webPageSchema = generateWebPage({
+    description: frontmatter.meta?.description,
+    name: frontmatter.meta?.title || 'Odwierty',
+    url: 'https://aquatexbeskidy.pl/borehole/',
+  })
+
+  const breadcrumbs = generateBreadcrumbs('/borehole')
+  const breadcrumbSchema = generateBreadcrumbList(breadcrumbs)
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
       <section className='bg-primary py-16 text-white'>
         <div className='container-main'>
           <h1 className='text-center font-bold text-4xl'>{borehole.mainTitle}</h1>

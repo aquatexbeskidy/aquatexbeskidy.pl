@@ -143,6 +143,38 @@ All types in `src/types/content.ts`:
 - **gray-matter**: Parse YAML frontmatter from MDX files
 - **date-fns**: Date formatting/manipulation
 
+### Schema.org Structured Data
+
+This project implements Schema.org JSON-LD structured data for SEO.
+
+**Schema Types Available:**
+- **LocalBusiness**: Contact info, address, hours (Contact/About pages)
+- **Organization**: Company logo, social links, founding date (root layout)
+- **WebPage**: Page metadata (title, description, URL)
+- **BreadcrumbList**: Site navigation structure
+- **FAQPage**: Q&A content (homepage FAQ section)
+- **Service**: Service offerings with provider (Services pages)
+
+**Usage Pattern:**
+```tsx
+import { SchemaScript } from '@/components/schema/schema-script'
+import { generateLocalBusiness } from '@/lib/schema-generators'
+
+export default async function Page() {
+  const schema = generateLocalBusiness({ name: '...', url: '...' })
+  return <SchemaScript data={schema} />
+}
+```
+
+**Schema Generator Location:** `src/lib/schema-generators.ts`
+- See module docstring for adding new schema types
+- All generators are type-safe and follow established patterns
+- Source data from frontmatter or global config files
+
+**Validation:**
+- Manually test with Google Rich Results Test: https://search.google.com/test/rich-results
+- View page source to confirm JSON-LD renders correctly
+
 ## Linting & Formatting
 
 - **Biome** for linting and formatting (NOT ESLint)

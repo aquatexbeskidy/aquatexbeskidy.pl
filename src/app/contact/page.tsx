@@ -4,7 +4,14 @@ import type { ContactPageContent } from '@/types/content'
 import Image from 'next/image'
 
 import { MapWrapper } from '@/components/map-wrapper'
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import {
+  generateBreadcrumbList,
+  generateBreadcrumbs,
+  generateLocalBusiness,
+  generateWebPage,
+} from '@/lib/schema-generators'
 import { buttonStyles } from '@/types/components'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,8 +26,46 @@ export default async function ContactPage() {
   const { frontmatter } = await getPageContent<ContactPageContent>('contact')
   const { contact } = frontmatter
 
+  // Extract address from pinDesc: "Plażowa 6, 34-350 Węgierska Górka"
+  const addressMatch = contact.pinDesc.match(/(.+), (.+)/)
+  const streetAddress = addressMatch?.[1] || contact.pinDesc
+  const postalCity = addressMatch?.[2] || ''
+  const [postalCode, addressLocality] = postalCity.split(' ')
+
+  // Extract phone and email from buttons
+  const phoneButton = contact.buttons?.find((b) => b.url.startsWith('tel:'))
+  const emailButton = contact.buttons?.find((b) => b.url.startsWith('mailto:'))
+  const phone = phoneButton?.text.replace(/\s/g, '') || ''
+  const email = emailButton?.url.replace('mailto:', '') || ''
+
+  const localBusinessSchema = generateLocalBusiness({
+    address: {
+      addressCountry: 'PL',
+      addressLocality,
+      postalCode,
+      streetAddress,
+    },
+    areaServed: ['Śląskie', 'Małopolskie', 'Beskidy'],
+    email,
+    name: 'AQUA-TEX Beskidy',
+    telephone: phone,
+    url: 'https://aquatexbeskidy.pl/contact/',
+  })
+
+  const webPageSchema = generateWebPage({
+    description: frontmatter.meta?.description,
+    name: frontmatter.meta?.title || 'Kontakt',
+    url: 'https://aquatexbeskidy.pl/contact/',
+  })
+
+  const breadcrumbs = generateBreadcrumbs('/contact')
+  const breadcrumbSchema = generateBreadcrumbList(breadcrumbs)
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={localBusinessSchema} />
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
       <section className='bg-primary py-16 text-white'>
         <div className='container-main text-center'>
           <h1 className='mb-4 font-bold text-4xl'>{contact.title}</h1>

@@ -3,7 +3,9 @@ import type { DeepWellPageContent } from '@/types/content'
 
 import Image from 'next/image'
 
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter } = await getPageContent<DeepWellPageContent>('deep-well')
@@ -17,8 +19,19 @@ export default async function DeepWellPage() {
   const { frontmatter } = await getPageContent<DeepWellPageContent>('deep-well')
   const { deepWell } = frontmatter
 
+  const webPageSchema = generateWebPage({
+    description: frontmatter.meta?.description,
+    name: frontmatter.meta?.title || 'Studnie głębinowe',
+    url: 'https://aquatexbeskidy.pl/deep-well/',
+  })
+
+  const breadcrumbs = generateBreadcrumbs('/deep-well')
+  const breadcrumbSchema = generateBreadcrumbList(breadcrumbs)
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
       <section className='bg-primary py-16 text-white'>
         <div className='container-main'>
           <h1 className='text-center font-bold text-4xl'>{deepWell.mainTitle}</h1>

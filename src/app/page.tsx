@@ -6,7 +6,9 @@ import Image from 'next/image'
 import { CountUp } from '@/components/count-up'
 import { FAQ } from '@/components/faq'
 import { Hero } from '@/components/hero'
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter } = await getPageContent<HomePageContent>('home')
@@ -16,11 +18,33 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+import { generateBreadcrumbList, generateFAQPage } from '@/lib/schema-generators'
+
 export default async function HomePage() {
   const { frontmatter } = await getPageContent<HomePageContent>('home')
 
+  const webPageSchema = generateWebPage({
+    description: frontmatter.meta?.description,
+    name: frontmatter.meta?.title || 'Strona główna',
+    url: 'https://aquatexbeskidy.pl/',
+  })
+
+  const breadcrumbSchema = generateBreadcrumbList([{ name: 'Strona główna', url: 'https://aquatexbeskidy.pl/' }])
+
+  const faqSchema = frontmatter.faq
+    ? generateFAQPage({
+        questions: frontmatter.faq.list.map((item) => ({
+          answer: item.content,
+          question: item.title,
+        })),
+      })
+    : undefined
+
   return (
     <main>
+      <SchemaScript data={breadcrumbSchema} />
+      <SchemaScript data={webPageSchema} />
+      {faqSchema && <SchemaScript data={faqSchema} />}
       {frontmatter.hero && (
         <Hero
           buttons={frontmatter.hero.buttons}

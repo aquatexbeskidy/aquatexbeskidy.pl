@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import type { WorksPageContent } from '@/types/content'
 
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter } = await getPageContent<WorksPageContent>('works')
@@ -15,8 +17,19 @@ export default async function WorksPage() {
   const { frontmatter } = await getPageContent<WorksPageContent>('works')
   const { videosTitle, videos } = frontmatter
 
+  const webPageSchema = generateWebPage({
+    description: frontmatter.meta?.description,
+    name: frontmatter.meta?.title || 'Realizacje',
+    url: 'https://aquatexbeskidy.pl/works/',
+  })
+
+  const breadcrumbs = generateBreadcrumbs('/works')
+  const breadcrumbSchema = generateBreadcrumbList(breadcrumbs)
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
       <section className='bg-primary py-16 text-white'>
         <div className='container-main text-center'>
           <h1 className='font-bold text-4xl'>Realizacje</h1>

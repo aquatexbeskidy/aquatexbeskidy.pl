@@ -3,7 +3,9 @@ import type { AboutPageContent } from '@/types/content'
 
 import Image from 'next/image'
 
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { generateBreadcrumbList, generateLocalBusiness, generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter } = await getPageContent<AboutPageContent>('about')
@@ -17,8 +19,35 @@ export default async function AboutPage() {
   const { frontmatter } = await getPageContent<AboutPageContent>('about')
   const { about } = frontmatter
 
+  const localBusinessSchema = generateLocalBusiness({
+    address: {
+      addressCountry: 'PL',
+      addressLocality: 'Węgierska Górka',
+      postalCode: '34-350',
+      streetAddress: 'Plażowa 6',
+    },
+    areaServed: ['Śląskie', 'Małopolskie', 'Beskidy'],
+    description: frontmatter.meta?.description,
+    name: 'AQUA-TEX Beskidy',
+    url: 'https://aquatexbeskidy.pl/about/',
+  })
+
+  const webPageSchema = generateWebPage({
+    description: frontmatter.meta?.description,
+    name: frontmatter.meta?.title || 'O nas',
+    url: 'https://aquatexbeskidy.pl/about/',
+  })
+
+  const breadcrumbSchema = generateBreadcrumbList([
+    { name: 'Strona główna', url: 'https://aquatexbeskidy.pl/' },
+    { name: 'O nas', url: 'https://aquatexbeskidy.pl/about/' },
+  ])
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={localBusinessSchema} />
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
       <section className='bg-primary py-16 text-white'>
         <div className='container-main'>
           <h1 className='text-center font-bold text-4xl'>{about.mainTitle}</h1>

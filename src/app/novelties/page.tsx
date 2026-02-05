@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 
 import Link from 'next/link'
 
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPaginatedNovelties } from '@/lib/mdx'
+import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 export const metadata: Metadata = {
   description: 'Najnowsze informacje i realizacje AQUA-TEX Beskidy',
@@ -12,8 +14,19 @@ export const metadata: Metadata = {
 export default async function NoveltiesPage() {
   const { items, pageInfo } = await getPaginatedNovelties(1)
 
+  const webPageSchema = generateWebPage({
+    description: 'Najnowsze informacje i realizacje AQUA-TEX Beskidy',
+    name: 'Aktualności',
+    url: 'https://aquatexbeskidy.pl/novelties/',
+  })
+
+  const breadcrumbs = generateBreadcrumbs('/novelties')
+  const breadcrumbSchema = generateBreadcrumbList(breadcrumbs)
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
       <div className='container-main py-20'>
         <h1 className='mb-8 font-bold text-4xl text-primary'>Aktualności</h1>
 

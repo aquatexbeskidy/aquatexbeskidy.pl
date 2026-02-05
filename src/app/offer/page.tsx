@@ -3,7 +3,9 @@ import type { OfferPageContent } from '@/types/content'
 
 import Image from 'next/image'
 
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { generateBreadcrumbList, generateBreadcrumbs, generateService, generateWebPage } from '@/lib/schema-generators'
 import { buttonStyles } from '@/types/components'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -18,8 +20,30 @@ export default async function OfferPage() {
   const { frontmatter } = await getPageContent<OfferPageContent>('offer')
   const { offer } = frontmatter
 
+  const webPageSchema = generateWebPage({
+    description: frontmatter.meta?.description,
+    name: frontmatter.meta?.title || 'Oferta',
+    url: 'https://aquatexbeskidy.pl/offer/',
+  })
+
+  const breadcrumbs = generateBreadcrumbs('/offer')
+  const breadcrumbSchema = generateBreadcrumbList(breadcrumbs)
+
+  const serviceSchemas = offer.offerList?.map((item) =>
+    generateService({
+      areaServed: 'Beskidy',
+      description: item.price,
+      name: item.title,
+    }),
+  )
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
+      {serviceSchemas?.map((schema, index) => (
+        <SchemaScript data={schema} key={index} />
+      ))}
       <section className='bg-primary py-16 text-white'>
         <div className='container-main'>
           <h1 className='mb-6 text-center font-bold text-4xl'>{offer.mainTitle}</h1>

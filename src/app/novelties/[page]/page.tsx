@@ -3,7 +3,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { SchemaScript } from '@/components/schema/schema-script'
 import { getNoveltiesPageCount, getPaginatedNovelties } from '@/lib/mdx'
+import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 interface Props {
   params: Promise<{ page: string }>
@@ -40,8 +42,19 @@ export default async function NoveltiesPaginatedPage({ params }: Props) {
     notFound()
   }
 
+  const webPageSchema = generateWebPage({
+    description: 'Najnowsze informacje i realizacje AQUA-TEX Beskidy',
+    name: `Aktualności - Strona ${pageNum}`,
+    url: `https://aquatexbeskidy.pl/novelties/${pageNum}/`,
+  })
+
+  const breadcrumbs = generateBreadcrumbs(`/novelties/${pageNum}`)
+  const breadcrumbSchema = generateBreadcrumbList(breadcrumbs)
+
   return (
     <main className='min-h-screen'>
+      <SchemaScript data={webPageSchema} />
+      <SchemaScript data={breadcrumbSchema} />
       <div className='container-main py-20'>
         <h1 className='mb-8 font-bold text-4xl text-primary'>Aktualności - Strona {pageNum}</h1>
 

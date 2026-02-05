@@ -4,7 +4,9 @@ import { Montserrat } from 'next/font/google'
 
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
-import { getLayoutData } from '@/lib/mdx'
+import { SchemaScript } from '@/components/schema/schema-script'
+import { getGlobalContent, getLayoutData } from '@/lib/mdx'
+import { generateOrganization } from '@/lib/schema-generators'
 import './globals.css'
 
 const montserrat = Montserrat({
@@ -23,11 +25,18 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { siteTitle, header, footer } = await getLayoutData()
+  const [{ siteTitle, header, footer }, globalContent] = await Promise.all([getLayoutData(), getGlobalContent()])
+
+  const organizationSchema = generateOrganization({
+    name: siteTitle,
+    sameAs: [globalContent.facebook.url, globalContent.youtube?.url].filter((url): url is string => url !== undefined),
+    url: 'https://aquatexbeskidy.pl',
+  })
 
   return (
     <html className={montserrat.variable} lang='pl'>
       <body className='font-montserrat antialiased'>
+        <SchemaScript data={organizationSchema} />
         <Header
           bottomLinks={header.bottomLinks}
           infoBar={header.infoBar}
