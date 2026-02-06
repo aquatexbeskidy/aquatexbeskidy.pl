@@ -85,4 +85,22 @@ localStorage.setItem('test-facebook-pixel', 'true')
 
 ## Content System
 
-All content stored in `src/markdown/` as MDX files with YAML frontmatter:
+All content stored in `src/markdown/` as MDX files with YAML frontmatter.
+
+## Deployment
+
+Hosted on **Vercel**. Production deploys controlled via GitHub Actions.
+
+1. Push to `main` triggers `deploy-production.yml`
+2. Requires manual approval (environment: Production)
+3. Deploys via Vercel CLI
+4. Health check verifies site is up
+5. Auto-rollback if health check fails
+
+Manual rollback: `vercel rollback` or Vercel Dashboard > Deployments > Promote.
+
+### CI Checks (on PRs)
+
+- Biome (lint + format)
+- TypeScript type check + build
+- Commitlint (conventional commits)
