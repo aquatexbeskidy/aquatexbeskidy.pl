@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { MapWrapper } from '@/components/map-wrapper'
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { getSocialMetadata } from '@/lib/metadata'
 import {
   generateBreadcrumbList,
   generateBreadcrumbs,
@@ -19,6 +20,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     description: frontmatter.meta?.description,
     title: frontmatter.meta?.title || 'Kontakt',
+    ...getSocialMetadata({
+      canonicalUrl: '/contact/',
+      description: frontmatter.meta?.description,
+      title: frontmatter.meta?.title || 'Kontakt',
+    }),
   }
 }
 

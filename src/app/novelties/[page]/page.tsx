@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getNoveltiesPageCount, getPaginatedNovelties } from '@/lib/mdx'
+import { getSocialMetadata } from '@/lib/metadata'
 import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 interface Props {
@@ -25,6 +26,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     description: 'Najnowsze informacje i realizacje AQUA-TEX Beskidy',
     title: `Aktualności - Strona ${page}`,
+    ...getSocialMetadata({
+      canonicalUrl: `/novelties/${page}/`,
+      description: 'Najnowsze informacje i realizacje AQUA-TEX Beskidy',
+      title: `Aktualności - Strona ${page}`,
+    }),
   }
 }
 

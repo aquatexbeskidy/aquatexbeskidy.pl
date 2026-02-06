@@ -4,11 +4,17 @@ import Link from 'next/link'
 
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getPaginatedNovelties } from '@/lib/mdx'
+import { getSocialMetadata } from '@/lib/metadata'
 import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 export const metadata: Metadata = {
   description: 'Najnowsze informacje i realizacje AQUA-TEX Beskidy',
   title: 'Aktualności',
+  ...getSocialMetadata({
+    canonicalUrl: '/novelties/',
+    description: 'Najnowsze informacje i realizacje AQUA-TEX Beskidy',
+    title: 'Aktualności',
+  }),
 }
 
 export default async function NoveltiesPage() {

@@ -21,6 +21,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   description:
     'Profesjonalne wiercenie studni głębinowych w Beskidach. Ponad 20 lat doświadczenia, 3 lata gwarancji na usługi.',
+  metadataBase: new URL('https://aquatexbeskidy.pl'),
   title: {
     default: 'AQUA-TEX Beskidy - Studnie głębinowe i odwierty',
     template: '%s | AQUA-TEX Beskidy',

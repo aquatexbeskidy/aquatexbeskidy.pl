@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { getSocialMetadata } from '@/lib/metadata'
 import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -12,6 +13,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     description: frontmatter.meta?.description,
     title: frontmatter.meta?.title || 'Studnie głębinowe',
+    ...getSocialMetadata({
+      canonicalUrl: '/deep-well/',
+      description: frontmatter.meta?.description,
+      title: frontmatter.meta?.title || 'Studnie głębinowe',
+    }),
   }
 }
 

@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { getSocialMetadata } from '@/lib/metadata'
 import { generateBreadcrumbList, generateBreadcrumbs, generateService, generateWebPage } from '@/lib/schema-generators'
 import { buttonStyles } from '@/types/components'
 
@@ -13,6 +14,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     description: frontmatter.meta?.description,
     title: frontmatter.meta?.title || 'Oferta',
+    ...getSocialMetadata({
+      canonicalUrl: '/offer/',
+      description: frontmatter.meta?.description,
+      title: frontmatter.meta?.title || 'Oferta',
+    }),
   }
 }
 

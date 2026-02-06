@@ -8,6 +8,7 @@ import { FAQ } from '@/components/faq'
 import { Hero } from '@/components/hero'
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { getSocialMetadata } from '@/lib/metadata'
 import { generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,6 +16,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     description: frontmatter.meta?.description,
     title: frontmatter.meta?.title || 'Strona główna',
+    ...getSocialMetadata({
+      canonicalUrl: '/',
+      description: frontmatter.meta?.description,
+      imagePath: frontmatter.hero?.image,
+      title: frontmatter.meta?.title || 'Strona główna',
+    }),
   }
 }
 

@@ -3,6 +3,7 @@ import type { WorksPageContent } from '@/types/content'
 
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getPageContent } from '@/lib/mdx'
+import { getSocialMetadata } from '@/lib/metadata'
 import { generateBreadcrumbList, generateBreadcrumbs, generateWebPage } from '@/lib/schema-generators'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -10,6 +11,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     description: frontmatter.meta?.description,
     title: frontmatter.meta?.title || 'Realizacje',
+    ...getSocialMetadata({
+      canonicalUrl: '/works/',
+      description: frontmatter.meta?.description,
+      title: frontmatter.meta?.title || 'Realizacje',
+    }),
   }
 }
 
