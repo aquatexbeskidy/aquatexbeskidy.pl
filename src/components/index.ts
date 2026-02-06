@@ -1,3 +1,4 @@
+export { CookieConsent } from './cookie-consent'
 export { CountUp } from './count-up'
 export { FacebookPixel } from './facebook-pixel'
 export { FAQ } from './faq'

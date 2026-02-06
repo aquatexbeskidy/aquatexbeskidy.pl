@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { Montserrat } from 'next/font/google'
 
+import { CookieConsent } from '@/components/cookie-consent'
 import { FacebookPixel } from '@/components/facebook-pixel'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           quickContact={footer.quickContact}
           siteTitle={siteTitle}
         />
+        <CookieConsent />
       </body>
     </html>
   )
