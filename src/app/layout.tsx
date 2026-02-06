@@ -5,6 +5,7 @@ import { Montserrat } from 'next/font/google'
 import { CookieConsent } from '@/components/cookie-consent'
 import { FacebookPixel } from '@/components/facebook-pixel'
 import { Footer } from '@/components/footer'
+import { GoogleAnalytics } from '@/components/google-analytics'
 import { Header } from '@/components/header'
 import { SchemaScript } from '@/components/schema/schema-script'
 import { getGlobalContent, getLayoutData } from '@/lib/mdx'
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className='font-montserrat antialiased' suppressHydrationWarning>
         <SchemaScript data={organizationSchema} />
         <FacebookPixel />
+        <GoogleAnalytics />
         <Header
           bottomLinks={header.bottomLinks}
           infoBar={header.infoBar}
