@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { Montserrat } from 'next/font/google'
 
+import { FacebookPixel } from '@/components/facebook-pixel'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { SchemaScript } from '@/components/schema/schema-script'
@@ -35,8 +36,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html className={montserrat.variable} lang='pl'>
-      <body className='font-montserrat antialiased'>
+      <body className='font-montserrat antialiased' suppressHydrationWarning>
         <SchemaScript data={organizationSchema} />
+        <FacebookPixel />
         <Header
           bottomLinks={header.bottomLinks}
           infoBar={header.infoBar}

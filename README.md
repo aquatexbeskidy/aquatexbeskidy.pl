@@ -57,6 +57,32 @@ aquatexbeskidy.pl/
 - TypeScript strict mode enabled
 - Path alias: `@/*` → `./src/*`
 
+## Facebook Pixel Configuration
+
+The website uses Facebook Pixel (ID: `XXX`) for analytics and conversion tracking.
+
+**Environment Variable:**
+```bash
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=XXX
+```
+
+**Manual Testing:**
+Set the following in browser console to enable pixel tracking without cookie consent:
+```javascript
+localStorage.setItem('test-facebook-pixel', 'true')
+```
+
+**Implementation:**
+- Pixel component: `src/components/facebook-pixel.tsx`
+- Automatic PageView tracking on route changes
+- Consent-aware initialization (requires cookie consent or manual test flag)
+- Noscript fallback for users without JavaScript
+
+**Notes:**
+- Pixel only initializes when user has granted cookie consent
+- Consent integration depends on future cookie consent system implementation
+- Currently defaults to no tracking for privacy compliance
+
 ## Content System
 
 All content stored in `src/markdown/` as MDX files with YAML frontmatter:

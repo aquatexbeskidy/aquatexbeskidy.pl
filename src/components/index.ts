@@ -1,4 +1,5 @@
 export { CountUp } from './count-up'
+export { FacebookPixel } from './facebook-pixel'
 export { FAQ } from './faq'
 export { Features } from './features'
 export { Footer } from './footer'
