@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import type { TLabel } from '@/translations'
 
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
@@ -24,17 +25,45 @@ export const Pages: CollectionConfig = {
     slugField(),
     {
       defaultValue: 'home',
+      label: ({ t }: TLabel) => t('custom:pages:pageType:label'),
       name: 'pageType',
       options: [
-        { label: 'Home', value: 'home' },
-        { label: 'About', value: 'about' },
-        { label: 'Contact', value: 'contact' },
-        { label: 'Offer', value: 'offer' },
-        { label: 'Works', value: 'works' },
-        { label: 'Borehole', value: 'borehole' },
-        { label: 'Deep Well', value: 'deep-well' },
-        { label: 'Novelties', value: 'novelties' },
-        { label: 'Privacy Policy', value: 'privacy-policy' },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:home'),
+          value: 'home',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:about'),
+          value: 'about',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:contact'),
+          value: 'contact',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:offer'),
+          value: 'offer',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:works'),
+          value: 'works',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:borehole'),
+          value: 'borehole',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:deepWell'),
+          value: 'deep-well',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:novelties'),
+          value: 'novelties',
+        },
+        {
+          label: ({ t }: TLabel) => t('custom:pages:pageType:privacyPolicy'),
+          value: 'privacy-policy',
+        },
       ],
       required: true,
       type: 'select',
@@ -56,6 +85,7 @@ export const Pages: CollectionConfig = {
           type: 'text',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:meta'),
       name: 'meta',
       type: 'group',
     },
@@ -100,6 +130,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:hero'),
       name: 'hero',
       type: 'group',
     },
@@ -124,6 +155,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:homeInfoModal'),
       name: 'homeInfoModal',
       type: 'group',
     },
@@ -192,6 +224,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:about'),
       name: 'about',
       type: 'group',
     },
@@ -241,6 +274,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:contact'),
       name: 'contact',
       type: 'group',
     },
@@ -305,6 +339,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:offer'),
       name: 'offer',
       type: 'group',
     },
@@ -342,6 +377,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:works'),
       name: 'works',
       type: 'group',
     },
@@ -379,6 +415,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:borehole'),
       name: 'borehole',
       type: 'group',
     },
@@ -444,6 +481,7 @@ export const Pages: CollectionConfig = {
           type: 'text',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:deepWell'),
       name: 'deepWell',
       type: 'group',
     },
@@ -472,6 +510,7 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:novelties'),
       name: 'novelties',
       type: 'group',
     },
@@ -487,10 +526,17 @@ export const Pages: CollectionConfig = {
           type: 'richText',
         },
       ],
+      label: ({ t }: TLabel) => t('custom:pages:groups:privacyPolicy'),
       name: 'privacyPolicy',
       type: 'group',
     },
   ],
+
+  labels: {
+    plural: ({ t }: TLabel) => t('custom:pages:plural'),
+    singular: ({ t }: TLabel) => t('custom:pages:singular'),
+  },
+
   slug: 'pages',
   timestamps: true,
 }

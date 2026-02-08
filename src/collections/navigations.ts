@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import type { TLabel } from '@/translations'
 
 export const Navigations: CollectionConfig = {
   access: {
@@ -18,18 +19,19 @@ export const Navigations: CollectionConfig = {
       type: 'text',
     },
     {
+      label: ({ t }: TLabel) => t('custom:navigations:navType:label'),
       name: 'navType',
       options: [
         {
-          label: 'Header Top',
+          label: ({ t }: TLabel) => t('custom:navigations:navType:headerTop'),
           value: 'header-top',
         },
         {
-          label: 'Header Bottom',
+          label: ({ t }: TLabel) => t('custom:navigations:navType:headerBottom'),
           value: 'header-bottom',
         },
         {
-          label: 'Footer',
+          label: ({ t }: TLabel) => t('custom:navigations:navType:footer'),
           value: 'footer',
         },
       ],
@@ -49,11 +51,11 @@ export const Navigations: CollectionConfig = {
           name: 'type',
           options: [
             {
-              label: 'Internal',
+              label: ({ t }: TLabel) => t('custom:navigations:linkType:internal'),
               value: 'internal',
             },
             {
-              label: 'External',
+              label: ({ t }: TLabel) => t('custom:navigations:linkType:external'),
               value: 'external',
             },
           ],
@@ -71,7 +73,7 @@ export const Navigations: CollectionConfig = {
         },
         {
           defaultValue: false,
-          label: 'Open in new tab',
+          label: ({ t }: TLabel) => t('custom:navigations:newTab'),
           name: 'newTab',
           type: 'checkbox',
         },
@@ -80,6 +82,11 @@ export const Navigations: CollectionConfig = {
       type: 'array',
     },
   ],
+
+  labels: {
+    plural: ({ t }: TLabel) => t('custom:navigations:plural'),
+    singular: ({ t }: TLabel) => t('custom:navigations:singular'),
+  },
 
   slug: 'navigations',
   timestamps: true,

@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { pl } from '@payloadcms/translations/languages/pl'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
@@ -12,6 +13,7 @@ import { Pages } from '@/collections/pages'
 import { Users } from '@/collections/users'
 import { Novelties } from '@/collections/vovelties'
 import { SiteConfig } from '@/globals/site-config'
+import { translations } from '@/translations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,6 +37,12 @@ export default buildConfig({
   editor: lexicalEditor({}),
 
   globals: [SiteConfig],
+
+  i18n: {
+    fallbackLanguage: 'pl',
+    supportedLanguages: { pl },
+    translations,
+  },
 
   localization: {
     defaultLocale: 'pl',

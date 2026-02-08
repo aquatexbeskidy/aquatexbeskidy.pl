@@ -16,3 +16,5 @@ docs/
 .vercel/
 .vercel
 .env*.local
+
+repomix-old.xml

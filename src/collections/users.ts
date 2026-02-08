@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import type { TLabel } from '@/translations'
 
 export const Users: CollectionConfig = {
   admin: {
@@ -15,20 +16,26 @@ export const Users: CollectionConfig = {
     {
       defaultValue: ['editor'],
       hasMany: true,
+      label: ({ t }: TLabel) => t('custom:users:roles:label'),
       name: 'roles',
       options: [
         {
-          label: 'Admin',
+          label: ({ t }: TLabel) => t('custom:users:roles:admin'),
           value: 'admin',
         },
         {
-          label: 'Editor',
+          label: ({ t }: TLabel) => t('custom:users:roles:editor'),
           value: 'editor',
         },
       ],
       type: 'select',
     },
   ],
+
+  labels: {
+    plural: ({ t }: TLabel) => t('custom:users:plural'),
+    singular: ({ t }: TLabel) => t('custom:users:singular'),
+  },
 
   slug: 'users',
 }

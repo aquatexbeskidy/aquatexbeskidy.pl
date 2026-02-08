@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import type { TLabel } from '@/translations'
 
 export const Media: CollectionConfig = {
   access: {
@@ -13,6 +14,11 @@ export const Media: CollectionConfig = {
       type: 'text',
     },
   ],
+
+  labels: {
+    plural: ({ t }: TLabel) => t('custom:media:plural'),
+    singular: ({ t }: TLabel) => t('custom:media:singular'),
+  },
 
   slug: 'media',
 

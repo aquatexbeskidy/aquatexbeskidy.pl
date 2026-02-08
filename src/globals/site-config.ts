@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import type { TLabel } from '@/translations'
 
 export const SiteConfig: GlobalConfig = {
   access: {
@@ -6,7 +7,7 @@ export const SiteConfig: GlobalConfig = {
   },
   fields: [
     {
-      label: 'Info Bar Text',
+      label: ({ t }: TLabel) => t('custom:siteConfig:infoBar'),
       localized: true,
       name: 'infoBar',
       type: 'text',
@@ -28,7 +29,7 @@ export const SiteConfig: GlobalConfig = {
           type: 'upload',
         },
       ],
-      label: 'Call Me Up Button',
+      label: ({ t }: TLabel) => t('custom:siteConfig:callMeUp'),
       name: 'callMeUp',
       type: 'group',
     },
@@ -49,7 +50,7 @@ export const SiteConfig: GlobalConfig = {
           type: 'upload',
         },
       ],
-      label: 'Facebook Link',
+      label: ({ t }: TLabel) => t('custom:siteConfig:facebook'),
       name: 'facebook',
       type: 'group',
     },
@@ -70,11 +71,11 @@ export const SiteConfig: GlobalConfig = {
           type: 'upload',
         },
       ],
-      label: 'YouTube Link',
+      label: ({ t }: TLabel) => t('custom:siteConfig:youtube'),
       name: 'youtube',
       type: 'group',
     },
   ],
-  label: 'Site Configuration',
+  label: ({ t }: TLabel) => t('custom:siteConfig:label'),
   slug: 'site-config',
 }

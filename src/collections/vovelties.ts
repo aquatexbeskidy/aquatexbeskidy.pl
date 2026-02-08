@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import type { TLabel } from '@/translations'
 
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
@@ -30,7 +31,7 @@ export const Novelties: CollectionConfig = {
     },
     slugField(),
     {
-      label: 'Facebook URL',
+      label: ({ t }: TLabel) => t('custom:novelties:facebookUrl'),
       name: 'url',
       type: 'text',
     },
@@ -44,6 +45,7 @@ export const Novelties: CollectionConfig = {
         position: 'sidebar',
       },
       defaultValue: false,
+      label: ({ t }: TLabel) => t('custom:novelties:published'),
       name: 'published',
       type: 'checkbox',
     },
@@ -52,6 +54,7 @@ export const Novelties: CollectionConfig = {
         position: 'sidebar',
       },
       defaultValue: true,
+      label: ({ t }: TLabel) => t('custom:novelties:showDate'),
       name: 'showDate',
       type: 'checkbox',
     },
@@ -72,6 +75,11 @@ export const Novelties: CollectionConfig = {
       type: 'richText',
     },
   ],
+
+  labels: {
+    plural: ({ t }: TLabel) => t('custom:novelties:plural'),
+    singular: ({ t }: TLabel) => t('custom:novelties:singular'),
+  },
 
   slug: 'novelties',
   timestamps: true,
