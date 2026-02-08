@@ -14,3 +14,5 @@ docs/
 .env.production.local
 
 .vercel/
+.vercel
+.env*.local

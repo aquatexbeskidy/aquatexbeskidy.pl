@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next'
 
+import { withPayload } from '@payloadcms/next/withPayload'
+
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -15,4 +17,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+export default withPayload(nextConfig)
