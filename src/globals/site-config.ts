@@ -7,12 +7,14 @@ export const SiteConfig: GlobalConfig = {
   fields: [
     {
       label: 'Info Bar Text',
+      localized: true,
       name: 'infoBar',
       type: 'text',
     },
     {
       fields: [
         {
+          localized: true,
           name: 'title',
           type: 'text',
         },
@@ -33,6 +35,7 @@ export const SiteConfig: GlobalConfig = {
     {
       fields: [
         {
+          localized: true,
           name: 'title',
           type: 'text',
         },
@@ -53,6 +56,7 @@ export const SiteConfig: GlobalConfig = {
     {
       fields: [
         {
+          localized: true,
           name: 'title',
           type: 'text',
         },

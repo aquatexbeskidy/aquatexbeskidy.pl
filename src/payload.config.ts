@@ -36,6 +36,12 @@ export default buildConfig({
 
   globals: [SiteConfig],
 
+  localization: {
+    defaultLocale: 'pl',
+    fallback: true,
+    locales: ['pl'],
+  },
+
   plugins: [],
 
   secret: String(process.env.PAYLOAD_SECRET),

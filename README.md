@@ -87,6 +87,97 @@ localStorage.setItem('test-facebook-pixel', 'true')
 
 All content stored in `src/markdown/` as MDX files with YAML frontmatter.
 
+## PayloadCMS Localization
+
+The project is configured with PayloadCMS Localization support for Polish (`pl`) language. This enables future multi-language expansion without major refactoring.
+
+### Configuration
+
+Localization is configured in `src/payload.config.ts`:
+- **Default locale**: `pl` (Polish)
+- **Fallback enabled**: Yes (automatic fallback to Polish for missing content)
+- **Available locales**: Currently only Polish (`['pl']`)
+
+### Localized Collections
+
+The following PayloadCMS collections have text-heavy fields marked as `localized: true`:
+
+**Pages**:
+- Localized: `title`, all text fields in meta, hero, about, contact, offer, works, borehole, deep-well, novelties, and privacy-policy sections
+- Non-localized: `slug`, `pageType`, dates, relations (media), checkbox fields
+
+**Novelties**:
+- Localized: `title`, `content`
+- Non-localized: `slug`, `date`, `published`, `showDate`, `image`, `url`
+
+**Navigations**:
+- Localized: `title`, `links` array text fields
+- Non-localized: `navType`, links structural fields (url, icon, newTab, type)
+
+**Media**:
+- Localized: `alt`
+- Non-localized: Upload collection (no structural fields)
+
+**SiteConfig** (Global):
+- Localized: `infoBar`, and all text fields in `callMeUp`, `facebook`, and `youtube` groups
+- Non-localized: URLs, icon relations
+
+### Data Structure
+
+Localized fields are stored as objects keyed by locale:
+```typescript
+// Example: localized title field
+{
+  title: {
+    pl: "Tytuł w języku polskim",
+    // Future: en: "Title in English"
+  }
+}
+```
+
+Non-localized fields (slug, dates, status) remain as single values:
+```typescript
+// Example: non-localized slug field
+{
+  slug: "about-page"  // Same across all locales
+}
+```
+
+### Adding New Languages
+
+To add a new locale (e.g., English):
+
+1. Update `src/payload.config.ts` to add the locale to the `localization.locales` array:
+   ```typescript
+   localization: {
+     defaultLocale: 'pl',
+     locales: ['pl', 'en'],  // Add 'en' here
+     fallback: true,
+   }
+   ```
+
+2. PayloadCMS will automatically support the new locale in all localized fields
+3. Existing content remains in Polish locale
+4. Admin UI will show locale selector for content editors
+
+### Migration Guide (Future)
+
+When switching from MDX files to PayloadCMS content:
+
+1. **Export MDX content** to structured format (JSON/CSV)
+2. **Create PayloadCMS import script** to populate collections
+3. **Run migration** via PayloadCMS CLI or admin import
+4. **Update frontend** to fetch from PayloadCMS instead of MDX
+5. **Redirect URLs** from MDX-based to PayloadCMS-based structure
+
+### Current Status
+
+- ✅ PayloadCMS configured with Polish localization
+- ✅ All text-heavy fields marked as `localized: true`
+- ✅ Build and lint passing
+- ⏳ Frontend still uses MDX files (PayloadCMS not actively used yet)
+- ⏳ Admin UI testing requires dev server access
+
 ## Deployment
 
 Hosted on **Vercel**. Production deploys controlled via GitHub Actions.

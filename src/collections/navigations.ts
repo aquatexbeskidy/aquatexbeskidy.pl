@@ -12,6 +12,7 @@ export const Navigations: CollectionConfig = {
 
   fields: [
     {
+      localized: true,
       name: 'title',
       required: true,
       type: 'text',
@@ -38,6 +39,7 @@ export const Navigations: CollectionConfig = {
     {
       fields: [
         {
+          localized: true,
           name: 'text',
           required: true,
           type: 'text',

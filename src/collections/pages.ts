@@ -16,6 +16,7 @@ export const Pages: CollectionConfig = {
 
   fields: [
     {
+      localized: true,
       name: 'title',
       required: true,
       type: 'text',
@@ -41,10 +42,12 @@ export const Pages: CollectionConfig = {
     {
       fields: [
         {
+          localized: true,
           name: 'title',
           type: 'text',
         },
         {
+          localized: true,
           name: 'description',
           type: 'textarea',
         },
@@ -62,10 +65,12 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'title',
           type: 'text',
         },
         {
+          localized: true,
           name: 'subtitle',
           type: 'text',
         },
@@ -77,6 +82,7 @@ export const Pages: CollectionConfig = {
         {
           fields: [
             {
+              localized: true,
               name: 'title',
               type: 'text',
             },
@@ -127,22 +133,26 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'mainTitle',
           type: 'text',
         },
         {
+          localized: true,
           name: 'subTitle',
           type: 'text',
         },
         {
           fields: [
             {
+              localized: true,
               name: 'title',
               type: 'text',
             },
             {
               fields: [
                 {
+                  localized: true,
                   name: 'desc',
                   type: 'textarea',
                 },
@@ -168,10 +178,12 @@ export const Pages: CollectionConfig = {
         {
           fields: [
             {
+              localized: true,
               name: 'title',
               type: 'text',
             },
             {
+              localized: true,
               name: 'desc',
               type: 'textarea',
             },
@@ -189,24 +201,29 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'title',
           type: 'text',
         },
         {
+          localized: true,
           name: 'subTitle',
           type: 'text',
         },
         {
+          localized: true,
           name: 'pinTitle',
           type: 'text',
         },
         {
+          localized: true,
           name: 'pinDesc',
           type: 'textarea',
         },
         {
           fields: [
             {
+              localized: true,
               name: 'title',
               type: 'text',
             },
@@ -233,31 +250,37 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'mainTitle',
           type: 'text',
         },
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'mainContent',
           type: 'richText',
         },
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'subContent',
           type: 'richText',
         },
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'bonusInfo',
           type: 'richText',
         },
         {
+          localized: true,
           name: 'quickOfferTitle',
           type: 'text',
         },
         {
           fields: [
             {
+              localized: true,
               name: 'text',
               type: 'text',
             },
@@ -268,10 +291,12 @@ export const Pages: CollectionConfig = {
         {
           fields: [
             {
+              localized: true,
               name: 'title',
               type: 'text',
             },
             {
+              localized: true,
               name: 'desc',
               type: 'textarea',
             },
@@ -289,12 +314,14 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'videosTitle',
           type: 'text',
         },
         {
           fields: [
             {
+              localized: true,
               name: 'title',
               type: 'text',
             },
@@ -324,16 +351,19 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'mainTitle',
           type: 'text',
         },
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'mainContent',
           type: 'richText',
         },
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'subContent',
           type: 'richText',
         },
@@ -358,22 +388,26 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'mainTitle',
           type: 'text',
         },
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'mainContent',
           type: 'richText',
         },
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'bonusContent',
           type: 'richText',
         },
         {
           fields: [
             {
+              localized: true,
               name: 'text',
               type: 'text',
             },
@@ -382,10 +416,12 @@ export const Pages: CollectionConfig = {
           type: 'array',
         },
         {
+          localized: true,
           name: 'waterSearchTitle',
           type: 'text',
         },
         {
+          localized: true,
           name: 'waterSearchDesc',
           type: 'textarea',
         },
@@ -394,10 +430,12 @@ export const Pages: CollectionConfig = {
           type: 'text',
         },
         {
+          localized: true,
           name: 'waterConnectTitle',
           type: 'text',
         },
         {
+          localized: true,
           name: 'waterConnectDesc',
           type: 'textarea',
         },
@@ -415,6 +453,7 @@ export const Pages: CollectionConfig = {
       },
       fields: [
         {
+          localized: true,
           name: 'mainTitle',
           type: 'text',
         },
@@ -443,6 +482,7 @@ export const Pages: CollectionConfig = {
       fields: [
         {
           editor: lexicalEditor({}),
+          localized: true,
           name: 'content',
           type: 'richText',
         },

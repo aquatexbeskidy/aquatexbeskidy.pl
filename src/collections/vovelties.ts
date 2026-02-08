@@ -23,6 +23,7 @@ export const Novelties: CollectionConfig = {
 
   fields: [
     {
+      localized: true,
       name: 'title',
       required: true,
       type: 'text',
@@ -66,6 +67,7 @@ export const Novelties: CollectionConfig = {
     },
     {
       editor: lexicalEditor({}),
+      localized: true,
       name: 'content',
       type: 'richText',
     },
